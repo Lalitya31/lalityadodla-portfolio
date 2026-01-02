@@ -1,18 +1,51 @@
+<!--
+Create a semantic HTML5 structure for a dark-themed landing page called
+"Balanced Engineering".
+
+The layout is split into two main sections:
+1) Left side: title text with heading "Balanced Engineering" and subheading
+   "An engineer in the making".
+2) Right side: a container that will later hold concentric circular layers
+   representing a multi-layer engineering system.
+
+Use semantic tags like main, section, article, and footer.
+Do not add JavaScript.
+Do not add CSS beyond linking a stylesheet.
+Keep the structure clean and minimal.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Balanced Engineering</title>
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="../css/main.css">
 </head>
 <body>
 
-  <main>
-    <section>
-      <h1>Balanced Engineering</h1>
-      <p>An engineer in the making</p>
+  <main class="container">
+    <!-- Left Section: Title and Subheading -->
+    <section class="left-section">
+      <article class="text-content">
+        <h1>Balanced Engineering</h1>
+        <p class="subheading">An engineer in the making</p>
+      </article>
+    </section>
+
+    <!-- Right Section: Concentric Circular Layers -->
+    <section class="right-section">
+      <div class="circle-container">
+        <div class="layer layer-outer"></div>
+        <div class="layer layer-middle"></div>
+        <div class="layer layer-inner"></div>
+        <div class="layer layer-core"></div>
+      </div>
     </section>
   </main>
+
+  <footer>
+    <p>&copy; 2026 Balanced Engineering</p>
+  </footer>
 
 </body>
 </html>
