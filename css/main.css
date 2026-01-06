@@ -1,4 +1,442 @@
 :root {
   --bg-main: #0B0D10;
   --text-primary: #E5E7EB;
+  --text-muted: #9CA3AF;
+
+  --blue-layer-1: #1E3A8A;
+  --blue-layer-2: #1E40AF;
+  --blue-layer-3: #2563EB;
+  --blue-layer-4: #3B82F6;
+  --blue-layer-5: #60A5FA;
+  --blue-layer-6: #93C5FD;
+  
+  --blue-glow: rgba(59, 130, 246, 0.4);
+  --panel-bg: rgba(30, 58, 138, 0.85);
+  --panel-border: rgba(147, 197, 253, 0.6);
+}
+
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background Glimmering Dots */
+.background-dots {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dot {
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--blue-layer-4);
+  opacity: 0.15;
+  filter: blur(1px);
+}
+
+.dot-1 { width: 3px; height: 3px; top: 10%; left: 15%; animation: glimmer 4s ease-in-out infinite; }
+.dot-2 { width: 2px; height: 2px; top: 25%; left: 35%; animation: glimmer 5s ease-in-out infinite 1s; }
+.dot-3 { width: 4px; height: 4px; top: 40%; left: 20%; animation: glimmer 6s ease-in-out infinite 2s; }
+.dot-4 { width: 2px; height: 2px; top: 55%; left: 45%; animation: glimmer 4.5s ease-in-out infinite 0.5s; }
+.dot-5 { width: 3px; height: 3px; top: 70%; left: 25%; animation: glimmer 5.5s ease-in-out infinite 1.5s; }
+.dot-6 { width: 2px; height: 2px; top: 15%; left: 60%; animation: glimmer 4s ease-in-out infinite 2.5s; }
+.dot-7 { width: 4px; height: 4px; top: 30%; left: 75%; animation: glimmer 6s ease-in-out infinite 0.8s; }
+.dot-8 { width: 3px; height: 3px; top: 50%; left: 85%; animation: glimmer 5s ease-in-out infinite 1.8s; }
+.dot-9 { width: 2px; height: 2px; top: 65%; left: 70%; animation: glimmer 4.5s ease-in-out infinite 2.2s; }
+.dot-10 { width: 3px; height: 3px; top: 80%; left: 55%; animation: glimmer 5.5s ease-in-out infinite 0.3s; }
+.dot-11 { width: 2px; height: 2px; top: 5%; left: 40%; animation: glimmer 4s ease-in-out infinite 1.2s; }
+.dot-12 { width: 4px; height: 4px; top: 45%; left: 10%; animation: glimmer 6s ease-in-out infinite 2.8s; }
+.dot-13 { width: 3px; height: 3px; top: 60%; left: 90%; animation: glimmer 5s ease-in-out infinite 0.6s; }
+.dot-14 { width: 2px; height: 2px; top: 75%; left: 80%; animation: glimmer 4.5s ease-in-out infinite 1.4s; }
+.dot-15 { width: 3px; height: 3px; top: 90%; left: 30%; animation: glimmer 5.5s ease-in-out infinite 2.6s; }
+
+@keyframes glimmer {
+  0%, 100% { opacity: 0.1; }
+  50% { opacity: 0.25; }
+}
+
+/* Header Section */
+.center-header {
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Background Text */
+.background-text {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: var(--blue-layer-4);
+  opacity: 0.05;
+  white-space: normal;
+  letter-spacing: 0.05em;
+  user-select: none;
+  text-align: right;
+  max-width: 400px;
+  line-height: 1.2;
+}
+
+/* Main Container */
+main.container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  gap: 4rem;
+}
+
+/* Two-Column Layout */
+.left-section,
+.right-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.left-section {
+  padding: 2rem;
+}
+
+.right-section {
+  padding: 2rem;
+  position: relative;
+}
+
+/* Typography */
+h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.subheading {
+  font-size: 1.75rem;
+  color: var(--text-muted);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+/* System Container */
+.system-container {
+  position: relative;
+  width: 500px;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SVG Curved Text */
+.curved-text-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.curved-label {
+  fill: #FFFFFF;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Hide Checkbox Toggles */
+.layer-toggle {
+  display: none;
+}
+
+/* Concentric Layers */
+.layer {
+  position: absolute;
+  border-radius: 50%;
+  border: 40px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.layer-label {
+  position: absolute;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  opacity: 1;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.layer:hover .layer-label {
+  opacity: 0.9;
+}
+
+.layer:hover {
+  box-shadow: 0 0 20px var(--blue-glow);
+}
+
+/* Layer 6: Balance & Discipline (Outermost) */
+.layer-6 {
+  width: 100%;
+  height: 100%;
+  border-color: var(--blue-layer-6);
+}
+
+.layer-6 .layer-label {
+  top: -30px;
+  right: 20%;
+}
+
+/* Layer 5: Achievements */
+.layer-5 {
+  width: 85%;
+  height: 85%;
+  border-color: var(--blue-layer-5);
+}
+
+.layer-5 .layer-label {
+  top: 10%;
+  right: -60px;
+}
+
+/* Layer 4: Academics */
+.layer-4 {
+  width: 70%;
+  height: 70%;
+  border-color: var(--blue-layer-4);
+}
+
+.layer-4 .layer-label {
+  bottom: -30px;
+  right: 25%;
+}
+
+/* Layer 3: Leadership */
+.layer-3 {
+  width: 55%;
+  height: 55%;
+  border-color: var(--blue-layer-3);
+}
+
+.layer-3 .layer-label {
+  top: 15%;
+  left: -60px;
+}
+
+/* Layer 2: Research */
+.layer-2 {
+  width: 40%;
+  height: 40%;
+  border-color: var(--blue-layer-2);
+}
+
+.layer-2 .layer-label {
+  bottom: 15%;
+  left: -50px;
+}
+
+/* Layer 1: Engineering Projects (Core) */
+.layer-1 {
+  width: 25%;
+  height: 25%;
+  border-color: var(--blue-layer-1);
+  background-color: var(--blue-layer-1);
+}
+
+.layer-1 .layer-label {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Rotation Animations */
+@keyframes rotate-cw-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotate-ccw-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes rotate-cw-medium {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotate-ccw-medium {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes rotate-cw-fast {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotate-ccw-fast {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
+/* Information Panels */
+.info-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--panel-bg);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--panel-border);
+  border-radius: 12px;
+  padding: 2.5rem;
+  max-width: 500px;
+  width: 90%;
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.info-panel h2 {
+  font-size: 2rem;
+  color: var(--blue-layer-6);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.info-panel p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.8;
+}
+
+.close-panel {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+}
+
+.close-panel:hover {
+  color: var(--text-primary);
+}
+
+/* Show Panel When Checkbox is Checked */
+#layer-1:checked ~ .panel-1,
+#layer-2:checked ~ .panel-2,
+#layer-3:checked ~ .panel-3,
+#layer-4:checked ~ .panel-4,
+#layer-5:checked ~ .panel-5,
+#layer-6:checked ~ .panel-6 {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  .subheading {
+    font-size: 1.5rem;
+  }
+
+  .system-container {
+    width: 400px;
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  main.container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .subheading {
+    font-size: 1.25rem;
+  }
+
+  .system-container {
+    width: 350px;
+    height: 350px;
+  }
+
+  .info-panel {
+    padding: 2rem;
+  }
+
+  .info-panel h2 {
+    font-size: 1.5rem;
+  }
+
+  .info-panel p {
+    font-size: 1rem;
+  }
 }

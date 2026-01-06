@@ -1,5 +1,4 @@
 <!--
-Create a semantic HTML5 structure for a dark-themed landing page called
 "Balanced Engineering".
 
 The layout is split into two main sections:
@@ -8,10 +7,9 @@ The layout is split into two main sections:
 2) Right side: a container that will later hold concentric circular layers
    representing a multi-layer engineering system.
 
-Use semantic tags like main, section, article, and footer.
-Do not add JavaScript.
-Do not add CSS beyond linking a stylesheet.
-Keep the structure clean and minimal.
+main, section, article, and footer.
+no JavaScript.
+clean and minimal.
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -23,8 +21,27 @@ Keep the structure clean and minimal.
 </head>
 <body>
 
+  <!-- Background Glimmer Dots -->
+  <div class="background-dots">
+    <span class="dot dot-1"></span>
+    <span class="dot dot-2"></span>
+    <span class="dot dot-3"></span>
+    <span class="dot dot-4"></span>
+    <span class="dot dot-5"></span>
+    <span class="dot dot-6"></span>
+    <span class="dot dot-7"></span>
+    <span class="dot dot-8"></span>
+    <span class="dot dot-9"></span>
+    <span class="dot dot-10"></span>
+    <span class="dot dot-11"></span>
+    <span class="dot dot-12"></span>
+    <span class="dot dot-13"></span>
+    <span class="dot dot-14"></span>
+    <span class="dot dot-15"></span>
+  </div>
+
   <main class="container">
-    <!-- Left Section: Title and Subheading -->
+    <!-- Left Section: Identity -->
     <section class="left-section">
       <article class="text-content">
         <h1>Balanced Engineering</h1>
@@ -32,13 +49,103 @@ Keep the structure clean and minimal.
       </article>
     </section>
 
-    <!-- Right Section: Concentric Circular Layers -->
+    <!-- Header Section: Background Text -->
+    <header class="center-header">
+      <div class="background-text">MULTILAYERED OPERATING SYSTEM</div>
+    </header>
+
+    <!-- Right Section: Multi-Layer System Visualization -->
     <section class="right-section">
-      <div class="circle-container">
-        <div class="layer layer-outer"></div>
-        <div class="layer layer-middle"></div>
-        <div class="layer layer-inner"></div>
-        <div class="layer layer-core"></div>
+      <div class="system-container">
+        
+        <!-- SVG for curved text -->
+        <svg class="curved-text-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <path id="circle-6" d="M 250,20 A 230,230 0 1,1 249.9,20" fill="none"/>
+            <path id="circle-5" d="M 250,57.5 A 192.5,192.5 0 1,1 249.9,57.5" fill="none"/>
+            <path id="circle-4" d="M 250,95 A 155,155 0 1,1 249.9,95" fill="none"/>
+            <path id="circle-3" d="M 250,132.5 A 117.5,117.5 0 1,1 249.9,132.5" fill="none"/>
+            <path id="circle-2" d="M 250,170 A 80,80 0 1,1 249.9,170" fill="none"/>
+          </defs>
+          
+          <text class="curved-label label-6">
+            <textPath href="#circle-6" startOffset="65%">BALANCE &amp; DISCIPLINE</textPath>
+          </text>
+          <text class="curved-label label-5">
+            <textPath href="#circle-5" startOffset="65%">ACHIEVEMENTS</textPath>
+          </text>
+          <text class="curved-label label-4">
+            <textPath href="#circle-4" startOffset="65%">ACADEMICS</textPath>
+          </text>
+          <text class="curved-label label-3">
+            <textPath href="#circle-3" startOffset="65%">LEADERSHIP</textPath>
+          </text>
+          <text class="curved-label label-2">
+            <textPath href="#circle-2" startOffset="65%">RESEARCH</textPath>
+          </text>
+        </svg>
+        
+        <!-- Layer 6: Balance & Discipline (Outermost) -->
+        <input type="checkbox" id="layer-6" class="layer-toggle">
+        <label for="layer-6" class="layer layer-6" aria-label="Balance & Discipline">
+        </label>
+        <div class="info-panel panel-6">
+          <h2>Balance & Discipline</h2>
+          <p>The foundation of sustainable engineering excellence. Maintaining equilibrium between work, learning, health, and personal growth.</p>
+          <label for="layer-6" class="close-panel">✕</label>
+        </div>
+
+        <!-- Layer 5: Achievements -->
+        <input type="checkbox" id="layer-5" class="layer-toggle">
+        <label for="layer-5" class="layer layer-5" aria-label="Achievements">
+        </label>
+        <div class="info-panel panel-5">
+          <h2>Achievements</h2>
+          <p>Recognition and milestones that mark the journey. Hackathons, competitions, certifications, and honors earned through dedication.</p>
+          <label for="layer-5" class="close-panel">✕</label>
+        </div>
+
+        <!-- Layer 4: Academics -->
+        <input type="checkbox" id="layer-4" class="layer-toggle">
+        <label for="layer-4" class="layer layer-4" aria-label="Academics">
+        </label>
+        <div class="info-panel panel-4">
+          <h2>Academics</h2>
+          <p>The theoretical foundation. Core computer science principles, algorithms, data structures, and mathematical rigor.</p>
+          <label for="layer-4" class="close-panel">✕</label>
+        </div>
+
+        <!-- Layer 3: Leadership & Project Management -->
+        <input type="checkbox" id="layer-3" class="layer-toggle">
+        <label for="layer-3" class="layer layer-3" aria-label="Leadership & Project Management">
+        </label>
+        <div class="info-panel panel-3">
+          <h2>Leadership & Project Management</h2>
+          <p>Orchestrating teams and driving projects to completion. Leading initiatives, mentoring peers, and managing complex deliverables.</p>
+          <label for="layer-3" class="close-panel">✕</label>
+        </div>
+
+        <!-- Layer 2: Research & Publications -->
+        <input type="checkbox" id="layer-2" class="layer-toggle">
+        <label for="layer-2" class="layer layer-2" aria-label="Research & Publications">
+        </label>
+        <div class="info-panel panel-2">
+          <h2>Research & Publications</h2>
+          <p>Pushing boundaries through systematic investigation. Academic papers, technical articles, and contributions to the body of knowledge.</p>
+          <label for="layer-2" class="close-panel">✕</label>
+        </div>
+
+        <!-- Layer 1: Engineering Projects (Core) -->
+        <input type="checkbox" id="layer-1" class="layer-toggle">
+        <label for="layer-1" class="layer layer-1" aria-label="Engineering Projects">
+          <span class="layer-label">PROJECTS</span>
+        </label>
+        <div class="info-panel panel-1">
+          <h2>Engineering Projects</h2>
+          <p>The core of practical engineering. Hands-on applications, systems built, problems solved, and code deployed.</p>
+          <label for="layer-1" class="close-panel">✕</label>
+        </div>
+
       </div>
     </section>
   </main>
