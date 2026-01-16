@@ -34,6 +34,82 @@ body {
   position: relative;
 }
 
+/* Navigation Bar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(11, 13, 16, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(147, 197, 253, 0.1);
+  z-index: 1000;
+  padding: 0.75rem 0;
+}
+
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-brand {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-decoration: none;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+.nav-brand:hover {
+  color: var(--blue-layer-5);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-links li a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--blue-layer-5);
+  transition: width 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: var(--text-primary);
+}
+
+.nav-links li a:hover::after {
+  width: 100%;
+}
+
+/* Adjust main container to account for fixed navbar */
+.container {
+  margin-top: 60px;
+}
+
 /* Background Glimmering Dots */
 .background-dots {
   position: fixed;
@@ -566,6 +642,104 @@ footer {
   }
 
   .info-panel p {
+    font-size: 1rem;
+  }
+}
+
+/* Page Layouts for Individual Layer Pages */
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(147, 197, 253, 0.2);
+}
+
+.page-header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, var(--blue-layer-5), var(--blue-layer-3));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.8;
+}
+
+.page-content {
+  min-height: 400px;
+  padding: 2rem;
+  background-color: rgba(30, 58, 138, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(147, 197, 253, 0.2);
+}
+
+.page-content p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Panel link styling */
+.panel-link {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.6rem 1.5rem;
+  background-color: var(--blue-layer-4);
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid var(--blue-layer-5);
+}
+
+.panel-link:hover {
+  background-color: var(--blue-layer-5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--blue-glow);
+}
+
+/* Responsive adjustments for navbar */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .nav-links li a {
+    font-size: 0.85rem;
+  }
+
+  .container {
+    margin-top: 100px;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .page-subtitle {
     font-size: 1rem;
   }
 }
