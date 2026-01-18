@@ -341,6 +341,41 @@ h1 {
   text-shadow: 0 0 15px var(--blue-glow), 0 0 30px rgba(59, 130, 246, 0.2);
 }
 
+/* Contact Links */
+.contact-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  align-items: center;
+}
+
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: rgba(30, 58, 138, 0.3);
+  border: 1px solid rgba(147, 197, 253, 0.2);
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.contact-icon:hover {
+  background-color: rgba(30, 58, 138, 0.6);
+  border-color: rgba(147, 197, 253, 0.5);
+  color: var(--blue-layer-5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.contact-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
 /* System Container */
 .system-container {
   position: relative;
@@ -415,7 +450,6 @@ h1 {
   height: 100%;
   border-color: var(--blue-layer-6);
   box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
-  animation: rotate-cw-slow 18s linear infinite;
 }
 
 .layer-6 .layer-label {
@@ -429,7 +463,6 @@ h1 {
   height: 85%;
   border-color: var(--blue-layer-5);
   box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
-  animation: rotate-ccw-slow 17s linear infinite;
 }
 
 .layer-5 .layer-label {
@@ -443,7 +476,6 @@ h1 {
   height: 70%;
   border-color: var(--blue-layer-4);
   box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
-  animation: rotate-cw-medium 16s linear infinite;
 }
 
 .layer-4 .layer-label {
@@ -457,7 +489,6 @@ h1 {
   height: 55%;
   border-color: var(--blue-layer-3);
   box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
-  animation: rotate-ccw-medium 15s linear infinite;
 }
 
 .layer-3 .layer-label {
@@ -471,7 +502,6 @@ h1 {
   height: 40%;
   border-color: var(--blue-layer-2);
   box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
-  animation: rotate-cw-fast 17s linear infinite;
 }
 
 .layer-2 .layer-label {
@@ -486,7 +516,6 @@ h1 {
   border-color: var(--blue-layer-1);
   background-color: var(--blue-layer-1);
   box-shadow: 0 0 20px var(--blue-glow), inset 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.2);
-  animation: rotate-ccw-fast 16s linear infinite;
 }
 
 .layer-1 .layer-label {
