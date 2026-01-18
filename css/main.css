@@ -577,13 +577,19 @@ h1 {
   color: var(--text-primary);
 }
 
-/* Show Panel When Checkbox is Checked */
+/* Show Panel When Checkbox is Checked OR When Layer is Hovered */
 #layer-1:checked ~ .panel-1,
 #layer-2:checked ~ .panel-2,
 #layer-3:checked ~ .panel-3,
 #layer-4:checked ~ .panel-4,
 #layer-5:checked ~ .panel-5,
-#layer-6:checked ~ .panel-6 {
+#layer-6:checked ~ .panel-6,
+.layer-1:hover ~ .panel-1,
+.layer-2:hover ~ .panel-2,
+.layer-3:hover ~ .panel-3,
+.layer-4:hover ~ .panel-4,
+.layer-5:hover ~ .panel-5,
+.layer-6:hover ~ .panel-6 {
   opacity: 1;
   pointer-events: auto;
 }

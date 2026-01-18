@@ -5,6 +5,290 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Engineering Projects - Balanced Engineering</title>
   <link rel="stylesheet" href="../css/main.css">
+  <style>
+    /* Projects page specific styles */
+    body {
+      background-color: #1E3A8A;
+      overflow-x: hidden;
+    }
+
+    .projects-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 100vh;
+      padding: 100px 4rem 2rem 4rem;
+      gap: 4rem;
+    }
+
+    .left-description {
+      flex: 1;
+      max-width: 500px;
+      padding: 2rem;
+    }
+
+    .left-description h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      color: #E5E7EB;
+      margin-bottom: 1.5rem;
+      letter-spacing: -1px;
+    }
+
+    .left-description h2 {
+      font-size: 1.5rem;
+      color: #93C5FD;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .left-description p {
+      font-size: 1.1rem;
+      color: #D1D5DB;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .vault-container {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      padding: 2rem;
+    }
+
+    .vault-outer {
+      width: 500px;
+      height: 500px;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .vault-outer:hover {
+      transform: scale(1.02);
+    }
+
+    /* Vault door main circle */
+    .vault-door {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #2C5282 0%, #1E3A8A 50%, #1E40AF 100%);
+      border: 12px solid #60A5FA;
+      box-shadow: 
+        0 0 40px rgba(96, 165, 250, 0.4),
+        inset 0 0 60px rgba(0, 0, 0, 0.5),
+        inset 0 0 20px rgba(96, 165, 250, 0.2);
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.5s ease;
+    }
+
+    .vault-outer.opened .vault-door {
+      transform: rotateY(90deg);
+      opacity: 0;
+    }
+
+    /* Vault handle/wheel */
+    .vault-wheel {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #3B82F6, #1E40AF);
+      border: 8px solid #93C5FD;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 
+        0 0 30px rgba(147, 197, 253, 0.5),
+        inset 0 0 20px rgba(0, 0, 0, 0.4);
+      transition: transform 0.5s ease;
+    }
+
+    .vault-outer:hover .vault-wheel {
+      transform: translate(-50%, -50%) rotate(15deg);
+    }
+
+    .vault-outer.opened .vault-wheel {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+
+    /* Spokes on the wheel */
+    .spoke {
+      position: absolute;
+      width: 4px;
+      height: 80px;
+      background: linear-gradient(to bottom, #93C5FD, #60A5FA);
+      top: 50%;
+      left: 50%;
+      transform-origin: center;
+      border-radius: 2px;
+      box-shadow: 0 0 10px rgba(147, 197, 253, 0.6);
+    }
+
+    .spoke:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg); }
+    .spoke:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg); }
+    .spoke:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg); }
+    .spoke:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg); }
+    .spoke:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg); }
+    .spoke:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg); }
+    .spoke:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg); }
+    .spoke:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg); }
+
+    /* Center hub */
+    .vault-center {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #1E3A8A, #0F172A);
+      border: 4px solid #60A5FA;
+      box-shadow: 
+        0 0 20px rgba(96, 165, 250, 0.6),
+        inset 0 0 10px rgba(0, 0, 0, 0.7);
+      position: relative;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #93C5FD;
+      font-weight: 700;
+    }
+
+    /* Decorative bolts around the door */
+    .bolt {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #60A5FA, #3B82F6);
+      border: 3px solid #93C5FD;
+      position: absolute;
+      box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+    }
+
+    .bolt:nth-child(1) { top: 5%; left: 50%; transform: translateX(-50%); }
+    .bolt:nth-child(2) { top: 20%; right: 12%; }
+    .bolt:nth-child(3) { top: 50%; right: 5%; transform: translateY(-50%); }
+    .bolt:nth-child(4) { bottom: 20%; right: 12%; }
+    .bolt:nth-child(5) { bottom: 5%; left: 50%; transform: translateX(-50%); }
+    .bolt:nth-child(6) { bottom: 20%; left: 12%; }
+    .bolt:nth-child(7) { top: 50%; left: 5%; transform: translateY(-50%); }
+    .bolt:nth-child(8) { top: 20%; left: 12%; }
+
+    /* Projects content (revealed when vault opens) */
+    .projects-revealed {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(11, 13, 16, 0.95);
+      border-radius: 20px;
+      padding: 2rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease 0.3s;
+      overflow-y: auto;
+      border: 2px solid #60A5FA;
+      box-shadow: 0 0 40px rgba(96, 165, 250, 0.3);
+    }
+
+    .vault-outer.opened .projects-revealed {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .projects-revealed h2 {
+      color: #93C5FD;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .projects-list {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .project-item {
+      background: rgba(30, 58, 138, 0.5);
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid rgba(147, 197, 253, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .project-item:hover {
+      background: rgba(30, 58, 138, 0.7);
+      border-color: rgba(147, 197, 253, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .project-item h3 {
+      color: #60A5FA;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-item p {
+      color: #D1D5DB;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .close-vault {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #3B82F6;
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .close-vault:hover {
+      background: #2563EB;
+      transform: rotate(90deg);
+    }
+
+    .click-hint {
+      position: absolute;
+      bottom: -50px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: #93C5FD;
+      font-size: 0.9rem;
+      font-weight: 500;
+      opacity: 0.8;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    .vault-outer.opened .click-hint {
+      display: none;
+    }
+  </style>
 </head>
 <body>
 
@@ -23,21 +307,94 @@
     </div>
   </nav>
 
-  <main class="page-container">
-    <section class="page-header">
-      <h1>Engineering Projects</h1>
-      <p class="page-subtitle">The core of practical engineering. Hands-on applications, systems built, problems solved, and code deployed.</p>
+  <main class="projects-container">
+    <!-- Left Section: Description -->
+    <section class="left-description">
+      <h1>Projects</h1>
+      
+      <h2>The Core of Engineering</h2>
+      <p>This is where theory meets practice. Every line of code, every system designed, every problem solved represents a step forward in the engineering journey.</p>
+      
+      <h2>Building Real Solutions</h2>
+      <p>From concept to deployment, these projects showcase hands-on experience with modern technologies, scalable architectures, and practical problem-solving.</p>
+      
+      <h2>Click the Vault</h2>
+      <p>Open the vault to explore the collection of engineering projects that demonstrate technical expertise and innovative thinking.</p>
     </section>
 
-    <section class="page-content">
-      <!-- Add your projects content here -->
-      <p>Content coming soon...</p>
+    <!-- Right Section: Vault -->
+    <section class="vault-container">
+      <div class="vault-outer" id="vaultOuter">
+        <!-- Main vault door -->
+        <div class="vault-door">
+          <!-- Decorative bolts -->
+          <span class="bolt"></span>
+          <span class="bolt"></span>
+          <span class="bolt"></span>
+          <span class="bolt"></span>
+          <span class="bolt"></span>
+          <span class="bolt"></span>
+          <span class="bolt"></span>
+          <span class="bolt"></span>
+
+          <!-- Vault wheel/handle -->
+          <div class="vault-wheel">
+            <span class="spoke"></span>
+            <span class="spoke"></span>
+            <span class="spoke"></span>
+            <span class="spoke"></span>
+            <span class="spoke"></span>
+            <span class="spoke"></span>
+            <span class="spoke"></span>
+            <span class="spoke"></span>
+            <div class="vault-center">OPEN</div>
+          </div>
+        </div>
+
+        <!-- Click hint -->
+        <div class="click-hint">Click to Open</div>
+
+        <!-- Projects revealed when vault opens -->
+        <div class="projects-revealed">
+          <button class="close-vault" onclick="closeVault()">×</button>
+          <h2>My Engineering Projects</h2>
+          
+          <div class="projects-list">
+            <!-- Projects will be added here -->
+            <div class="project-item">
+              <h3>Project 1</h3>
+              <p>Project details coming soon...</p>
+            </div>
+            
+            <div class="project-item">
+              <h3>Project 2</h3>
+              <p>Project details coming soon...</p>
+            </div>
+            
+            <div class="project-item">
+              <h3>Project 3</h3>
+              <p>Project details coming soon...</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
-  <footer>
-    <p>&copy; 2026 Balanced Engineering</p>
-  </footer>
+  <script>
+    const vaultOuter = document.getElementById('vaultOuter');
+    
+    vaultOuter.addEventListener('click', function(e) {
+      // Don't open if clicking the close button
+      if (!e.target.classList.contains('close-vault')) {
+        this.classList.add('opened');
+      }
+    });
+
+    function closeVault() {
+      vaultOuter.classList.remove('opened');
+    }
+  </script>
 
 </body>
 </html>
