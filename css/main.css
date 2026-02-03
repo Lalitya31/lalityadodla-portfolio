@@ -778,3 +778,72 @@ footer {
     font-size: 1rem;
   }
 }
+
+/* ============================================================================
+   INTERACTIVE FEATURES STYLES
+   ============================================================================ */
+
+/* Layer Focus Mode */
+.layer {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.4s ease,
+              filter 0.4s ease;
+  cursor: pointer;
+}
+
+.layer.active {
+  transform: scale(1.08);
+  z-index: 100;
+  filter: brightness(1.3) drop-shadow(0 0 20px var(--blue-glow));
+}
+
+.layer.dimmed {
+  opacity: 0.3;
+  filter: brightness(0.6);
+}
+
+.info-panel {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: opacity 0.4s ease, 
+              visibility 0.4s ease,
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.info-panel.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Keyboard Focus Indicator */
+.layer.keyboard-focused {
+  outline: 2px solid var(--blue-layer-5);
+  outline-offset: 4px;
+  animation: focusPulse 2s ease-in-out infinite;
+}
+
+@keyframes focusPulse {
+  0%, 100% { outline-color: var(--blue-layer-5); }
+  50% { outline-color: var(--blue-layer-4); }
+}
+
+/* Scroll-based Highlighting */
+.layer.scroll-highlighted {
+  filter: brightness(1.15);
+  box-shadow: 0 0 15px var(--blue-glow);
+}
+
+.nav-links li a.active {
+  color: var(--blue-layer-5);
+  font-weight: 600;
+}
+
+.nav-links li a.active::after {
+  width: 100%;
+}
+
+/* Hover Description Box - styles are inline in JS for dynamic positioning */
+
+/* System Status Indicator - base styles are inline in JS */
