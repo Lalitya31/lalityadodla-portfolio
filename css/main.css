@@ -55,100 +55,138 @@ body {
   position: relative;                /* Position context for absolute children */
 }
 
-/* Navigation Bar */
+/**
+ * Navigation Bar
+ * Fixed header navigation with blur effect and bottom border
+ */
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(11, 13, 16, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(147, 197, 253, 0.1);
-  z-index: 1000;
-  padding: 0.75rem 0;
+  position: fixed;                             /* Fixed at top of viewport */
+  top: 0;                                      /* Aligned to top edge */
+  left: 0;                                     /* Aligned to left edge */
+  right: 0;                                    /* Aligned to right edge */
+  background-color: rgba(11, 13, 16, 0.95);   /* Semi-transparent dark background */
+  backdrop-filter: blur(10px);                 /* Blur effect on content behind */
+  border-bottom: 1px solid rgba(147, 197, 253, 0.1); /* Subtle bottom border */
+  z-index: 1000;                               /* Layer above most content */
+  padding: 0.75rem 0;                          /* Vertical padding */
 }
 
+/**
+ * Navigation container - centers content with max width
+ */
 .nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  max-width: 1400px;           /* Maximum width for content */
+  margin: 0 auto;              /* Center horizontally */
+  padding: 0 2rem;             /* Horizontal padding */
+  display: flex;               /* Flexbox layout */
+  justify-content: space-between; /* Space between brand and links */
+  align-items: center;         /* Vertically center items */
 }
 
+/**
+ * Navigation brand/logo link
+ */
 .nav-brand {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  text-decoration: none;
-  letter-spacing: 0.5px;
-  transition: color 0.3s ease;
+  font-size: 1.1rem;                 /* Text size */
+  font-weight: 600;                  /* Semi-bold weight */
+  color: var(--text-primary);        /* Light text color */
+  text-decoration: none;             /* Remove underline */
+  letter-spacing: 0.5px;             /* Slight letter spacing */
+  transition: color 0.3s ease;       /* Smooth color transition */
 }
 
+/**
+ * Navigation brand hover state
+ */
 .nav-brand:hover {
-  color: var(--blue-layer-5);
+  color: var(--blue-layer-5);  /* Light blue on hover */
 }
 
+/**
+ * Navigation links list container
+ */
 .nav-links {
-  display: flex;
-  list-style: none;
-  gap: 2rem;
-  margin: 0;
-  padding: 0;
+  display: flex;     /* Horizontal layout */
+  list-style: none;  /* Remove bullet points */
+  gap: 2rem;         /* Space between items */
+  margin: 0;         /* No margin */
+  padding: 0;        /* No padding */
 }
 
+/**
+ * Individual navigation link styling
+ */
 .nav-links li a {
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
-  position: relative;
+  color: var(--text-muted);    /* Muted text color */
+  text-decoration: none;       /* No underline */
+  font-size: 0.9rem;           /* Text size */
+  font-weight: 500;            /* Medium weight */
+  transition: color 0.3s ease; /* Smooth color transition */
+  position: relative;          /* Position context for pseudo-element */
 }
 
+/**
+ * Navigation link underline pseudo-element
+ * Creates animated underline on hover
+ */
 .nav-links li a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: var(--blue-layer-5);
-  transition: width 0.3s ease;
+  content: '';                                /* Empty content */
+  position: absolute;                         /* Absolute positioning */
+  bottom: -4px;                               /* Below the text */
+  left: 0;                                    /* Aligned to left */
+  width: 0;                                   /* Initially no width */
+  height: 2px;                                /* Underline thickness */
+  background-color: var(--blue-layer-5);      /* Blue underline color */
+  transition: width 0.3s ease;                /* Animate width change */
 }
 
+/**
+ * Navigation link hover state - text color
+ */
 .nav-links li a:hover {
-  color: var(--text-primary);
+  color: var(--text-primary);  /* Brighten text on hover */
 }
 
+/**
+ * Navigation link hover state - underline animation
+ */
 .nav-links li a:hover::after {
-  width: 100%;
+  width: 100%;  /* Expand underline to full width */
 }
 
-/* Adjust main container to account for fixed navbar */
+/**
+ * Main container top margin adjustment
+ * Accounts for fixed navbar height
+ */
 .container {
-  margin-top: 60px;
+  margin-top: 60px;  /* Offset for fixed navbar */
 }
 
-/* Background Glimmering Dots */
+/**
+ * Background Glimmering Dots Container
+ * Full-screen overlay containing animated dot elements
+ */
 .background-dots {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
+  position: fixed;        /* Fixed positioning covers entire viewport */
+  top: 0;                 /* Aligned to top */
+  left: 0;                /* Aligned to left */
+  width: 100%;            /* Full width */
+  height: 100%;           /* Full height */
+  pointer-events: none;   /* Don't interfere with mouse events */
+  z-index: 0;             /* Render behind all content */
 }
 
+/**
+ * Individual dot element styling
+ * Creates glowing animated dots that float across screen
+ */
 .dot {
-  position: absolute;
-  border-radius: 50%;
-  background-color: var(--blue-layer-4);
-  opacity: 0.6;
-  filter: blur(2px);
-  box-shadow: 0 0 10px var(--blue-glow), 0 0 20px var(--blue-glow);
+  position: absolute;                                            /* Absolute positioning for placement */
+  border-radius: 50%;                                            /* Make it circular */
+  background-color: var(--blue-layer-4);                         /* Blue color */
+  opacity: 0.6;                                                  /* Semi-transparent */
+  filter: blur(2px);                                             /* Slight blur for glow effect */
+  box-shadow: 0 0 10px var(--blue-glow), 0 0 20px var(--blue-glow); /* Glowing shadow effect */
 }
 
 .dot-1 { width: 3px; height: 3px; top: 10%; left: 15%; animation: firefly1 8s ease-in-out infinite; }
