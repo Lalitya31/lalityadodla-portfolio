@@ -1,240 +1,310 @@
 <!--
-"Balanced Engineering".
-
-The layout is split into two main sections:
-1) Left side: title text with heading "Balanced Engineering" and subheading
-   "An engineer in the making".
-2) Right side: a container that will later hold concentric circular layers
-   representing a multi-layer engineering system.
-
-main, section, article, and footer.
-no JavaScript.
-clean and minimal.
+  Balanced Engineering Portfolio - Home Page
+  
+  Main landing page featuring a multi-layered visualization system
+  representing different aspects of engineering excellence.
+  
+  The layout is split into two main sections:
+  1) Left side: Personal branding with name, tagline, and contact links
+  2) Right side: Interactive concentric circular layers representing:
+     - Layer 1 (Core): Engineering Projects
+     - Layer 2: Research & Publications
+     - Layer 3: Leadership & Project Management
+     - Layer 4: Academics
+     - Layer 5: Achievements
+     - Layer 6 (Outermost): Balance & Discipline
+  
+  Semantic HTML5 structure using main, section, article, nav, header, and footer.
+  Interactive features powered by JavaScript (interactions.js).
+  Clean and minimal design with modern CSS.
 -->
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html> <!-- HTML5 document type declaration -->
+<html lang="en"> <!-- Root element with English language attribute -->
 <head>
+  <!-- Character encoding for UTF-8 support -->
   <meta charset="UTF-8">
+  
+  <!-- Viewport meta tag for responsive design on mobile devices -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Page title shown in browser tab -->
   <title>Balanced Engineering</title>
+  
+  <!-- Main stylesheet link (relative path to CSS folder) -->
   <link rel="stylesheet" href="../css/main.css">
 </head>
-<body>
+<body> <!-- Main body element containing all visible content -->
 
   <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="nav-container">
+  <!-- Fixed top navigation with logo/brand and links to all sections -->
+  <nav class="navbar"> <!-- Semantic nav element for navigation -->
+    <div class="nav-container"> <!-- Container for centering and layout -->
+      <!-- Brand/logo link - returns to home page -->
       <a href="index.html" class="nav-brand">Balanced Engineering</a>
-      <ul class="nav-links">
-        <li><a href="../pages/projects.html">Projects</a></li>
-        <li><a href="../pages/research.html">Research</a></li>
-        <li><a href="../pages/leadership.html">Leadership</a></li>
-        <li><a href="../pages/academics.html">Academics</a></li>
-        <li><a href="../pages/achievements.html">Achievements</a></li>
-        <li><a href="../pages/balance.html">Balance</a></li>
+      
+      <!-- Navigation links list -->
+      <ul class="nav-links"> <!-- Unordered list of navigation items -->
+        <li><a href="../pages/projects.html">Projects</a></li> <!-- Link to Projects page -->
+        <li><a href="../pages/research.html">Research</a></li> <!-- Link to Research page -->
+        <li><a href="../pages/leadership.html">Leadership</a></li> <!-- Link to Leadership page -->
+        <li><a href="../pages/academics.html">Academics</a></li> <!-- Link to Academics page -->
+        <li><a href="../pages/achievements.html">Achievements</a></li> <!-- Link to Achievements page -->
+        <li><a href="../pages/balance.html">Balance</a></li> <!-- Link to Balance page -->
       </ul>
     </div>
   </nav>
 
   <!-- Background Glimmer Dots -->
-  <div class="background-dots">
-    <span class="dot dot-1"></span>
-    <span class="dot dot-2"></span>
-    <span class="dot dot-3"></span>
-    <span class="dot dot-4"></span>
-    <span class="dot dot-5"></span>
-    <span class="dot dot-6"></span>
-    <span class="dot dot-7"></span>
-    <span class="dot dot-8"></span>
-    <span class="dot dot-9"></span>
-    <span class="dot dot-10"></span>
-    <span class="dot dot-11"></span>
-    <span class="dot dot-12"></span>
-    <span class="dot dot-13"></span>
-    <span class="dot dot-14"></span>
-    <span class="dot dot-15"></span>
-    <span class="dot dot-16"></span>
-    <span class="dot dot-17"></span>
-    <span class="dot dot-18"></span>
-    <span class="dot dot-19"></span>
-    <span class="dot dot-20"></span>
-    <span class="dot dot-21"></span>
-    <span class="dot dot-22"></span>
-    <span class="dot dot-23"></span>
-    <span class="dot dot-24"></span>
-    <span class="dot dot-25"></span>
-    <span class="dot dot-26"></span>
-    <span class="dot dot-27"></span>
-    <span class="dot dot-28"></span>
-    <span class="dot dot-29"></span>
-    <span class="dot dot-30"></span>
-    <span class="dot dot-31"></span>
-    <span class="dot dot-32"></span>
-    <span class="dot dot-33"></span>
-    <span class="dot dot-34"></span>
-    <span class="dot dot-35"></span>
-    <span class="dot dot-36"></span>
-    <span class="dot dot-37"></span>
-    <span class="dot dot-38"></span>
-    <span class="dot dot-39"></span>
-    <span class="dot dot-40"></span>
-    <span class="dot dot-41"></span>
-    <span class="dot dot-42"></span>
-    <span class="dot dot-43"></span>
-    <span class="dot dot-44"></span>
-    <span class="dot dot-45"></span>
-    <span class="dot dot-46"></span>
-    <span class="dot dot-47"></span>
-    <span class="dot dot-48"></span>
-    <span class="dot dot-49"></span>
-    <span class="dot dot-50"></span>
+  <!-- Decorative animated dots that create ambient movement in background -->
+  <div class="background-dots"> <!-- Container for all animated dot elements -->
+    <!-- 50 individual dots positioned across the screen -->
+    <!-- Each dot has unique position and animation timing -->
+    <span class="dot dot-1"></span>   <!-- Dot 1 - specific position and animation -->
+    <span class="dot dot-2"></span>   <!-- Dot 2 - specific position and animation -->
+    <span class="dot dot-3"></span>   <!-- Dot 3 - specific position and animation -->
+    <span class="dot dot-4"></span>   <!-- Dot 4 - specific position and animation -->
+    <span class="dot dot-5"></span>   <!-- Dot 5 - specific position and animation -->
+    <span class="dot dot-6"></span>   <!-- Dot 6 - specific position and animation -->
+    <span class="dot dot-7"></span>   <!-- Dot 7 - specific position and animation -->
+    <span class="dot dot-8"></span>   <!-- Dot 8 - specific position and animation -->
+    <span class="dot dot-9"></span>   <!-- Dot 9 - specific position and animation -->
+    <span class="dot dot-10"></span>  <!-- Dot 10 - specific position and animation -->
+    <span class="dot dot-11"></span>  <!-- Dot 11 - specific position and animation -->
+    <span class="dot dot-12"></span>  <!-- Dot 12 - specific position and animation -->
+    <span class="dot dot-13"></span>  <!-- Dot 13 - specific position and animation -->
+    <span class="dot dot-14"></span>  <!-- Dot 14 - specific position and animation -->
+    <span class="dot dot-15"></span>  <!-- Dot 15 - specific position and animation -->
+    <span class="dot dot-16"></span>  <!-- Dot 16 - specific position and animation -->
+    <span class="dot dot-17"></span>  <!-- Dot 17 - specific position and animation -->
+    <span class="dot dot-18"></span>  <!-- Dot 18 - specific position and animation -->
+    <span class="dot dot-19"></span>  <!-- Dot 19 - specific position and animation -->
+    <span class="dot dot-20"></span>  <!-- Dot 20 - specific position and animation -->
+    <span class="dot dot-21"></span>  <!-- Dot 21 - specific position and animation -->
+    <span class="dot dot-22"></span>  <!-- Dot 22 - specific position and animation -->
+    <span class="dot dot-23"></span>  <!-- Dot 23 - specific position and animation -->
+    <span class="dot dot-24"></span>  <!-- Dot 24 - specific position and animation -->
+    <span class="dot dot-25"></span>  <!-- Dot 25 - specific position and animation -->
+    <span class="dot dot-26"></span>  <!-- Dot 26 - specific position and animation -->
+    <span class="dot dot-27"></span>  <!-- Dot 27 - specific position and animation -->
+    <span class="dot dot-28"></span>  <!-- Dot 28 - specific position and animation -->
+    <span class="dot dot-29"></span>  <!-- Dot 29 - specific position and animation -->
+    <span class="dot dot-30"></span>  <!-- Dot 30 - specific position and animation -->
+    <span class="dot dot-31"></span>  <!-- Dot 31 - specific position and animation -->
+    <span class="dot dot-32"></span>  <!-- Dot 32 - specific position and animation -->
+    <span class="dot dot-33"></span>  <!-- Dot 33 - specific position and animation -->
+    <span class="dot dot-34"></span>  <!-- Dot 34 - specific position and animation -->
+    <span class="dot dot-35"></span>  <!-- Dot 35 - specific position and animation -->
+    <span class="dot dot-36"></span>  <!-- Dot 36 - specific position and animation -->
+    <span class="dot dot-37"></span>  <!-- Dot 37 - specific position and animation -->
+    <span class="dot dot-38"></span>  <!-- Dot 38 - specific position and animation -->
+    <span class="dot dot-39"></span>  <!-- Dot 39 - specific position and animation -->
+    <span class="dot dot-40"></span>  <!-- Dot 40 - specific position and animation -->
+    <span class="dot dot-41"></span>  <!-- Dot 41 - specific position and animation -->
+    <span class="dot dot-42"></span>  <!-- Dot 42 - specific position and animation -->
+    <span class="dot dot-43"></span>  <!-- Dot 43 - specific position and animation -->
+    <span class="dot dot-44"></span>  <!-- Dot 44 - specific position and animation -->
+    <span class="dot dot-45"></span>  <!-- Dot 45 - specific position and animation -->
+    <span class="dot dot-46"></span>  <!-- Dot 46 - specific position and animation -->
+    <span class="dot dot-47"></span>  <!-- Dot 47 - specific position and animation -->
+    <span class="dot dot-48"></span>  <!-- Dot 48 - specific position and animation -->
+    <span class="dot dot-49"></span>  <!-- Dot 49 - specific position and animation -->
+    <span class="dot dot-50"></span>  <!-- Dot 50 - specific position and animation -->
   </div>
 
-  <main class="container">
+  <!-- Main Content Container -->
+  <!-- Flexbox container holding left (identity) and right (visualization) sections -->
+  <main class="container"> <!-- Semantic main element for primary content -->
+    
     <!-- Left Section: Identity -->
-    <section class="left-section">
-      <article class="text-content">
-        <h1> Lalitya Dodla</h1>
-        <h2>Balanced Engineering</h2>
+    <!-- Personal branding, name, tagline, and contact information -->
+    <section class="left-section"> <!-- Semantic section for thematic grouping -->
+      <article class="text-content"> <!-- Semantic article for self-contained content -->
+        
+        <!-- Main heading - personal name -->
+        <h1> Lalitya Dodla</h1> <!-- H1 heading for primary page title -->
+        
+        <!-- Secondary heading - portfolio tagline -->
+        <h2>Balanced Engineering</h2> <!-- H2 heading for subtitle -->
+        
+        <!-- Subheading paragraph - philosophy statement -->
         <p class="subheading">Excellence in every layer,balance in every endeavor</p>
         
         <!-- Contact Links -->
-        <div class="contact-links">
+        <!-- Social media and email contact icons -->
+        <div class="contact-links"> <!-- Container div for contact icon buttons -->
+          
+          <!-- LinkedIn profile link -->
+          <!-- target="_blank" opens in new tab, rel="noopener noreferrer" for security -->
           <a href="https://www.linkedin.com/in/lalitya-dodla-078aa5367/" target="_blank" rel="noopener noreferrer" class="contact-icon" aria-label="LinkedIn">
+            <!-- LinkedIn SVG icon -->
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- LinkedIn icon paths - professional network logo -->
               <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
               <rect x="2" y="9" width="4" height="12"></rect>
               <circle cx="4" cy="4" r="2"></circle>
             </svg>
           </a>
+          
+          <!-- GitHub profile link -->
           <a href="https://github.com/Lalitya31" target="_blank" rel="noopener noreferrer" class="contact-icon" aria-label="GitHub">
+            <!-- GitHub SVG icon -->
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- GitHub icon path - code repository platform logo -->
               <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
             </svg>
           </a>
+          
+          <!-- Email contact link -->
           <a href="mailto:lalityadodla@gmail.com" class="contact-icon" aria-label="Email">
+            <!-- Email SVG icon -->
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Email icon paths - envelope symbol -->
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
               <polyline points="22,6 12,13 2,6"></polyline>
             </svg>
           </a>
-        </div>
-      </article>
-    </section>
+        </div> <!-- End contact-links -->
+      </article> <!-- End text-content -->
+    </section> <!-- End left-section -->
 
     <!-- Header Section: Background Text -->
-    <header class="center-header">
-      <div class="background-text">MULTILAYERED OPERATING SYSTEM</div>
+    <!-- Large decorative text behind the main content -->
+    <header class="center-header"> <!-- Semantic header element for decorative section -->
+      <div class="background-text">MULTILAYERED OPERATING SYSTEM</div> <!-- Large semi-transparent decorative text -->
     </header>
 
     <!-- Right Section: Multi-Layer System Visualization -->
-    <section class="right-section">
-      <div class="system-container">
+    <!-- Interactive concentric circles representing engineering layers -->
+    <section class="right-section"> <!-- Semantic section for visualization area -->
+      <div class="system-container"> <!-- Container for the concentric layer system -->
         
-        <!-- SVG for curved text -->
+        <!-- SVG for curved text labels -->
+        <!-- Text that curves along each circular layer -->
         <svg class="curved-text-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <path id="circle-6" d="M 250,20 A 230,230 0 1,1 249.9,20" fill="none"/>
-            <path id="circle-5" d="M 250,57.5 A 192.5,192.5 0 1,1 249.9,57.5" fill="none"/>
-            <path id="circle-4" d="M 250,95 A 155,155 0 1,1 249.9,95" fill="none"/>
-            <path id="circle-3" d="M 250,132.5 A 117.5,117.5 0 1,1 249.9,132.5" fill="none"/>
-            <path id="circle-2" d="M 250,170 A 80,80 0 1,1 249.9,170" fill="none"/>
-          </defs>
+          <defs> <!-- SVG definitions for reusable elements -->
+            <!-- Invisible circular paths for text to follow -->
+            <!-- Each path corresponds to a specific layer's circumference -->
+            <path id="circle-6" d="M 250,20 A 230,230 0 1,1 249.9,20" fill="none"/> <!-- Path for layer 6 - outermost -->
+            <path id="circle-5" d="M 250,57.5 A 192.5,192.5 0 1,1 249.9,57.5" fill="none"/> <!-- Path for layer 5 -->
+            <path id="circle-4" d="M 250,95 A 155,155 0 1,1 249.9,95" fill="none"/> <!-- Path for layer 4 -->
+            <path id="circle-3" d="M 250,132.5 A 117.5,117.5 0 1,1 249.9,132.5" fill="none"/> <!-- Path for layer 3 -->
+            <path id="circle-2" d="M 250,170 A 80,80 0 1,1 249.9,170" fill="none"/> <!-- Path for layer 2 -->
+          </defs> <!-- End SVG definitions -->
           
-          <text class="curved-label label-6">
-            <textPath href="#circle-6" startOffset="65%">BALANCE &amp; DISCIPLINE</textPath>
+          <!-- Text elements that follow circular paths -->
+          <!-- Each textPath references a path defined above -->
+          <text class="curved-label label-6"> <!-- Text for layer 6 -->
+            <!-- href links to path, startOffset positions text along path -->
+            <textPath href="#circle-6" startOffset="65%">BALANCE &amp; DISCIPLINE</textPath> <!-- Layer 6 label -->
           </text>
-          <text class="curved-label label-5">
-            <textPath href="#circle-5" startOffset="65%">ACHIEVEMENTS</textPath>
+          <text class="curved-label label-5"> <!-- Text for layer 5 -->
+            <textPath href="#circle-5" startOffset="65%">ACHIEVEMENTS</textPath> <!-- Layer 5 label -->
           </text>
-          <text class="curved-label label-4">
-            <textPath href="#circle-4" startOffset="65%">ACADEMICS</textPath>
+          <text class="curved-label label-4"> <!-- Text for layer 4 -->
+            <textPath href="#circle-4" startOffset="65%">ACADEMICS</textPath> <!-- Layer 4 label -->
           </text>
-          <text class="curved-label label-3">
-            <textPath href="#circle-3" startOffset="65%">LEADERSHIP</textPath>
+          <text class="curved-label label-3"> <!-- Text for layer 3 -->
+            <textPath href="#circle-3" startOffset="65%">LEADERSHIP</textPath> <!-- Layer 3 label -->
           </text>
-          <text class="curved-label label-2">
-            <textPath href="#circle-2" startOffset="65%">RESEARCH</textPath>
+          <text class="curved-label label-2"> <!-- Text for layer 2 -->
+            <textPath href="#circle-2" startOffset="65%">RESEARCH</textPath> <!-- Layer 2 label -->
           </text>
-        </svg>
+        </svg> <!-- End curved text SVG -->
         
         <!-- Layer 6: Balance & Discipline (Outermost) -->
-        <input type="checkbox" id="layer-6" class="layer-toggle">
+        <!-- Largest circle representing the foundation of everything -->
+        
+        <!-- Hidden checkbox for CSS-only interaction (not used with JavaScript) -->
+        <input type="checkbox" id="layer-6" class="layer-toggle"> <!-- Checkbox ID corresponds to layer -->
+        
+        <!-- Clickable layer link - navigates to balance.html -->
+        <!-- aria-label provides accessibility description -->
         <a href="../pages/balance.html" class="layer layer-6" aria-label="Balance & Discipline">
-        </a>
-        <div class="info-panel panel-6">
-          <h2>Balance & Discipline</h2>
-          <p>The foundation of sustainable engineering excellence. Maintaining equilibrium between work, learning, health, and personal growth.</p>
-          <a href="../pages/balance.html" class="panel-link">View Details →</a>
-          <label for="layer-6" class="close-panel">✕</label>
-        </div>
+        </a> <!-- Empty anchor, styled as concentric circle via CSS -->
+        
+        <!-- Information panel for Balance & Discipline -->
+        <!-- Shown when layer is activated by JavaScript -->
+        <div class="info-panel panel-6"> <!-- Panel ID corresponds to layer -->
+          <h2>Balance & Discipline</h2> <!-- Panel heading -->
+          <p>The foundation of sustainable engineering excellence. Maintaining equilibrium between work, learning, health, and personal growth.</p> <!-- Panel description -->
+          <a href="../pages/balance.html" class="panel-link">View Details →</a> <!-- Link to full page -->
+          <label for="layer-6" class="close-panel">✕</label> <!-- Close button (× symbol) -->
+        </div> <!-- End panel-6 -->
 
         <!-- Layer 5: Achievements -->
-        <input type="checkbox" id="layer-5" class="layer-toggle">
+        <!-- Second largest circle -->
+        <input type="checkbox" id="layer-5" class="layer-toggle"> <!-- Hidden checkbox for layer 5 -->
         <a href="../pages/achievements.html" class="layer layer-5" aria-label="Achievements">
-        </a>
-        <div class="info-panel panel-5">
-          <h2>Achievements</h2>
-          <p>Recognition and milestones that mark the journey. Hackathons, competitions, certifications, and honors earned through dedication.</p>
-          <a href="../pages/achievements.html" class="panel-link">View Details →</a>
-          <label for="layer-5" class="close-panel">✕</label>
-        </div>
+        </a> <!-- Layer 5 circle link -->
+        <div class="info-panel panel-5"> <!-- Achievement info panel -->
+          <h2>Achievements</h2> <!-- Panel heading -->
+          <p>Recognition and milestones that mark the journey. Hackathons, competitions, certifications, and honors earned through dedication.</p> <!-- Panel description -->
+          <a href="../pages/achievements.html" class="panel-link">View Details →</a> <!-- Link to achievements page -->
+          <label for="layer-5" class="close-panel">✕</label> <!-- Close button -->
+        </div> <!-- End panel-5 -->
 
         <!-- Layer 4: Academics -->
-        <input type="checkbox" id="layer-4" class="layer-toggle">
+        <!-- Third largest circle -->
+        <input type="checkbox" id="layer-4" class="layer-toggle"> <!-- Hidden checkbox for layer 4 -->
         <a href="../pages/academics.html" class="layer layer-4" aria-label="Academics">
-        </a>
-        <div class="info-panel panel-4">
-          <h2>Academics</h2>
-          <p>The theoretical foundation. Core computer science principles, algorithms, data structures, and mathematical rigor.</p>
-          <a href="../pages/academics.html" class="panel-link">View Details →</a>
-          <label for="layer-4" class="close-panel">✕</label>
-        </div>
+        </a> <!-- Layer 4 circle link -->
+        <div class="info-panel panel-4"> <!-- Academics info panel -->
+          <h2>Academics</h2> <!-- Panel heading -->
+          <p>The theoretical foundation. Core computer science principles, algorithms, data structures, and mathematical rigor.</p> <!-- Panel description -->
+          <a href="../pages/academics.html" class="panel-link">View Details →</a> <!-- Link to academics page -->
+          <label for="layer-4" class="close-panel">✕</label> <!-- Close button -->
+        </div> <!-- End panel-4 -->
 
         <!-- Layer 3: Leadership & Project Management -->
-        <input type="checkbox" id="layer-3" class="layer-toggle">
+        <!-- Fourth largest circle -->
+        <input type="checkbox" id="layer-3" class="layer-toggle"> <!-- Hidden checkbox for layer 3 -->
         <a href="../pages/leadership.html" class="layer layer-3" aria-label="Leadership & Project Management">
-        </a>
-        <div class="info-panel panel-3">
-          <h2>Leadership & Project Management</h2>
-          <p>Orchestrating teams and driving projects to completion. Leading initiatives, mentoring peers, and managing complex deliverables.</p>
-          <a href="../pages/leadership.html" class="panel-link">View Details →</a>
-          <label for="layer-3" class="close-panel">✕</label>
-        </div>
+        </a> <!-- Layer 3 circle link -->
+        <div class="info-panel panel-3"> <!-- Leadership info panel -->
+          <h2>Leadership & Project Management</h2> <!-- Panel heading -->
+          <p>Orchestrating teams and driving projects to completion. Leading initiatives, mentoring peers, and managing complex deliverables.</p> <!-- Panel description -->
+          <a href="../pages/leadership.html" class="panel-link">View Details →</a> <!-- Link to leadership page -->
+          <label for="layer-3" class="close-panel">✕</label> <!-- Close button -->
+        </div> <!-- End panel-3 -->
 
         <!-- Layer 2: Research & Publications -->
-        <input type="checkbox" id="layer-2" class="layer-toggle">
+        <!-- Fifth largest circle -->
+        <input type="checkbox" id="layer-2" class="layer-toggle"> <!-- Hidden checkbox for layer 2 -->
         <a href="../pages/research.html" class="layer layer-2" aria-label="Research & Publications">
-        </a>
-        <div class="info-panel panel-2">
-          <h2>Research & Publications</h2>
-          <p>Pushing boundaries through systematic investigation. Academic papers, technical articles, and contributions to the body of knowledge.</p>
-          <a href="../pages/research.html" class="panel-link">View Details →</a>
-          <label for="layer-2" class="close-panel">✕</label>
-        </div>
+        </a> <!-- Layer 2 circle link -->
+        <div class="info-panel panel-2"> <!-- Research info panel -->
+          <h2>Research & Publications</h2> <!-- Panel heading -->
+          <p>Pushing boundaries through systematic investigation. Academic papers, technical articles, and contributions to the body of knowledge.</p> <!-- Panel description -->
+          <a href="../pages/research.html" class="panel-link">View Details →</a> <!-- Link to research page -->
+          <label for="layer-2" class="close-panel">✕</label> <!-- Close button -->
+        </div> <!-- End panel-2 -->
 
         <!-- Layer 1: Engineering Projects (Core) -->
-        <input type="checkbox" id="layer-1" class="layer-toggle">
+        <!-- Smallest, innermost circle - the heart of the system -->
+        <input type="checkbox" id="layer-1" class="layer-toggle"> <!-- Hidden checkbox for layer 1 -->
         <a href="../pages/projects.html" class="layer layer-1" aria-label="Engineering Projects">
-          <span class="layer-label">PROJECTS</span>
-        </a>
-        <div class="info-panel panel-1">
-          <h2>Engineering Projects</h2>
-          <p>The core of practical engineering. Hands-on applications, systems built, problems solved, and code deployed.</p>
-          <a href="../pages/projects.html" class="panel-link">View Details →</a>
-          <label for="layer-1" class="close-panel">✕</label>
-        </div>
+          <span class="layer-label">PROJECTS</span> <!-- Text label displayed on core layer -->
+        </a> <!-- Layer 1 circle link with label -->
+        <div class="info-panel panel-1"> <!-- Projects info panel -->
+          <h2>Engineering Projects</h2> <!-- Panel heading -->
+          <p>The core of practical engineering. Hands-on applications, systems built, problems solved, and code deployed.</p> <!-- Panel description -->
+          <a href="../pages/projects.html" class="panel-link">View Details →</a> <!-- Link to projects page -->
+          <label for="layer-1" class="close-panel">✕</label> <!-- Close button -->
+        </div> <!-- End panel-1 -->
 
-      </div>
-    </section>
-  </main>
+      </div> <!-- End system-container -->
+    </section> <!-- End right-section -->
+  </main> <!-- End main container -->
 
-  <footer>
-    <p>&copy; 2026 Balanced Engineering</p>
+  <!-- Footer Section -->
+  <!-- Copyright and credits at bottom of page -->
+  <footer> <!-- Semantic footer element -->
+    <p>&copy; 2026 Balanced Engineering</p> <!-- Copyright notice with HTML entity for © symbol -->
   </footer>
 
   <!-- Interactive Features Script -->
-  <script src="../js/interactions.js"></script>
+  <!-- JavaScript file that adds interactivity to layers -->
+  <script src="../js/interactions.js"></script> <!-- External JavaScript file -->
 
-</body>
-</html>
+</body> <!-- End body -->
+</html> <!-- End HTML document -->

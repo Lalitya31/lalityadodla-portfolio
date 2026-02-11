@@ -1,406 +1,501 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Engineering Projects - Balanced Engineering</title>
-  <link rel="stylesheet" href="../css/main.css">
-  <style>
-    /* Projects page specific styles */
+<!--
+  Engineering Projects Page
+  
+  Dedicated page for showcasing engineering projects with an interactive vault metaphor.
+  Features a clickable vault door animation that reveals project details when opened.
+  
+  This page includes:
+  - Custom inline styles for vault visualization
+  - Two-column layout: description (left) and interactive vault (right)
+  - JavaScript for vault open/close interaction
+  
+  Uses semantic HTML5 structure and extends main.css with page-specific styles.
+-->
+<!DOCTYPE html> <!-- HTML5 document type -->\n<html lang=\"en\"> <!-- Root element with English language -->\n<head>\n  <!-- Character encoding for UTF-8 support -->\n  <meta charset=\"UTF-8\">\n  \n  <!-- Viewport meta tag for responsive design -->\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  \n  <!-- Page title shown in browser tab -->\n  <title>Engineering Projects - Balanced Engineering</title>\n  \n  <!-- Main stylesheet link (relative path from pages folder) -->\n  <link rel=\"stylesheet\" href=\"../css/main.css\">\n  \n  <!-- Page-specific inline styles for vault visualization -->\n  <style>
+    /* ===== Projects Page Specific Styles ===== */
+    
+    /* Body Background */
     body {
-      background-color: #0B0D10;
-      overflow-x: hidden;
+      background-color: #0B0D10;  /* Dark background color */
+      overflow-x: hidden;         /* Prevent horizontal scroll */
     }
 
+    /* Main Projects Container */
+    /* Two-column flex layout for description and vault */
     .projects-container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      min-height: 100vh;
-      padding: 100px 4rem 2rem 4rem;
-      gap: 4rem;
+      display: flex;                /* Flexbox layout */
+      align-items: center;          /* Vertically center items */
+      justify-content: space-between; /* Space between columns */
+      min-height: 100vh;            /* Minimum full viewport height */
+      padding: 100px 4rem 2rem 4rem; /* Top accounts for navbar, horizontal padding */
+      gap: 4rem;                    /* Space between columns */
     }
 
+    /* Left Description Section */
+    /* Contains text explaining projects */
     .left-description {
-      flex: 1;
-      max-width: 500px;
-      padding: 2rem;
+      flex: 1;              /* Take up 1 part of flex space */
+      max-width: 500px;     /* Maximum width constraint */
+      padding: 2rem;        /* Internal spacing */
     }
 
+    /* Left Description Main Heading */
     .left-description h1 {
-      font-size: 4rem;
-      font-weight: 700;
-      color: #E5E7EB;
-      margin-bottom: 1.5rem;
-      letter-spacing: -1px;
+      font-size: 4rem;        /* Very large heading */
+      font-weight: 700;       /* Bold weight */
+      color: #E5E7EB;         /* Light gray text */
+      margin-bottom: 1.5rem;  /* Space below */
+      letter-spacing: -1px;   /* Tight letter spacing */
     }
 
+    /* Left Description Subheadings */
     .left-description h2 {
-      font-size: 1.5rem;
-      color: #93C5FD;
-      margin-bottom: 1rem;
-      font-weight: 600;
+      font-size: 1.5rem;    /* Medium heading size */
+      color: #93C5FD;       /* Light blue color */
+      margin-bottom: 1rem;  /* Space below */
+      font-weight: 600;     /* Semi-bold weight */
     }
 
+    /* Left Description Paragraphs */
     .left-description p {
-      font-size: 1.1rem;
-      color: #D1D5DB;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
+      font-size: 1.1rem;    /* Slightly large text */
+      color: #D1D5DB;       /* Light gray color */
+      line-height: 1.8;     /* Generous line height */
+      margin-bottom: 1.5rem; /* Space below each paragraph */
     }
 
+    /* Vault Container */
+    /* Centers the vault visualization */
     .vault-container {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      padding: 2rem;
+      flex: 1;              /* Take up 1 part of flex space */
+      display: flex;        /* Flexbox for centering */
+      justify-content: center; /* Horizontally center */
+      align-items: center;  /* Vertically center */
+      position: relative;   /* Position context for children */
+      padding: 2rem;        /* Internal spacing */
     }
 
+    /* Vault Outer Container */
+    /* Main container for vault door and contents */
     .vault-outer {
-      width: 500px;
-      height: 500px;
-      position: relative;
-      cursor: pointer;
-      transition: transform 0.3s ease;
+      width: 500px;                     /* Fixed width */
+      height: 500px;                    /* Fixed height (square) */
+      position: relative;               /* Position context for absolute children */
+      cursor: pointer;                  /* Pointer cursor for clickability */
+      transition: transform 0.3s ease;  /* Smooth scale transition */
     }
 
+    /* Vault Outer Hover State */
     .vault-outer:hover {
-      transform: scale(1.02);
+      transform: scale(1.02);  /* Slightly enlarge on hover */
     }
 
-    /* Vault door main circle */
+    /* Vault Door - Main Circle */
+    /* The circular vault door that rotates away when clicked */
     .vault-door {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #2C5282 0%, #1E3A8A 50%, #1E40AF 100%);
-      border: 12px solid #60A5FA;
+      width: 100%;              /* Full width of container */
+      height: 100%;             /* Full height of container */
+      border-radius: 50%;       /* Make it circular */
+      background: linear-gradient(135deg, #2C5282 0%, #1E3A8A 50%, #1E40AF 100%); /* Blue gradient background */
+      border: 12px solid #60A5FA; /* Light blue border */
       box-shadow: 
-        0 0 40px rgba(96, 165, 250, 0.4),
-        inset 0 0 60px rgba(0, 0, 0, 0.5),
-        inset 0 0 20px rgba(96, 165, 250, 0.2);
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.5s ease;
+        0 0 40px rgba(96, 165, 250, 0.4),    /* Outer glow */
+        inset 0 0 60px rgba(0, 0, 0, 0.5),   /* Inner shadow for depth */
+        inset 0 0 20px rgba(96, 165, 250, 0.2); /* Inner blue glow */
+      position: relative;         /* Position context for children */
+      display: flex;              /* Flexbox for centering wheel */
+      align-items: center;        /* Vertically center */
+      justify-content: center;    /* Horizontally center */
+      transition: all 0.5s ease;  /* Smooth transition for opening */
     }
 
+    /* Vault Door Opened State */
+    /* Applied when vault is clicked - rotates and fades out */
     .vault-outer.opened .vault-door {
-      transform: rotateY(90deg);
-      opacity: 0;
+      transform: rotateY(90deg);  /* Rotate 90 degrees on Y axis (3D effect) */
+      opacity: 0;                 /* Fade out completely */
     }
 
-    /* Vault handle/wheel */
+    /* Vault Wheel/Handle */
+    /* The circular wheel in the center of the vault door */
     .vault-wheel {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #3B82F6, #1E40AF);
-      border: 8px solid #93C5FD;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 200px;               /* Fixed width */
+      height: 200px;              /* Fixed height (circular) */
+      border-radius: 50%;         /* Make it circular */
+      background: linear-gradient(145deg, #3B82F6, #1E40AF); /* Blue gradient */
+      border: 8px solid #93C5FD;  /* Light blue border */
+      position: absolute;         /* Absolute positioning */
+      top: 50%;                   /* Vertical center */
+      left: 50%;                  /* Horizontal center */
+      transform: translate(-50%, -50%); /* Center transform */
+      display: flex;              /* Flexbox for center hub */
+      align-items: center;        /* Vertically center */
+      justify-content: center;    /* Horizontally center */
       box-shadow: 
-        0 0 30px rgba(147, 197, 253, 0.5),
-        inset 0 0 20px rgba(0, 0, 0, 0.4);
-      transition: transform 0.5s ease;
+        0 0 30px rgba(147, 197, 253, 0.5),   /* Outer glow */
+        inset 0 0 20px rgba(0, 0, 0, 0.4);   /* Inner shadow */
+      transition: transform 0.5s ease; /* Smooth rotation transition */
     }
 
+    /* Vault Wheel Hover State */
     .vault-outer:hover .vault-wheel {
-      transform: translate(-50%, -50%) rotate(15deg);
+      transform: translate(-50%, -50%) rotate(15deg);  /* Slight rotation on hover */
     }
 
+    /* Vault Wheel Opened State */
+    /* Spins when vault opens */
     .vault-outer.opened .vault-wheel {
-      transform: translate(-50%, -50%) rotate(360deg);
+      transform: translate(-50%, -50%) rotate(360deg);  /* Full rotation when opened */
     }
 
-    /* Spokes on the wheel */
+    /* Spokes on the Wheel */
+    /* Radial lines extending from center of wheel */
     .spoke {
-      position: absolute;
-      width: 4px;
-      height: 80px;
-      background: linear-gradient(to bottom, #93C5FD, #60A5FA);
-      top: 50%;
-      left: 50%;
-      transform-origin: center;
-      border-radius: 2px;
-      box-shadow: 0 0 10px rgba(147, 197, 253, 0.6);
+      position: absolute;         /* Absolute positioning */
+      width: 4px;                 /* Thin line width */
+      height: 80px;               /* Length of spoke */
+      background: linear-gradient(to bottom, #93C5FD, #60A5FA); /* Blue gradient */
+      top: 50%;                   /* Position from center */
+      left: 50%;                  /* Position from center */
+      transform-origin: center;   /* Rotate from center */
+      border-radius: 2px;         /* Slightly rounded ends */
+      box-shadow: 0 0 10px rgba(147, 197, 253, 0.6); /* Glow effect */
     }
 
-    .spoke:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg); }
-    .spoke:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg); }
-    .spoke:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg); }
-    .spoke:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg); }
-    .spoke:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg); }
-    .spoke:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg); }
-    .spoke:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg); }
-    .spoke:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg); }
+    /* Individual Spoke Rotations */
+    /* Each spoke is rotated to create radial pattern */
+    .spoke:nth-child(1) { transform: translate(-50%, -50%) rotate(0deg); }      /* 0 degrees */
+    .spoke:nth-child(2) { transform: translate(-50%, -50%) rotate(45deg); }     /* 45 degrees */
+    .spoke:nth-child(3) { transform: translate(-50%, -50%) rotate(90deg); }     /* 90 degrees */
+    .spoke:nth-child(4) { transform: translate(-50%, -50%) rotate(135deg); }    /* 135 degrees */
+    .spoke:nth-child(5) { transform: translate(-50%, -50%) rotate(180deg); }    /* 180 degrees */
+    .spoke:nth-child(6) { transform: translate(-50%, -50%) rotate(225deg); }    /* 225 degrees */
+    .spoke:nth-child(7) { transform: translate(-50%, -50%) rotate(270deg); }    /* 270 degrees */
+    .spoke:nth-child(8) { transform: translate(-50%, -50%) rotate(315deg); }    /* 315 degrees */
 
-    /* Center hub */
+    /* Center Hub */
+    /* Small circle in the very center of the wheel */
     .vault-center {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #1E3A8A, #0F172A);
-      border: 4px solid #60A5FA;
+      width: 60px;                /* Fixed width */
+      height: 60px;               /* Fixed height (circular) */
+      border-radius: 50%;         /* Make it circular */
+      background: linear-gradient(145deg, #1E3A8A, #0F172A); /* Dark blue gradient */
+      border: 4px solid #60A5FA;  /* Light blue border */
       box-shadow: 
-        0 0 20px rgba(96, 165, 250, 0.6),
-        inset 0 0 10px rgba(0, 0, 0, 0.7);
-      position: relative;
-      z-index: 10;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      color: #93C5FD;
-      font-weight: 700;
+        0 0 20px rgba(96, 165, 250, 0.6),    /* Outer glow */
+        inset 0 0 10px rgba(0, 0, 0, 0.7);   /* Inner shadow */
+      position: relative;         /* Position context */
+      z-index: 10;                /* Above spokes */
+      display: flex;              /* Flexbox for text */
+      align-items: center;        /* Vertically center text */
+      justify-content: center;    /* Horizontally center text */
+      font-size: 0.8rem;          /* Small text size */
+      color: #93C5FD;             /* Light blue text */
+      font-weight: 700;           /* Bold weight */
     }
 
-    /* Decorative bolts around the door */
+    /* Decorative Bolts Around the Door */
+    /* Small circles positioned around the vault door edge */
     .bolt {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #60A5FA, #3B82F6);
-      border: 3px solid #93C5FD;
-      position: absolute;
-      box-shadow: 0 0 10px rgba(96, 165, 250, 0.5);
+      width: 20px;                /* Fixed width */
+      height: 20px;               /* Fixed height (circular) */
+      border-radius: 50%;         /* Make it circular */
+      background: linear-gradient(145deg, #60A5FA, #3B82F6); /* Blue gradient */
+      border: 3px solid #93C5FD;  /* Light blue border */
+      position: absolute;         /* Absolute positioning */
+      box-shadow: 0 0 10px rgba(96, 165, 250, 0.5); /* Glow effect */
     }
 
-    .bolt:nth-child(1) { top: 5%; left: 50%; transform: translateX(-50%); }
-    .bolt:nth-child(2) { top: 20%; right: 12%; }
-    .bolt:nth-child(3) { top: 50%; right: 5%; transform: translateY(-50%); }
-    .bolt:nth-child(4) { bottom: 20%; right: 12%; }
-    .bolt:nth-child(5) { bottom: 5%; left: 50%; transform: translateX(-50%); }
-    .bolt:nth-child(6) { bottom: 20%; left: 12%; }
-    .bolt:nth-child(7) { top: 50%; left: 5%; transform: translateY(-50%); }
-    .bolt:nth-child(8) { top: 20%; left: 12%; }
+    /* Individual Bolt Positions */
+    /* Each bolt positioned around the circle */
+    .bolt:nth-child(1) { top: 5%; left: 50%; transform: translateX(-50%); }    /* Top center */
+    .bolt:nth-child(2) { top: 20%; right: 12%; }                                /* Top right */
+    .bolt:nth-child(3) { top: 50%; right: 5%; transform: translateY(-50%); }   /* Middle right */
+    .bolt:nth-child(4) { bottom: 20%; right: 12%; }                             /* Bottom right */
+    .bolt:nth-child(5) { bottom: 5%; left: 50%; transform: translateX(-50%); } /* Bottom center */
+    .bolt:nth-child(6) { bottom: 20%; left: 12%; }                              /* Bottom left */
+    .bolt:nth-child(7) { top: 50%; left: 5%; transform: translateY(-50%); }    /* Middle left */
+    .bolt:nth-child(8) { top: 20%; left: 12%; }                                 /* Top left */
 
-    /* Projects content (revealed when vault opens) */
+    /* Projects Content Revealed When Vault Opens */
+    /* Hidden panel that shows project details */
     .projects-revealed {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(11, 13, 16, 0.95);
-      border-radius: 20px;
-      padding: 2rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease 0.3s;
-      overflow-y: auto;
-      border: 2px solid #60A5FA;
-      box-shadow: 0 0 40px rgba(96, 165, 250, 0.3);
+      position: absolute;                   /* Absolute positioning over vault */
+      top: 0;                               /* Aligned to top */
+      left: 0;                              /* Aligned to left */
+      width: 100%;                          /* Full width */
+      height: 100%;                         /* Full height */
+      background: rgba(11, 13, 16, 0.95);   /* Nearly opaque dark background */
+      border-radius: 20px;                  /* Rounded corners */
+      padding: 2rem;                        /* Internal spacing */
+      opacity: 0;                           /* Initially invisible */
+      pointer-events: none;                 /* Don't block clicks when hidden */
+      transition: opacity 0.5s ease 0.3s;   /* Delayed fade-in transition */
+      overflow-y: auto;                     /* Scroll if content overflows */
+      border: 2px solid #60A5FA;            /* Light blue border */
+      box-shadow: 0 0 40px rgba(96, 165, 250, 0.3); /* Glow effect */
     }
 
+    /* Projects Revealed Visible State */
+    /* Applied when vault is opened */
     .vault-outer.opened .projects-revealed {
-      opacity: 1;
-      pointer-events: all;
+      opacity: 1;             /* Fully visible */
+      pointer-events: all;    /* Enable interactions */
     }
 
+    /* Projects Revealed Heading */
     .projects-revealed h2 {
-      color: #93C5FD;
-      font-size: 2rem;
-      margin-bottom: 1.5rem;
-      text-align: center;
+      color: #93C5FD;          /* Light blue color */
+      font-size: 2rem;         /* Large heading */
+      margin-bottom: 1.5rem;   /* Space below */
+      text-align: center;      /* Center alignment */
     }
 
+    /* Projects List Grid */
+    /* Grid layout for project items */
     .projects-list {
-      display: grid;
-      gap: 1.5rem;
+      display: grid;   /* Grid layout */
+      gap: 1.5rem;     /* Space between items */
     }
 
+    /* Individual Project Item */
+    /* Card-style container for each project */
     .project-item {
-      background: rgba(30, 58, 138, 0.5);
-      padding: 1.5rem;
-      border-radius: 10px;
-      border: 1px solid rgba(147, 197, 253, 0.3);
-      transition: all 0.3s ease;
+      background: rgba(30, 58, 138, 0.5);    /* Semi-transparent blue background */
+      padding: 1.5rem;                       /* Internal spacing */
+      border-radius: 10px;                   /* Rounded corners */
+      border: 1px solid rgba(147, 197, 253, 0.3); /* Light blue border */
+      transition: all 0.3s ease;             /* Smooth hover transition */
     }
 
+    /* Project Item Hover State */
     .project-item:hover {
-      background: rgba(30, 58, 138, 0.7);
-      border-color: rgba(147, 197, 253, 0.6);
-      transform: translateY(-2px);
+      background: rgba(30, 58, 138, 0.7);        /* Darker background on hover */
+      border-color: rgba(147, 197, 253, 0.6);    /* Brighter border on hover */
+      transform: translateY(-2px);               /* Slight lift effect */
     }
 
+    /* Project Item Heading */
     .project-item h3 {
-      color: #60A5FA;
-      font-size: 1.3rem;
-      margin-bottom: 0.5rem;
+      color: #60A5FA;         /* Light blue color */
+      font-size: 1.3rem;      /* Medium-large heading */
+      margin-bottom: 0.5rem;  /* Space below */
     }
 
+    /* Project Item Description */
     .project-item p {
-      color: #D1D5DB;
-      font-size: 0.95rem;
-      line-height: 1.6;
+      color: #D1D5DB;     /* Light gray color */
+      font-size: 0.95rem; /* Slightly small text */
+      line-height: 1.6;   /* Good readability line height */
     }
 
+    /* Close Vault Button */
+    /* X button in top-right corner of revealed projects */
     .close-vault {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: #3B82F6;
-      color: white;
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: all 0.3s ease;
-      z-index: 100;
+      position: absolute;                  /* Absolute positioning */
+      top: 1rem;                           /* Distance from top */
+      right: 1rem;                         /* Distance from right */
+      background: #3B82F6;                 /* Medium blue background */
+      color: white;                        /* White text/icon */
+      border: none;                        /* No border */
+      width: 40px;                         /* Fixed width */
+      height: 40px;                        /* Fixed height (square) */
+      border-radius: 50%;                  /* Make it circular */
+      cursor: pointer;                     /* Pointer cursor */
+      font-size: 1.5rem;                   /* Large text */
+      display: flex;                       /* Flexbox for centering */
+      align-items: center;                 /* Vertically center */
+      justify-content: center;             /* Horizontally center */
+      transition: all 0.3s ease;           /* Smooth transitions */
+      z-index: 100;                        /* Above other content */
     }
 
+    /* Close Vault Button Hover State */
     .close-vault:hover {
-      background: #2563EB;
-      transform: rotate(90deg);
+      background: #2563EB;           /* Darker blue on hover */
+      transform: rotate(90deg);      /* Rotate 90 degrees on hover */
     }
 
+    /* Click Hint Text */
+    /* Text below vault prompting user to click */
     .click-hint {
-      position: absolute;
-      bottom: -50px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: #93C5FD;
-      font-size: 0.9rem;
-      font-weight: 500;
-      opacity: 0.8;
-      animation: pulse 2s ease-in-out infinite;
+      position: absolute;                       /* Absolute positioning */
+      bottom: -50px;                            /* Below the vault */
+      left: 50%;                                /* Horizontally centered */
+      transform: translateX(-50%);              /* Center transform */
+      color: #93C5FD;                           /* Light blue color */
+      font-size: 0.9rem;                        /* Small text */
+      font-weight: 500;                         /* Medium weight */
+      opacity: 0.8;                             /* Semi-transparent */
+      animation: pulse 2s ease-in-out infinite; /* Pulsing animation */
     }
 
+    /* Pulse Animation for Click Hint */
     @keyframes pulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
+      0%, 100% { opacity: 0.5; }  /* Start and end at 50% opacity */
+      50% { opacity: 1; }         /* Midpoint at full opacity */
     }
 
+    /* Hide Click Hint When Vault Is Opened */
     .vault-outer.opened .click-hint {
-      display: none;
+      display: none;  /* Completely hide element */
     }
   </style>
 </head>
-<body>
+<body> <!-- Main body element -->
 
   <!-- Navigation Bar -->
-  <nav class="navbar">
-    <div class="nav-container">
+  <!-- Fixed top navigation consistent across all pages -->
+  <nav class="navbar"> <!-- Semantic nav element -->
+    <div class="nav-container"> <!-- Container for navbar content -->
+      <!-- Brand link returns to home page -->
       <a href="../index.html/index.html" class="nav-brand">Balanced Engineering</a>
-      <ul class="nav-links">
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="research.html">Research</a></li>
-        <li><a href="leadership.html">Leadership</a></li>
-        <li><a href="academics.html">Academics</a></li>
-        <li><a href="achievements.html">Achievements</a></li>
-        <li><a href="balance.html">Balance</a></li>
+      
+      <!-- Navigation links list -->
+      <ul class="nav-links"> <!-- Unordered list of page links -->
+        <li><a href="projects.html">Projects</a></li> <!-- Current page - Projects -->
+        <li><a href="research.html">Research</a></li> <!-- Link to Research page -->
+        <li><a href="leadership.html">Leadership</a></li> <!-- Link to Leadership page -->
+        <li><a href="academics.html">Academics</a></li> <!-- Link to Academics page -->
+        <li><a href="achievements.html">Achievements</a></li> <!-- Link to Achievements page -->
+        <li><a href="balance.html">Balance</a></li> <!-- Link to Balance page -->
       </ul>
     </div>
   </nav>
 
-  <main class="projects-container">
+  <!-- Main Projects Container -->
+  <!-- Two-column layout: description (left) and vault (right) -->
+  <main class="projects-container"> <!-- Main semantic element with custom class -->
+    
     <!-- Left Section: Description -->
-    <section class="left-description">
-      <h1>Projects</h1>
+    <!-- Text explaining the projects and vault concept -->
+    <section class="left-description"> <!-- Semantic section element -->
+      <h1>Projects</h1> <!-- Main page heading -->
       
-      <h2>The Core of Engineering</h2>
-      <p>This is where theory meets practice. Every line of code, every system designed, every problem solved represents a step forward in the engineering journey.</p>
+      <h2>The Core of Engineering</h2> <!-- First subheading -->
+      <p>This is where theory meets practice. Every line of code, every system designed, every problem solved represents a step forward in the engineering journey.</p> <!-- Description paragraph -->
       
-      <h2>Building Real Solutions</h2>
-      <p>From concept to deployment, these projects showcase hands-on experience with modern technologies, scalable architectures, and practical problem-solving. Each project reflects a commitment to writing clean, maintainable code and creating solutions that make a real-world impact.</p>
+      <h2>Building Real Solutions</h2> <!-- Second subheading -->
+      <p>From concept to deployment, these projects showcase hands-on experience with modern technologies, scalable architectures, and practical problem-solving. Each project reflects a commitment to writing clean, maintainable code and creating solutions that make a real-world impact.</p> <!-- Description paragraph -->
       
-      <h2>Innovation Through Practice</h2>
-      <p>These projects span various domains including web development, systems programming, data analysis, and automation. They represent not just technical achievements, but also lessons learned in debugging, optimization, and the iterative process of turning ideas into functional software.</p>
+      <h2>Innovation Through Practice</h2> <!-- Third subheading -->
+      <p>These projects span various domains including web development, systems programming, data analysis, and automation. They represent not just technical achievements, but also lessons learned in debugging, optimization, and the iterative process of turning ideas into functional software.</p> <!-- Description paragraph -->
       
-      <h2>Continuous Learning</h2>
-      <p>Every project is an opportunity to explore new frameworks, experiment with cutting-edge technologies, and push the boundaries of what's possible. The vault contains a curated collection of work that demonstrates growth, adaptability, and a passion for solving complex challenges.</p>
+      <h2>Continuous Learning</h2> <!-- Fourth subheading -->
+      <p>Every project is an opportunity to explore new frameworks, experiment with cutting-edge technologies, and push the boundaries of what's possible. The vault contains a curated collection of work that demonstrates growth, adaptability, and a passion for solving complex challenges.</p> <!-- Description paragraph -->
       
-      <h2>Click the Vault</h2>
-      <p>Open the vault to explore the collection of engineering projects that demonstrate technical expertise and innovative thinking.</p>
-    </section>
+      <h2>Click the Vault</h2> <!-- Fifth subheading - call to action -->
+      <p>Open the vault to explore the collection of engineering projects that demonstrate technical expertise and innovative thinking.</p> <!-- Call to action description -->
+    </section> <!-- End left-description -->
 
     <!-- Right Section: Vault -->
-    <section class="vault-container">
-      <div class="vault-outer" id="vaultOuter">
-        <!-- Main vault door -->
-        <div class="vault-door">
-          <!-- Decorative bolts -->
-          <span class="bolt"></span>
-          <span class="bolt"></span>
-          <span class="bolt"></span>
-          <span class="bolt"></span>
-          <span class="bolt"></span>
-          <span class="bolt"></span>
-          <span class="bolt"></span>
-          <span class="bolt"></span>
-
-          <!-- Vault wheel/handle -->
-          <div class="vault-wheel">
-            <span class="spoke"></span>
-            <span class="spoke"></span>
-            <span class="spoke"></span>
-            <span class="spoke"></span>
-            <span class="spoke"></span>
-            <span class="spoke"></span>
-            <span class="spoke"></span>
-            <span class="spoke"></span>
-            <div class="vault-center">OPEN</div>
-          </div>
-        </div>
-
-        <!-- Click hint -->
-        <div class="click-hint">Click to Open</div>
-
-        <!-- Projects revealed when vault opens -->
-        <div class="projects-revealed">
-          <button class="close-vault" onclick="closeVault()">×</button>
-          <h2>My Engineering Projects</h2>
+    <!-- Interactive vault visualization -->
+    <section class="vault-container"> <!-- Semantic section for vault -->
+      <!-- Vault Outer Container - clickable element with ID for JavaScript -->
+      <div class="vault-outer" id="vaultOuter"> <!-- ID used by JavaScript for interaction -->
+        
+        <!-- Main Vault Door -->
+        <!-- Circular door that rotates away when clicked -->
+        <div class="vault-door"> <!-- Vault door element -->
           
-          <div class="projects-list">
-            <!-- Projects will be added here -->
-            <div class="project-item">
-              <h3>Project 1</h3>
-              <p>Project details coming soon...</p>
-            </div>
-            
-            <div class="project-item">
-              <h3>Project 2</h3>
-              <p>Project details coming soon...</p>
-            </div>
-            
-            <div class="project-item">
-              <h3>Project 3</h3>
-              <p>Project details coming soon...</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+          <!-- Decorative Bolts -->
+          <!-- 8 bolts positioned around the door edge -->
+          <span class="bolt"></span> <!-- Bolt 1 - top center -->
+          <span class="bolt"></span> <!-- Bolt 2 - top right -->
+          <span class="bolt"></span> <!-- Bolt 3 - middle right -->
+          <span class="bolt"></span> <!-- Bolt 4 - bottom right -->
+          <span class="bolt"></span> <!-- Bolt 5 - bottom center -->
+          <span class="bolt"></span> <!-- Bolt 6 - bottom left -->
+          <span class="bolt"></span> <!-- Bolt 7 - middle left -->
+          <span class="bolt"></span> <!-- Bolt 8 - top left -->
 
+          <!-- Vault Wheel/Handle -->
+          <!-- Rotating wheel in center of door -->
+          <div class="vault-wheel"> <!-- Wheel container -->
+            <!-- 8 spokes radiating from center -->
+            <span class="spoke"></span> <!-- Spoke 1 - 0 degrees -->
+            <span class="spoke"></span> <!-- Spoke 2 - 45 degrees -->
+            <span class="spoke"></span> <!-- Spoke 3 - 90 degrees -->
+            <span class="spoke"></span> <!-- Spoke 4 - 135 degrees -->
+            <span class="spoke"></span> <!-- Spoke 5 - 180 degrees -->
+            <span class="spoke"></span> <!-- Spoke 6 - 225 degrees -->
+            <span class="spoke"></span> <!-- Spoke 7 - 270 degrees -->
+            <span class="spoke"></span> <!-- Spoke 8 - 315 degrees -->
+            
+            <!-- Center hub with text -->
+            <div class="vault-center">OPEN</div> <!-- Text label at center -->  
+          </div> <!-- End vault-wheel -->
+        </div> <!-- End vault-door -->
+
+        <!-- Click Hint -->
+        <!-- Animated text prompting user to click -->
+        <div class="click-hint">Click to Open</div> <!-- Hint text with pulse animation -->
+
+        <!-- Projects Revealed When Vault Opens -->
+        <!-- Hidden content that becomes visible after clicking vault -->
+        <div class="projects-revealed"> <!-- Container for project details -->
+          
+          <!-- Close Button -->
+          <!-- onclick attribute calls closeVault() JavaScript function -->
+          <button class="close-vault" onclick="closeVault()">×</button> <!-- × is multiplication sign used as X -->  
+          
+          <h2>My Engineering Projects</h2> <!-- Projects heading -->
+          
+          <!-- Projects List -->
+          <!-- Grid of project items -->
+          <div class="projects-list"> <!-- Grid container for projects -->
+            
+            <!-- Project Item 1 -->
+            <!-- Individual project card -->
+            <div class="project-item"> <!-- Project card container -->
+              <h3>Project 1</h3> <!-- Project title -->
+              <p>Project details coming soon...</p> <!-- Project description (placeholder) -->
+            </div> <!-- End project-item -->
+            
+            <!-- Project Item 2 -->
+            <div class="project-item"> <!-- Project card container -->
+              <h3>Project 2</h3> <!-- Project title -->
+              <p>Project details coming soon...</p> <!-- Project description (placeholder) -->
+            </div> <!-- End project-item -->
+            
+            <!-- Project Item 3 -->
+            <div class="project-item"> <!-- Project card container -->
+              <h3>Project 3</h3> <!-- Project title -->
+              <p>Project details coming soon...</p> <!-- Project description (placeholder) -->
+            </div> <!-- End project-item -->
+            
+          </div> <!-- End projects-list -->
+        </div> <!-- End projects-revealed -->
+      </div> <!-- End vault-outer -->
+    </section> <!-- End vault-container -->
+  </main> <!-- End projects-container -->
+
+  <!-- Inline JavaScript for Vault Interaction -->
+  <!-- Handles opening and closing the vault -->
   <script>
+    // Get reference to vault element by ID
     const vaultOuter = document.getElementById('vaultOuter');
     
+    // Add click event listener to vault
+    // Event parameter 'e' contains information about the click
     vaultOuter.addEventListener('click', function(e) {
       // Don't open if clicking the close button
+      // Check if clicked element has 'close-vault' class
       if (!e.target.classList.contains('close-vault')) {
+        // Add 'opened' class to trigger CSS animations
         this.classList.add('opened');
       }
     });
 
+    /**
+     * Closes the vault by removing the 'opened' class
+     * Called by close button onclick attribute
+     */
     function closeVault() {
+      // Remove 'opened' class to reverse animations
       vaultOuter.classList.remove('opened');
     }
   </script>
 
-</body>
-</html>
+</body> <!-- End body -->
+</html> <!-- End HTML document -->

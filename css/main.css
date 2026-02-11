@@ -324,263 +324,364 @@ body {
   }
 }
 
-/* Header Section */
+/**
+ * Header Section - Background Text
+ * Positioned behind the main content as decorative element
+ */
 .center-header {
-  position: absolute;
-  top: 50%;
-  left: 40%;
-  transform: translate(-50%, -50%);
-  z-index: 0;
-  pointer-events: none;
+  position: absolute;                      /* Absolute positioning within container */
+  top: 50%;                                /* Vertical center */
+  left: 40%;                               /* Horizontal position */
+  transform: translate(-50%, -50%);        /* Center transform offset */
+  z-index: 0;                              /* Behind main content */
+  pointer-events: none;                    /* Don't block interactions */
 }
 
-/* Background Text */
+/**
+ * Background decorative text
+ * Large, semi-transparent text for visual interest
+ */
 .background-text {
-  font-size: 3.5rem;
-  font-weight: 900;
-  color: var(--blue-layer-4);
-  opacity: 0.05;
-  white-space: normal;
-  letter-spacing: 0.05em;
-  user-select: none;
-  text-align: right;
-  max-width: 400px;
-  line-height: 1.2;
+  font-size: 3.5rem;                  /* Large text size */
+  font-weight: 900;                   /* Extra bold weight */
+  color: var(--blue-layer-4);         /* Blue color */
+  opacity: 0.05;                      /* Very transparent */
+  white-space: normal;                /* Allow text wrapping */
+  letter-spacing: 0.05em;             /* Slight letter spacing */
+  user-select: none;                  /* Prevent text selection */
+  text-align: right;                  /* Right-aligned text */
+  max-width: 400px;                   /* Maximum width constraint */
+  line-height: 1.2;                   /* Tight line height */
 }
 
-/* Main Container */
+/**
+ * Main Container - Flexbox layout
+ * Centers content and provides responsive spacing
+ */
 main.container {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  max-width: 1400px;
-  margin: 0 auto;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-  gap: 4rem;
+  flex: 1;                    /* Grow to fill available space */
+  display: flex;              /* Flexbox layout */
+  align-items: center;        /* Vertically center items */
+  justify-content: center;    /* Horizontally center items */
+  padding: 2rem;              /* Internal spacing */
+  max-width: 1400px;          /* Maximum width */
+  margin: 0 auto;             /* Center horizontally */
+  width: 100%;                /* Full width up to max */
+  position: relative;         /* Position context for children */
+  z-index: 1;                 /* Above background elements */
+  gap: 4rem;                  /* Space between columns */
 }
 
-/* Two-Column Layout */
+/**
+ * Two-Column Layout - Left and Right Sections
+ * Equal-width columns with centered content
+ */
 .left-section,
 .right-section {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex: 1;                    /* Equal flex grow */
+  display: flex;              /* Flexbox for centering */
+  align-items: center;        /* Vertical centering */
+  justify-content: center;    /* Horizontal centering */
 }
 
+/**
+ * Left section specific styling
+ */
 .left-section {
-  padding: 2rem;
+  padding: 2rem;  /* Internal spacing */
 }
 
+/**
+ * Right section specific styling
+ */
 .right-section {
-  padding: 2rem;
-  position: relative;
+  padding: 2rem;          /* Internal spacing */
+  position: relative;     /* Position context for absolute children */
 }
 
-/* Typography */
+/**
+ * Typography - Main Heading (h1)
+ * Large, bold heading with glow effect
+ */
 h1 {
-  font-size: 4rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 1rem;
-  letter-spacing: -0.03em;
-  line-height: 1.1;
-  text-shadow: 0 0 20px var(--blue-glow), 0 0 40px var(--blue-glow), 0 0 60px rgba(59, 130, 246, 0.3);
+  font-size: 4rem;                                      /* Very large text */
+  font-weight: 700;                                      /* Bold weight */
+  color: var(--text-primary);                            /* Light text color */
+  margin-bottom: 1rem;                                   /* Space below */
+  letter-spacing: -0.03em;                               /* Tight letter spacing */
+  line-height: 1.1;                                      /* Tight line height */
+  text-shadow: 0 0 20px var(--blue-glow), 0 0 40px var(--blue-glow), 0 0 60px rgba(59, 130, 246, 0.3); /* Layered glow effect */
 }
 
+/**
+ * Subheading paragraph styling
+ * Lighter, larger text for secondary headings
+ */
 .subheading {
-  font-size: 1.75rem;
-  color: var(--text-muted);
-  font-weight: 300;
-  letter-spacing: 0.01em;
-  text-shadow: 0 0 15px var(--blue-glow), 0 0 30px rgba(59, 130, 246, 0.2);
+  font-size: 1.75rem;                                                /* Large text */
+  color: var(--text-muted);                                           /* Muted color */
+  font-weight: 300;                                                   /* Light weight */
+  letter-spacing: 0.01em;                                             /* Slight letter spacing */
+  text-shadow: 0 0 15px var(--blue-glow), 0 0 30px rgba(59, 130, 246, 0.2); /* Subtle glow */
 }
 
-/* Contact Links */
+/**
+ * Contact Links Container
+ * Horizontal list of social/contact icon links
+ */
 .contact-links {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-  align-items: center;
+  display: flex;            /* Flexbox layout */
+  gap: 1rem;                /* Space between icons */
+  margin-top: 2rem;         /* Space above */
+  align-items: center;      /* Vertically center icons */
 }
 
+/**
+ * Individual Contact Icon Button
+ * Styled button container for social media icons
+ */
 .contact-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-  background-color: rgba(30, 58, 138, 0.3);
-  border: 1px solid rgba(147, 197, 253, 0.2);
-  color: var(--text-muted);
-  transition: all 0.3s ease;
-  text-decoration: none;
+  display: flex;                                  /* Flexbox for centering icon */
+  align-items: center;                            /* Vertical center */
+  justify-content: center;                        /* Horizontal center */
+  width: 40px;                                    /* Fixed width */
+  height: 40px;                                   /* Fixed height (square) */
+  border-radius: 8px;                             /* Rounded corners */
+  background-color: rgba(30, 58, 138, 0.3);       /* Semi-transparent blue background */
+  border: 1px solid rgba(147, 197, 253, 0.2);     /* Light blue border */
+  color: var(--text-muted);                       /* Muted icon color */
+  transition: all 0.3s ease;                      /* Smooth transition for all properties */
+  text-decoration: none;                          /* Remove link underline */
 }
 
+/**
+ * Contact Icon Hover State
+ * Enhanced appearance on hover
+ */
 .contact-icon:hover {
-  background-color: rgba(30, 58, 138, 0.6);
-  border-color: rgba(147, 197, 253, 0.5);
-  color: var(--blue-layer-5);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  background-color: rgba(30, 58, 138, 0.6);       /* Darker background */
+  border-color: rgba(147, 197, 253, 0.5);          /* Brighter border */
+  color: var(--blue-layer-5);                      /* Brighter icon color */
+  transform: translateY(-2px);                     /* Slight lift effect */
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); /* Add glowing shadow */
 }
 
+/**
+ * SVG icon sizing within contact button
+ */
 .contact-icon svg {
-  width: 20px;
-  height: 20px;
+  width: 20px;   /* Icon width */
+  height: 20px;  /* Icon height */
 }
 
-/* System Container */
+/**
+ * System Container - Concentric Layers Visualization
+ * Container for the circular layer system
+ */
 .system-container {
-  position: relative;
-  width: 500px;
-  height: 500px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: relative;              /* Position context for absolute children */
+  width: 500px;                    /* Fixed width */
+  height: 500px;                   /* Fixed height (square) */
+  display: flex;                   /* Flexbox for centering */
+  align-items: center;             /* Vertical centering */
+  justify-content: center;         /* Horizontal centering */
 }
 
-/* SVG Curved Text */
+/**
+ * SVG Curved Text Overlay
+ * Positioned absolutely to overlay the layer circles
+ */
 .curved-text-svg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 10;
+  position: absolute;       /* Absolute positioning */
+  top: 0;                   /* Aligned to top */
+  left: 0;                  /* Aligned to left */
+  width: 100%;              /* Full width */
+  height: 100%;             /* Full height */
+  pointer-events: none;     /* Don't block interactions with layers */
+  z-index: 10;              /* Above the layers */
 }
 
+/**
+ * Curved Label Text Styling
+ * Text that follows circular paths on SVG
+ */
 .curved-label {
-  fill: #FFFFFF;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  fill: #FFFFFF;                                     /* White text color */
+  font-size: 14px;                                   /* Text size */
+  font-weight: 700;                                  /* Bold weight */
+  letter-spacing: 0.15em;                            /* Wide letter spacing */
+  text-transform: uppercase;                         /* All caps */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; /* Font stack */
 }
 
-/* Hide Checkbox Toggles */
+/**
+ * Layer Toggle Checkboxes
+ * Hidden checkbox inputs for layer interaction (not used in JS version)
+ */
 .layer-toggle {
-  display: none;
+  display: none;  /* Hide checkbox from view */
 }
 
-/* Concentric Layers */
+/**
+ * Concentric Layer Base Styling
+ * Common properties for all circular layers
+ */
 .layer {
-  position: absolute;
-  border-radius: 50%;
-  border: 40px solid;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
+  position: absolute;                  /* Absolute positioning for stacking */
+  border-radius: 50%;                  /* Make it circular */
+  border: 40px solid;                  /* Thick border (color set per layer) */
+  display: flex;                       /* Flexbox for centering label */
+  align-items: center;                 /* Vertical center */
+  justify-content: center;             /* Horizontal center */
+  cursor: pointer;                     /* Pointer cursor on hover */
+  transition: box-shadow 0.3s ease;    /* Smooth shadow transition */
 }
 
+/**
+ * Layer Label Text
+ * Text displayed within each layer
+ */
 .layer-label {
-  position: absolute;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-primary);
-  opacity: 1;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  position: absolute;              /* Absolute positioning */
+  font-size: 0.9rem;               /* Text size */
+  font-weight: 600;                /* Semi-bold weight */
+  color: var(--text-primary);      /* Light text color */
+  opacity: 1;                      /* Fully visible */
+  transition: opacity 0.3s ease;   /* Smooth opacity transition */
+  pointer-events: none;            /* Don't block layer clicks */
+  text-align: center;              /* Center text alignment */
+  text-transform: uppercase;       /* All caps */
+  letter-spacing: 0.1em;           /* Wide letter spacing */
 }
 
+/**
+ * Layer Label Hover State
+ */
 .layer:hover .layer-label {
-  opacity: 0.9;
+  opacity: 0.9;  /* Slightly reduce opacity on hover */
 }
 
+/**
+ * Layer Hover State - Add Glow
+ */
 .layer:hover {
-  box-shadow: 0 0 20px var(--blue-glow);
+  box-shadow: 0 0 20px var(--blue-glow);  /* Add glowing shadow */
 }
 
-/* Layer 6: Balance & Discipline (Outermost) */
+/**
+ * Layer 6: Balance & Discipline (Outermost Layer)
+ * Largest circle - represents foundation
+ */
 .layer-6 {
-  width: 100%;
-  height: 100%;
-  border-color: var(--blue-layer-6);
-  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
+  width: 100%;                                                                 /* Full container width */
+  height: 100%;                                                                /* Full container height */
+  border-color: var(--blue-layer-6);                                          /* Lightest blue color */
+  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2); /* Outer and inner glow */
 }
 
+/**
+ * Layer 6 label positioning
+ */
 .layer-6 .layer-label {
-  top: -30px;
-  right: 20%;
+  top: -30px;   /* Above the circle */
+  right: 20%;   /* Right side positioning */
 }
 
-/* Layer 5: Achievements */
+/**
+ * Layer 5: Achievements
+ * Second largest circle
+ */
 .layer-5 {
-  width: 85%;
-  height: 85%;
-  border-color: var(--blue-layer-5);
-  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
+  width: 85%;                                                                  /* 85% of container */
+  height: 85%;                                                                 /* 85% of container */
+  border-color: var(--blue-layer-5);                                           /* Light blue color */
+  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2); /* Outer and inner glow */
 }
 
+/**
+ * Layer 5 label positioning
+ */
 .layer-5 .layer-label {
-  top: 10%;
-  right: -60px;
+  top: 10%;      /* Near top */
+  right: -60px;  /* Outside right edge */
 }
 
-/* Layer 4: Academics */
+/**
+ * Layer 4: Academics
+ * Third largest circle
+ */
 .layer-4 {
-  width: 70%;
-  height: 70%;
-  border-color: var(--blue-layer-4);
-  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
+  width: 70%;                                                                  /* 70% of container */
+  height: 70%;                                                                 /* 70% of container */
+  border-color: var(--blue-layer-4);                                           /* Medium blue color */
+  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2); /* Outer and inner glow */
 }
 
+/**
+ * Layer 4 label positioning
+ */
 .layer-4 .layer-label {
-  bottom: -30px;
-  right: 25%;
+  bottom: -30px;  /* Below the circle */
+  right: 25%;     /* Right side positioning */
 }
 
-/* Layer 3: Leadership */
+/**
+ * Layer 3: Leadership
+ * Fourth largest circle
+ */
 .layer-3 {
-  width: 55%;
-  height: 55%;
-  border-color: var(--blue-layer-3);
-  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
+  width: 55%;                                                                  /* 55% of container */
+  height: 55%;                                                                 /* 55% of container */
+  border-color: var(--blue-layer-3);                                           /* Medium-dark blue */
+  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2); /* Outer and inner glow */
 }
 
+/**
+ * Layer 3 label positioning
+ */
 .layer-3 .layer-label {
-  top: 15%;
-  left: -60px;
+  top: 15%;     /* Near top */
+  left: -60px;  /* Outside left edge */
 }
 
-/* Layer 2: Research */
+/**
+ * Layer 2: Research
+ * Fifth largest circle
+ */
 .layer-2 {
-  width: 40%;
-  height: 40%;
-  border-color: var(--blue-layer-2);
-  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
+  width: 40%;                                                                  /* 40% of container */
+  height: 40%;                                                                 /* 40% of container */
+  border-color: var(--blue-layer-2);                                           /* Dark blue */
+  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2); /* Outer and inner glow */
 }
 
+/**
+ * Layer 2 label positioning
+ */
 .layer-2 .layer-label {
-  bottom: 15%;
-  left: -50px;
+  bottom: 15%;   /* Near bottom */
+  left: -50px;   /* Outside left edge */
 }
 
-/* Layer 1: Engineering Projects (Core) */
+/**
+ * Layer 1: Engineering Projects (Core)
+ * Smallest, innermost circle - the core
+ */
 .layer-1 {
-  width: 25%;
-  height: 25%;
-  border-color: var(--blue-layer-1);
-  background-color: var(--blue-layer-1);
-  box-shadow: 0 0 20px var(--blue-glow), inset 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.2);
+  width: 25%;                                                                                         /* 25% of container */
+  height: 25%;                                                                                        /* 25% of container */
+  border-color: var(--blue-layer-1);                                                                  /* Darkest blue */
+  background-color: var(--blue-layer-1);                                                              /* Filled background */
+  box-shadow: 0 0 20px var(--blue-glow), inset 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.2); /* Multi-layer glow */
 }
 
+/**
+ * Layer 1 label positioning - centered
+ */
 .layer-1 .layer-label {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 50%;                             /* Vertical center */
+  left: 50%;                            /* Horizontal center */
+  transform: translate(-50%, -50%);     /* Center transform */
 }
 
 /* Rotation Animations */
@@ -614,58 +715,77 @@ h1 {
   to { transform: rotate(-360deg); }
 }
 
-/* Information Panels */
+/**
+ * Information Panels
+ * Modal-style panels that appear when layers are activated
+ */
 .info-panel {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--panel-bg);
-  backdrop-filter: blur(10px);
-  border: 2px solid var(--panel-border);
-  border-radius: 12px;
-  padding: 2.5rem;
-  max-width: 500px;
-  width: 90%;
-  z-index: 10000;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s ease;
+  position: fixed;                      /* Fixed positioning on screen */
+  top: 50%;                             /* Vertical center */
+  left: 50%;                            /* Horizontal center */
+  transform: translate(-50%, -50%);     /* Center transform offset */
+  background-color: var(--panel-bg);    /* Semi-transparent blue background */
+  backdrop-filter: blur(10px);          /* Blur background behind panel */
+  border: 2px solid var(--panel-border); /* Light blue border */
+  border-radius: 12px;                  /* Rounded corners */
+  padding: 2.5rem;                      /* Internal spacing */
+  max-width: 500px;                     /* Maximum width constraint */
+  width: 90%;                           /* 90% width on smaller screens */
+  z-index: 10000;                       /* Above all other content */
+  opacity: 0;                           /* Initially hidden */
+  pointer-events: none;                 /* Don't block interactions when hidden */
+  transition: opacity 0.4s ease;        /* Smooth fade transition */
 }
 
+/**
+ * Info Panel Heading
+ */
 .info-panel h2 {
-  font-size: 2rem;
-  color: var(--blue-layer-6);
-  margin-bottom: 1rem;
-  font-weight: 600;
+  font-size: 2rem;                /* Large heading size */
+  color: var(--blue-layer-6);     /* Light blue color */
+  margin-bottom: 1rem;            /* Space below heading */
+  font-weight: 600;               /* Semi-bold weight */
 }
 
+/**
+ * Info Panel Paragraph Text
+ */
 .info-panel p {
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  line-height: 1.8;
+  font-size: 1.1rem;          /* Slightly large text */
+  color: var(--text-muted);   /* Muted gray color */
+  line-height: 1.8;           /* Generous line height for readability */
 }
 
+/**
+ * Close Panel Button
+ * X button in top-right corner of panels
+ */
 .close-panel {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1.5rem;
-  color: var(--text-muted);
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.3s ease;
+  position: absolute;                  /* Absolute positioning */
+  top: 1rem;                           /* Distance from top */
+  right: 1rem;                         /* Distance from right */
+  font-size: 1.5rem;                   /* Large text size */
+  color: var(--text-muted);            /* Muted gray color */
+  cursor: pointer;                     /* Pointer cursor */
+  width: 30px;                         /* Fixed width */
+  height: 30px;                        /* Fixed height */
+  display: flex;                       /* Flexbox for centering */
+  align-items: center;                 /* Vertical center */
+  justify-content: center;             /* Horizontal center */
+  transition: color 0.3s ease;         /* Smooth color transition */
 }
 
+/**
+ * Close Panel Button Hover State
+ */
 .close-panel:hover {
-  color: var(--text-primary);
+  color: var(--text-primary);  /* Brighten on hover */
 }
 
-/* Show Panel When Checkbox is Checked OR When Layer is Hovered */
+/**
+ * Show Panel When Checkbox is Checked OR When Layer is Hovered
+ * CSS-only interaction (overridden by JavaScript in actual implementation)
+ */
 #layer-1:checked ~ .panel-1,
 #layer-2:checked ~ .panel-2,
 #layer-3:checked ~ .panel-3,
@@ -678,231 +798,372 @@ h1 {
 .layer-4:hover ~ .panel-4,
 .layer-5:hover ~ .panel-5,
 .layer-6:hover ~ .panel-6 {
-  opacity: 1;
-  pointer-events: auto;
+  opacity: 1;             /* Make visible */
+  pointer-events: auto;   /* Enable interactions */
 }
 
-/* Footer */
+/**
+ * Footer
+ * Copyright and credits section at bottom of page
+ */
 footer {
-  text-align: center;
-  padding: 2rem;
-  color: var(--text-muted);
-  font-size: 0.875rem;
-  position: relative;
-  z-index: 1;
+  text-align: center;           /* Center text */
+  padding: 2rem;                /* Vertical and horizontal padding */
+  color: var(--text-muted);     /* Muted gray text */
+  font-size: 0.875rem;          /* Small text size */
+  position: relative;           /* Position context */
+  z-index: 1;                   /* Above background elements */
 }
 
-/* Responsive Design */
+/**
+ * Responsive Design - Tablet Breakpoint
+ * Adjustments for screens 1024px and smaller
+ */
 @media (max-width: 1024px) {
+  /**
+   * Reduce h1 size on tablets
+   */
   h1 {
-    font-size: 3rem;
+    font-size: 3rem;  /* Smaller heading */
   }
 
+  /**
+   * Reduce subheading size on tablets
+   */
   .subheading {
-    font-size: 1.5rem;
+    font-size: 1.5rem;  /* Smaller subheading */
   }
 
+  /**
+   * Reduce system container size on tablets
+   */
   .system-container {
-    width: 400px;
-    height: 400px;
+    width: 400px;   /* Smaller width */
+    height: 400px;  /* Smaller height */
   }
 }
 
+/**
+ * Responsive Design - Mobile Breakpoint
+ * Adjustments for screens 768px and smaller
+ */
 @media (max-width: 768px) {
+  /**
+   * Stack columns vertically on mobile
+   */
   main.container {
-    flex-direction: column;
-    gap: 2rem;
+    flex-direction: column;  /* Vertical stacking */
+    gap: 2rem;               /* Reduced gap */
   }
 
+  /**
+   * Further reduce h1 size on mobile
+   */
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.5rem;  /* Even smaller heading */
   }
 
+  /**
+   * Further reduce subheading size on mobile
+   */
   .subheading {
-    font-size: 1.25rem;
+    font-size: 1.25rem;  /* Smaller subheading */
   }
 
+  /**
+   * Further reduce system container size on mobile
+   */
   .system-container {
-    width: 350px;
-    height: 350px;
+    width: 350px;   /* Smaller width */
+    height: 350px;  /* Smaller height */
   }
 
+  /**
+   * Reduce info panel padding on mobile
+   */
   .info-panel {
-    padding: 2rem;
+    padding: 2rem;  /* Less padding */
   }
 
+  /**
+   * Reduce info panel heading size on mobile
+   */
   .info-panel h2 {
-    font-size: 1.5rem;
+    font-size: 1.5rem;  /* Smaller heading */
   }
 
+  /**
+   * Reduce info panel text size on mobile
+   */
   .info-panel p {
-    font-size: 1rem;
+    font-size: 1rem;  /* Smaller text */
   }
 }
 
-/* Page Layouts for Individual Layer Pages */
+/**
+ * Page Layouts for Individual Layer Pages
+ * Styling for individual detail pages (projects, research, etc.)
+ */
+
+/**
+ * Page Container - Main wrapper for content pages
+ */
 .page-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 4rem 2rem;
-  position: relative;
-  z-index: 1;
+  max-width: 1200px;        /* Maximum width constraint */
+  margin: 0 auto;           /* Center horizontally */
+  padding: 4rem 2rem;       /* Vertical and horizontal padding */
+  position: relative;       /* Position context */
+  z-index: 1;               /* Above background elements */
 }
 
+/**
+ * Page Header Section
+ * Title and subtitle area for content pages
+ */
 .page-header {
-  text-align: center;
-  margin-bottom: 3rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid rgba(147, 197, 253, 0.2);
+  text-align: center;                                 /* Center alignment */
+  margin-bottom: 3rem;                                /* Space below */
+  padding-bottom: 2rem;                               /* Internal bottom padding */
+  border-bottom: 1px solid rgba(147, 197, 253, 0.2); /* Bottom border separator */
 }
 
+/**
+ * Page Header H1 - Main title with gradient effect
+ */
 .page-header h1 {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  background: linear-gradient(135deg, var(--blue-layer-5), var(--blue-layer-3));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 3rem;                                                     /* Large text size */
+  margin-bottom: 1rem;                                                 /* Space below */
+  background: linear-gradient(135deg, var(--blue-layer-5), var(--blue-layer-3)); /* Blue gradient */
+  -webkit-background-clip: text;                                       /* Clip gradient to text (webkit) */
+  -webkit-text-fill-color: transparent;                                /* Make text transparent (webkit) */
+  background-clip: text;                                               /* Clip gradient to text (standard) */
 }
 
+/**
+ * Page Subtitle - Descriptive text below title
+ */
 .page-subtitle {
-  font-size: 1.2rem;
-  color: var(--text-muted);
-  max-width: 700px;
-  margin: 0 auto;
-  line-height: 1.8;
+  font-size: 1.2rem;          /* Medium text size */
+  color: var(--text-muted);   /* Muted gray color */
+  max-width: 700px;           /* Maximum width for readability */
+  margin: 0 auto;             /* Center horizontally */
+  line-height: 1.8;           /* Generous line height */
 }
 
+/**
+ * Page Content Section
+ * Main content area for page body
+ */
 .page-content {
-  min-height: 400px;
-  padding: 2rem;
-  background-color: rgba(30, 58, 138, 0.1);
-  border-radius: 12px;
-  border: 1px solid rgba(147, 197, 253, 0.2);
+  min-height: 400px;                                 /* Minimum height */
+  padding: 2rem;                                     /* Internal spacing */
+  background-color: rgba(30, 58, 138, 0.1);          /* Semi-transparent blue background */
+  border-radius: 12px;                               /* Rounded corners */
+  border: 1px solid rgba(147, 197, 253, 0.2);        /* Light blue border */
 }
 
+/**
+ * Page Content Paragraph Text
+ */
 .page-content p {
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  text-align: center;
-  padding: 2rem;
+  font-size: 1.1rem;            /* Slightly large text */
+  color: var(--text-muted);     /* Muted gray color */
+  text-align: center;           /* Center alignment */
+  padding: 2rem;                /* Internal spacing */
 }
 
-/* Panel link styling */
+/**
+ * Panel Link Styling
+ * Call-to-action links within info panels
+ */
 .panel-link {
-  display: inline-block;
-  margin-top: 1rem;
-  padding: 0.6rem 1.5rem;
-  background-color: var(--blue-layer-4);
-  color: var(--text-primary);
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  border: 1px solid var(--blue-layer-5);
+  display: inline-block;                   /* Inline block for sizing */
+  margin-top: 1rem;                        /* Space above */
+  padding: 0.6rem 1.5rem;                  /* Horizontal and vertical padding */
+  background-color: var(--blue-layer-4);   /* Medium blue background */
+  color: var(--text-primary);              /* Light text color */
+  text-decoration: none;                   /* Remove underline */
+  border-radius: 6px;                      /* Rounded corners */
+  font-weight: 500;                        /* Medium weight */
+  transition: all 0.3s ease;               /* Smooth transitions */
+  border: 1px solid var(--blue-layer-5);   /* Light blue border */
 }
 
+/**
+ * Panel Link Hover State
+ */
 .panel-link:hover {
-  background-color: var(--blue-layer-5);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px var(--blue-glow);
+  background-color: var(--blue-layer-5);      /* Lighter blue background */
+  transform: translateY(-2px);                /* Slight lift effect */
+  box-shadow: 0 4px 12px var(--blue-glow);    /* Add glowing shadow */
 }
 
-/* Responsive adjustments for navbar */
+/**
+ * Responsive Adjustments for Navbar - Mobile Layout
+ * Navigation adjustments for screens 768px and smaller
+ */
 @media (max-width: 768px) {
+  /**
+   * Stack navbar elements vertically on mobile
+   */
   .nav-container {
-    flex-direction: column;
-    gap: 1rem;
+    flex-direction: column;  /* Vertical stacking */
+    gap: 1rem;               /* Space between elements */
   }
 
+  /**
+   * Make nav links wrap and center on mobile
+   */
   .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
+    flex-wrap: wrap;          /* Allow wrapping */
+    justify-content: center;  /* Center items */
+    gap: 1rem;                /* Reduce gap */
   }
 
+  /**
+   * Reduce nav link text size on mobile
+   */
   .nav-links li a {
-    font-size: 0.85rem;
+    font-size: 0.85rem;  /* Smaller text */
   }
 
+  /**
+   * Increase top margin to account for taller navbar
+   */
   .container {
-    margin-top: 100px;
+    margin-top: 100px;  /* More space for wrapped navbar */
   }
 
+  /**
+   * Reduce page header h1 size on mobile
+   */
   .page-header h1 {
-    font-size: 2rem;
+    font-size: 2rem;  /* Smaller heading */
   }
 
+  /**
+   * Reduce page subtitle size on mobile
+   */
   .page-subtitle {
-    font-size: 1rem;
+    font-size: 1rem;  /* Smaller subtitle */
   }
 }
 
-/* ============================================================================
-   INTERACTIVE FEATURES STYLES
-   ============================================================================ */
+/**
+ * ============================================================================
+ * INTERACTIVE FEATURES STYLES
+ * JavaScript-enhanced interactions and animations
+ * ============================================================================
+ */
 
-/* Layer Focus Mode */
+/**
+ * Layer Focus Mode - Base Layer Styling
+ * Enhanced transitions for layer interactions
+ */
 .layer {
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-              opacity 0.4s ease,
-              filter 0.4s ease;
-  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),  /* Smooth scale animation */
+              opacity 0.4s ease,                             /* Smooth opacity change */
+              filter 0.4s ease;                              /* Smooth filter change */
+  cursor: pointer;                                           /* Pointer cursor for clickable layers */
 }
 
+/**
+ * Active Layer State
+ * Applied when layer is clicked/activated
+ */
 .layer.active {
-  transform: scale(1.08);
-  z-index: 100;
-  filter: brightness(1.3) drop-shadow(0 0 20px var(--blue-glow));
+  transform: scale(1.08);                                         /* Slightly enlarge */
+  z-index: 100;                                                   /* Bring to front */
+  filter: brightness(1.3) drop-shadow(0 0 20px var(--blue-glow)); /* Brighten and add glow */
 }
 
+/**
+ * Dimmed Layer State
+ * Applied to non-active layers when one is activated
+ */
 .layer.dimmed {
-  opacity: 0.3;
-  filter: brightness(0.6);
+  opacity: 0.3;                /* Significantly reduce opacity */
+  filter: brightness(0.6);     /* Darken the layer */
 }
 
+/**
+ * Info Panel Base State
+ * Initially hidden with transform offset
+ */
 .info-panel {
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: opacity 0.4s ease, 
-              visibility 0.4s ease,
-              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;                  /* Invisible */
+  visibility: hidden;          /* Hidden from screen readers */
+  transform: translateY(20px); /* Offset downward */
+  transition: opacity 0.4s ease,                              /* Smooth fade */
+              visibility 0.4s ease,                           /* Smooth visibility */
+              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);    /* Smooth slide */
 }
 
+/**
+ * Info Panel Visible State
+ * Applied by JavaScript when panel should show
+ */
 .info-panel.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
+  opacity: 1;                /* Fully visible */
+  visibility: visible;       /* Visible to screen readers */
+  transform: translateY(0);  /* Reset to original position */
 }
 
-/* Keyboard Focus Indicator */
+/**
+ * Keyboard Focus Indicator
+ * Visual indication of keyboard-focused layer
+ */
 .layer.keyboard-focused {
-  outline: 2px solid var(--blue-layer-5);
-  outline-offset: 4px;
-  animation: focusPulse 2s ease-in-out infinite;
+  outline: 2px solid var(--blue-layer-5);      /* Blue outline */
+  outline-offset: 4px;                          /* Space between outline and layer */
+  animation: focusPulse 2s ease-in-out infinite; /* Pulsing animation */
 }
 
+/**
+ * Focus Pulse Animation
+ * Pulsing outline color for keyboard focus
+ */
 @keyframes focusPulse {
-  0%, 100% { outline-color: var(--blue-layer-5); }
-  50% { outline-color: var(--blue-layer-4); }
+  0%, 100% { 
+    outline-color: var(--blue-layer-5);  /* Light blue */
+  }
+  50% { 
+    outline-color: var(--blue-layer-4);  /* Medium blue */
+  }
 }
 
-/* Scroll-based Highlighting */
+/**
+ * Scroll-based Highlighting
+ * Applied to layers when corresponding content is in viewport
+ */
 .layer.scroll-highlighted {
-  filter: brightness(1.15);
-  box-shadow: 0 0 15px var(--blue-glow);
+  filter: brightness(1.15);                  /* Slightly brighten */
+  box-shadow: 0 0 15px var(--blue-glow);     /* Add glow effect */
 }
 
+/**
+ * Active Navigation Link
+ * Highlight for current page/section in navigation
+ */
 .nav-links li a.active {
-  color: var(--blue-layer-5);
-  font-weight: 600;
+  color: var(--blue-layer-5);  /* Blue color for active link */
+  font-weight: 600;            /* Semi-bold weight */
 }
 
+/**
+ * Active Navigation Link Underline
+ * Show underline for active navigation item
+ */
 .nav-links li a.active::after {
-  width: 100%;
+  width: 100%;  /* Full-width underline */
 }
 
-/* Hover Description Box - styles are inline in JS for dynamic positioning */
+/**
+ * Hover Description Box
+ * Styles are inline in JavaScript for dynamic positioning
+ */
 
-/* System Status Indicator - base styles are inline in JS */
+/**
+ * System Status Indicator
+ * Base styles are inline in JavaScript for dynamic creation
+ */
