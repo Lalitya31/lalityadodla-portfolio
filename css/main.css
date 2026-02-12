@@ -526,7 +526,7 @@ h1 {
 .layer {
   position: absolute;                  /* Absolute positioning for stacking */
   border-radius: 50%;                  /* Make it circular */
-  border: 40px solid;                  /* Thick border (color set per layer) */
+  border: 40px solid;                  /* Thick solid border (color set per layer) */
   display: flex;                       /* Flexbox for centering label */
   align-items: center;                 /* Vertical center */
   justify-content: center;             /* Horizontal center */
