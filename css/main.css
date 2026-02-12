@@ -1,7 +1,4 @@
-/**
- * CSS Custom Properties (CSS Variables) - Root Level
- * These variables define the color scheme and design tokens used throughout the site
- */
+
 :root {
   /* Main background color - very dark blue-black */
   --bg-main: #0B0D10;
