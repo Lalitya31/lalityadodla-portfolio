@@ -174,6 +174,7 @@
     // Show corresponding info panel
     if (panel) {
       panel.classList.add('visible');  // Make panel visible
+      animateStatCounters(panel);      // Trigger stat counter animations
     }
     
     // Update focused index for keyboard navigation
@@ -633,6 +634,327 @@
   }
 
   // ============================================================================
+  // FEATURE 6: CANVAS PARTICLE SYSTEM ("System Activity Field")
+  // ============================================================================
+
+  /**
+   * Replaces CSS background dots with a canvas-based particle simulation.
+   * Uses requestAnimationFrame, vector motion, and mouse repulsion logic.
+   * Presentation note: "The background system field is rendered using the
+   * HTML5 Canvas API with requestAnimationFrame to simulate system activity."
+   */
+  function setupCanvasParticles() {
+    // Hide legacy CSS dots – canvas takes over
+    const dotsEl = document.querySelector('.background-dots');
+    if (dotsEl) dotsEl.style.display = 'none';
+
+    // Create canvas and insert as first child of body
+    const canvas = document.createElement('canvas');
+    canvas.id = 'particle-canvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0';
+    document.body.insertBefore(canvas, document.body.firstChild);
+
+    const ctx = canvas.getContext('2d');
+    let W, H;
+
+    function resize() {
+      const dpr = window.devicePixelRatio || 1;
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width  = W * dpr;
+      canvas.height = H * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);  // crisp rendering on HiDPI screens
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    const PARTICLE_COUNT  = 70;
+    const MAX_CONNECT_DIST = 130; // px – max distance for drawing a connection line
+    const REPEL_RADIUS    = 110; // px – mouse repulsion radius
+    const MAX_SPEED       = 1.5; // px/frame cap
+
+    // Track mouse position for repulsion
+    let mouseX = -9999, mouseY = -9999;
+    document.addEventListener('mousemove', e => { mouseX = e.clientX; mouseY = e.clientY; });
+
+    /** Single particle with vector motion and pulsing alpha */
+    class Particle {
+      constructor() {
+        this.x  = Math.random() * W;
+        this.y  = Math.random() * H;
+        this.vx = (Math.random() - 0.5) * 0.6;
+        this.vy = (Math.random() - 0.5) * 0.6;
+        this.r  = Math.random() * 1.2 + 0.4;
+        this.alpha  = Math.random() * 0.5 + 0.2;
+        this.dAlpha = (Math.random() - 0.5) * 0.008;
+      }
+
+      update() {
+        // --- Mouse repulsion ---
+        const dx   = this.x - mouseX;
+        const dy   = this.y - mouseY;
+        const dist = Math.hypot(dx, dy);
+        if (dist < REPEL_RADIUS && dist > 0) {
+          const force = ((REPEL_RADIUS - dist) / REPEL_RADIUS) * 0.4;
+          this.vx += (dx / dist) * force;
+          this.vy += (dy / dist) * force;
+        }
+
+        // --- Speed cap ---
+        const speed = Math.hypot(this.vx, this.vy);
+        if (speed > MAX_SPEED) {
+          this.vx = (this.vx / speed) * MAX_SPEED;
+          this.vy = (this.vy / speed) * MAX_SPEED;
+        }
+
+        this.vx *= 0.995;  // light damping – particles drift back to baseline
+        this.vy *= 0.995;
+
+        this.x += this.vx;
+        this.y += this.vy;
+
+        // --- Wrap-around edges ---
+        if (this.x < 0) this.x = W;
+        if (this.x > W) this.x = 0;
+        if (this.y < 0) this.y = H;
+        if (this.y > H) this.y = 0;
+
+        // --- Pulsing opacity ---
+        this.alpha += this.dAlpha;
+        if (this.alpha < 0.1 || this.alpha > 0.8) this.dAlpha *= -1;
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.fillStyle   = '#3B82F6';
+        ctx.shadowColor = '#60A5FA';
+        ctx.shadowBlur  = 4;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    const particles = Array.from({ length: PARTICLE_COUNT }, () => new Particle());
+
+    /** Draw faint lines between nearby particles (neural / system-network feel) */
+    function drawConnections() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx   = particles[i].x - particles[j].x;
+          const dy   = particles[i].y - particles[j].y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < MAX_CONNECT_DIST) {
+            ctx.save();
+            ctx.globalAlpha = (1 - dist / MAX_CONNECT_DIST) * 0.15;
+            ctx.strokeStyle = '#3B82F6';
+            ctx.lineWidth   = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+            ctx.restore();
+          }
+        }
+      }
+    }
+
+    /** Main animation loop – driven by requestAnimationFrame */
+    function loop() {
+      ctx.clearRect(0, 0, W, H);
+      particles.forEach(p => { p.update(); p.draw(); });
+      drawConnections();
+      requestAnimationFrame(loop);
+    }
+    loop();
+  }
+
+  // ============================================================================
+  // FEATURE 7: SYSTEM CLOCK
+  // ============================================================================
+
+  /**
+   * Injects a live digital clock into the navbar showing local system time.
+   * Demonstrates: Date(), setInterval, DOM manipulation.
+   */
+  function setupSystemClock() {
+    const navContainer = document.querySelector('.nav-container');
+    if (!navContainer) return;
+
+    const clockEl = document.createElement('div');
+    clockEl.className = 'system-clock';
+    clockEl.setAttribute('aria-live', 'polite');
+    clockEl.setAttribute('aria-label', 'System time');
+    navContainer.appendChild(clockEl);
+
+    function tick() {
+      const now = new Date();
+      const h   = String(now.getHours()).padStart(2, '0');
+      const m   = String(now.getMinutes()).padStart(2, '0');
+      const s   = String(now.getSeconds()).padStart(2, '0');
+      clockEl.innerHTML = `SYSTEM TIME&nbsp;<span class="clock-sep">|</span>&nbsp;${h}:${m}:${s}`;
+    }
+
+    tick();
+    setInterval(tick, 1000);
+  }
+
+  // ============================================================================
+  // FEATURE 8: ANIMATED STAT COUNTERS
+  // ============================================================================
+
+  /**
+   * Per-layer statistics shown inside info panels.
+   * Each stat animates from 0 → target when the panel opens.
+   */
+  const LAYER_STATS = {
+    'layer-1': [
+      { value: 14,  label: 'Projects'    },
+      { value: 8,   label: 'Technologies' },
+      { value: 500, label: 'Commits'     }
+    ],
+    'layer-2': [
+      { value: 3,  label: 'Papers'    },
+      { value: 12, label: 'Topics'    },
+      { value: 5,  label: 'Citations' }
+    ],
+    'layer-3': [
+      { value: 5,  label: 'Teams Led' },
+      { value: 8,  label: 'Events'    },
+      { value: 20, label: 'Members'   }
+    ],
+    'layer-4': [
+      { value: 40,  label: 'Courses'     },
+      { value: 92,  label: 'GPA %'       },
+      { value: 25,  label: 'Assignments' }
+    ],
+    'layer-5': [
+      { value: 7, label: 'Awards'         },
+      { value: 3, label: 'Hackathons'     },
+      { value: 5, label: 'Certifications' }
+    ],
+    'layer-6': [
+      { value: 6,   label: 'Daily Habits'  },
+      { value: 365, label: 'Days Tracked'  },
+      { value: 500, label: 'Focus Hours'   }
+    ]
+  };
+
+  /**
+   * Injects stat markup into each info panel at startup (called once from init).
+   */
+  function setupLayerStats() {
+    Object.entries(LAYER_STATS).forEach(([layerId, stats]) => {
+      const layerNum = layerId.split('-')[1];
+      const panel    = document.querySelector(`.panel-${layerNum}`);
+      if (!panel) return;
+
+      const statsEl = document.createElement('div');
+      statsEl.className = 'panel-stats';
+
+      stats.forEach(({ value, label }) => {
+        const item = document.createElement('div');
+        item.className = 'stat-item';
+        item.innerHTML = `<span class="stat-num" data-target="${value}">0</span><span class="stat-label">${label}</span>`;
+        statsEl.appendChild(item);
+      });
+
+      // Insert stat block before the "View Details" link
+      const panelLink = panel.querySelector('.panel-link');
+      panel.insertBefore(statsEl, panelLink);
+    });
+  }
+
+  /**
+   * Counts each .stat-num element from 0 to its data-target using an
+   * ease-out cubic curve and requestAnimationFrame.
+   * @param {HTMLElement} panel - The info panel whose counters to animate
+   */
+  function animateStatCounters(panel) {
+    if (!panel) return;
+    panel.querySelectorAll('.stat-num').forEach(el => {
+      const target   = parseInt(el.getAttribute('data-target'), 10);
+      const duration = 1400; // ms
+      const start    = performance.now();
+      el.textContent = '0';
+
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        const eased    = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+        el.textContent = Math.round(eased * target);
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          el.textContent = target; // ensure exact final value
+        }
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  // ============================================================================
+  // FEATURE 9: MOUSE LAYER INTERACTION
+  // ============================================================================
+
+  /**
+   * Applies a smooth 3-D tilt to the system-container disc stack
+   * based on mouse position, making the layers feel alive and responsive.
+   * Uses a lerp animation loop (requestAnimationFrame) for smooth lag.
+   */
+  function setupMouseLayerInteraction() {
+    const container = document.querySelector('.system-container');
+    if (!container) return;
+
+    let targetX = 0, targetY = 0;
+    let currentX = 0, currentY = 0;
+
+    document.addEventListener('mousemove', e => {
+      const cx = window.innerWidth  / 2;
+      const cy = window.innerHeight / 2;
+      targetX =  ((e.clientY - cy) / cy) * 8;  // ±8° vertical tilt
+      targetY = -((e.clientX - cx) / cx) * 8;  // ±8° horizontal tilt
+    });
+
+    document.addEventListener('mouseleave', () => { targetX = 0; targetY = 0; });
+
+    function tiltLoop() {
+      currentX += (targetX - currentX) * 0.06; // lerp factor – controls smoothness
+      currentY += (targetY - currentY) * 0.06;
+      container.style.transform =
+        `perspective(900px) rotateX(${currentX.toFixed(2)}deg) rotateY(${currentY.toFixed(2)}deg)`;
+      requestAnimationFrame(tiltLoop);
+    }
+    tiltLoop();
+  }
+
+  // ============================================================================
+  // FEATURE 10: SMOOTH PAGE TRANSITIONS
+  // ============================================================================
+
+  /**
+   * Intercepts nav and panel link clicks to fade the page out before
+   * navigating. Page fade-in on load is handled by a CSS animation defined
+   * in main.css (body { animation: pageFadeIn ... }).
+   */
+  function setupPageTransitions() {
+    // Only intercept nav links and panel "View Details" links
+    const links = document.querySelectorAll('.nav-links a, .panel-link');
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('mailto') || href.startsWith('http')) return;
+
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        document.body.classList.add('page-transition-out');
+        setTimeout(() => { window.location.href = href; }, 320);
+      });
+    });
+  }
+
+  // ============================================================================
   // INITIALIZATION
   // ============================================================================
   
@@ -649,11 +971,16 @@
     
     try {
       // Initialize all features
-      setupLayerFocusMode();       // Setup layer clicking and focus
-      setupHoverDescriptions();    // Setup hover tooltips
-      setupScrollHighlighting();   // Setup scroll-based highlighting
-      setupStatusIndicator();      // Setup status message display
-      setupKeyboardNavigation();   // Setup keyboard controls
+      setupLayerFocusMode();        // Setup layer clicking and focus
+      setupHoverDescriptions();     // Setup hover tooltips
+      setupScrollHighlighting();    // Setup scroll-based highlighting
+      setupStatusIndicator();       // Setup status message display
+      setupKeyboardNavigation();    // Setup keyboard controls
+      setupCanvasParticles();       // Replace CSS dots with canvas particle system
+      setupSystemClock();           // Live system clock in navbar
+      setupLayerStats();            // Inject stat markup into info panels
+      setupMouseLayerInteraction(); // 3-D tilt effect on layer stack
+      setupPageTransitions();       // Fade transitions between pages
       
       console.log('✅ All interactive features initialized');
     } catch (error) {

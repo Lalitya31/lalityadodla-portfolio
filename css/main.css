@@ -1164,3 +1164,86 @@ footer {
  * System Status Indicator
  * Base styles are inline in JavaScript for dynamic creation
  */
+
+/* ============================================================================
+ * FEATURE 7: SYSTEM CLOCK
+ * Live time display injected into the navbar
+ * ============================================================================ */
+
+.system-clock {
+  font-family: 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #60A5FA;
+  letter-spacing: 0.08em;
+  opacity: 0.85;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.clock-sep {
+  opacity: 0.45;
+  margin: 0 0.3rem;
+}
+
+/* ============================================================================
+ * FEATURE 8: ANIMATED STAT COUNTERS
+ * Panel statistics grid inside info panels
+ * ============================================================================ */
+
+.panel-stats {
+  display: flex;
+  gap: 1.25rem;
+  margin: 1.25rem 0 0.5rem;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  border-top: 1px solid rgba(147, 197, 253, 0.15);
+  border-bottom: 1px solid rgba(147, 197, 253, 0.15);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  flex: 1;
+  min-width: 60px;
+}
+
+.stat-num {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #60A5FA;
+  font-family: 'Courier New', monospace;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.65rem;
+  color: #9CA3AF;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+
+/* ============================================================================
+ * FEATURE 10: PAGE TRANSITIONS
+ * Fade-in on load, fade-out on navigation
+ * ============================================================================ */
+
+body {
+  animation: pageFadeIn 0.45s ease forwards;
+}
+
+body.page-transition-out {
+  animation: pageFadeOut 0.32s ease forwards !important;
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+@keyframes pageFadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}

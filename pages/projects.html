@@ -332,6 +332,26 @@
       transform: rotate(90deg);      /* Rotate 90 degrees on hover */
     }
 
+    /* Tech tag badges shown on each project card */
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin: 0.5rem 0 0.75rem;
+    }
+
+    .tech-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #93C5FD;
+      background: rgba(30, 58, 138, 0.5);
+      border: 1px solid rgba(147, 197, 253, 0.3);
+      padding: 0.15rem 0.55rem;
+      border-radius: 4px;
+    }
+
     /* Click Hint Text */
     /* Text below vault prompting user to click */
     .click-hint {
@@ -457,34 +477,68 @@
           
           <h2>My Engineering Projects</h2> <!-- Projects heading -->
           
-          <!-- Projects List -->
-          <!-- Grid of project items -->
-          <div class="projects-list"> <!-- Grid container for projects -->
-            
-            <!-- Project Item 1 -->
-            <!-- Individual project card -->
-            <div class="project-item"> <!-- Project card container -->
-              <h3>Project 1</h3> <!-- Project title -->
-              <p>Project details coming soon...</p> <!-- Project description (placeholder) -->
-            </div> <!-- End project-item -->
-            
-            <!-- Project Item 2 -->
-            <div class="project-item"> <!-- Project card container -->
-              <h3>Project 2</h3> <!-- Project title -->
-              <p>Project details coming soon...</p> <!-- Project description (placeholder) -->
-            </div> <!-- End project-item -->
-            
-            <!-- Project Item 3 -->
-            <div class="project-item"> <!-- Project card container -->
-              <h3>Project 3</h3> <!-- Project title -->
-              <p>Project details coming soon...</p> <!-- Project description (placeholder) -->
-            </div> <!-- End project-item -->
-            
-          </div> <!-- End projects-list -->
+          <!-- Projects list – rendered dynamically by JS below -->
+          <div class="projects-list" id="projectsListContainer"></div>
         </div> <!-- End projects-revealed -->
       </div> <!-- End vault-outer -->
     </section> <!-- End vault-container -->
   </main> <!-- End projects-container -->
+
+  <!-- Dynamic Project Data & Renderer -->
+  <script>
+    /**
+     * Project data source – edit this array to add / update projects.
+     * Each object is rendered into a .project-item card inside the vault.
+     */
+    const PROJECTS = [
+      {
+        title: 'Balanced Engineering Portfolio',
+        tech: ['HTML', 'CSS', 'JavaScript', 'Canvas API'],
+        description: 'A system-themed multi-layer portfolio with canvas particle backgrounds, 3-D disc tilt, animated stat counters, and smooth page transitions.'
+      },
+      {
+        title: 'System Activity Visualiser',
+        tech: ['JavaScript', 'Canvas', 'requestAnimationFrame'],
+        description: 'Real-time particle simulation using vector motion and mouse-repulsion logic to represent live system state.'
+      },
+      {
+        title: 'Data Structures Suite',
+        tech: ['Python', 'C++'],
+        description: 'Implementations of AVL trees, graphs, heaps, and sorting algorithms with performance benchmarks.'
+      },
+      {
+        title: 'CLI Task Manager',
+        tech: ['Python', 'SQLite'],
+        description: 'Command-line productivity tool with persistent storage, priority queuing, and tag-based filtering.'
+      },
+      {
+        title: 'Portfolio Analytics Dashboard',
+        tech: ['React', 'Node.js', 'Chart.js'],
+        description: 'Single-page dashboard tracking engineering metrics with live chart updates and export functionality.'
+      }
+    ];
+
+    /**
+     * Renders PROJECTS array into the vault's project list container.
+     * Demonstrates: DOM creation, dynamic rendering, data-driven UI.
+     */
+    function renderProjects() {
+      const container = document.getElementById('projectsListContainer');
+      if (!container) return;
+
+      container.innerHTML = PROJECTS.map(p => `
+        <div class="project-item">
+          <h3>${p.title}</h3>
+          <div class="project-tech">
+            ${p.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}
+          </div>
+          <p>${p.description}</p>
+        </div>
+      `).join('');
+    }
+
+    renderProjects();
+  </script>
 
   <!-- Inline JavaScript for Vault Interaction -->
   <!-- Handles opening and closing the vault -->
