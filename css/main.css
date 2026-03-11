@@ -1,28 +1,33 @@
-
 :root {
   /* Main background color - very dark blue-black */
   --bg-main: #0B0D10;
-  
+
   /* Primary text color - light gray for high contrast */
   --text-primary: #E5E7EB;
-  
+
   /* Muted text color - medium gray for secondary text */
   --text-muted: #9CA3AF;
 
   /* Layer color gradients - progressively lighter blues for each layer */
-  --blue-layer-1: #1E3A8A;  /* Darkest blue - Core/Projects layer */
-  --blue-layer-2: #1E40AF;  /* Dark blue - Research layer */
-  --blue-layer-3: #2563EB;  /* Medium-dark blue - Leadership layer */
-  --blue-layer-4: #3B82F6;  /* Medium blue - Academics layer */
-  --blue-layer-5: #60A5FA;  /* Light blue - Achievements layer */
-  --blue-layer-6: #93C5FD;  /* Lightest blue - Balance layer */
-  
+  --blue-layer-1: #1E3A8A;
+  /* Darkest blue - Core/Projects layer */
+  --blue-layer-2: #1E40AF;
+  /* Dark blue - Research layer */
+  --blue-layer-3: #2563EB;
+  /* Medium-dark blue - Leadership layer */
+  --blue-layer-4: #3B82F6;
+  /* Medium blue - Academics layer */
+  --blue-layer-5: #60A5FA;
+  /* Light blue - Achievements layer */
+  --blue-layer-6: #93C5FD;
+  /* Lightest blue - Balance layer */
+
   /* Blue glow effect color with transparency - used for shadows and highlights */
   --blue-glow: rgba(59, 130, 246, 0.4);
-  
+
   /* Panel background color - semi-transparent dark blue for info panels */
   --panel-bg: rgba(30, 58, 138, 0.85);
-  
+
   /* Panel border color - light blue with transparency for panel borders */
   --panel-border: rgba(147, 197, 253, 0.6);
 }
@@ -32,24 +37,36 @@
  * Removes default browser spacing and sets consistent box-sizing
  */
 * {
-  margin: 0;              /* Remove default margin from all elements */
-  padding: 0;             /* Remove default padding from all elements */
-  box-sizing: border-box; /* Include padding and border in element's total width/height */
+  margin: 0;
+  /* Remove default margin from all elements */
+  padding: 0;
+  /* Remove default padding from all elements */
+  box-sizing: border-box;
+  /* Include padding and border in element's total width/height */
 }
 
 /**
  * Body element - main container styling
  */
 body {
-  background-color: var(--bg-main);  /* Dark background color */
-  color: var(--text-primary);        /* Light text color for contrast */
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; /* Font stack */
-  line-height: 1.6;                  /* Line height for readability */
-  min-height: 100vh;                 /* Minimum height fills viewport */
-  display: flex;                     /* Flexbox layout */
-  flex-direction: column;            /* Stack children vertically */
-  overflow-x: hidden;                /* Prevent horizontal scroll */
-  position: relative;                /* Position context for absolute children */
+  background-color: var(--bg-main);
+  /* Dark background color */
+  color: var(--text-primary);
+  /* Light text color for contrast */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  /* Font stack */
+  line-height: 1.6;
+  /* Line height for readability */
+  min-height: 100vh;
+  /* Minimum height fills viewport */
+  display: flex;
+  /* Flexbox layout */
+  flex-direction: column;
+  /* Stack children vertically */
+  overflow-x: hidden;
+  /* Prevent horizontal scroll */
+  position: relative;
+  /* Position context for absolute children */
 }
 
 /**
@@ -57,69 +74,102 @@ body {
  * Fixed header navigation with blur effect and bottom border
  */
 .navbar {
-  position: fixed;                             /* Fixed at top of viewport */
-  top: 0;                                      /* Aligned to top edge */
-  left: 0;                                     /* Aligned to left edge */
-  right: 0;                                    /* Aligned to right edge */
-  background-color: rgba(11, 13, 16, 0.95);   /* Semi-transparent dark background */
-  backdrop-filter: blur(10px);                 /* Blur effect on content behind */
-  border-bottom: 1px solid rgba(147, 197, 253, 0.1); /* Subtle bottom border */
-  z-index: 1000;                               /* Layer above most content */
-  padding: 0.75rem 0;                          /* Vertical padding */
+  position: fixed;
+  /* Fixed at top of viewport */
+  top: 0;
+  /* Aligned to top edge */
+  left: 0;
+  /* Aligned to left edge */
+  right: 0;
+  /* Aligned to right edge */
+  background-color: rgba(11, 13, 16, 0.95);
+  /* Semi-transparent dark background */
+  backdrop-filter: blur(10px);
+  /* Blur effect on content behind */
+  border-bottom: 1px solid rgba(147, 197, 253, 0.1);
+  /* Subtle bottom border */
+  z-index: 1000;
+  /* Layer above most content */
+  padding: 0.75rem 0;
+  /* Vertical padding */
 }
 
 /**
  * Navigation container - centers content with max width
  */
 .nav-container {
-  max-width: 1400px;           /* Maximum width for content */
-  margin: 0 auto;              /* Center horizontally */
-  padding: 0 2rem;             /* Horizontal padding */
-  display: flex;               /* Flexbox layout */
-  justify-content: space-between; /* Space between brand and links */
-  align-items: center;         /* Vertically center items */
+  max-width: 1400px;
+  /* Maximum width for content */
+  margin: 0 auto;
+  /* Center horizontally */
+  padding: 0 2rem;
+  /* Horizontal padding */
+  display: flex;
+  /* Flexbox layout */
+  justify-content: space-between;
+  /* Space between brand and links */
+  align-items: center;
+  /* Vertically center items */
 }
 
 /**
  * Navigation brand/logo link
  */
 .nav-brand {
-  font-size: 1.1rem;                 /* Text size */
-  font-weight: 600;                  /* Semi-bold weight */
-  color: var(--text-primary);        /* Light text color */
-  text-decoration: none;             /* Remove underline */
-  letter-spacing: 0.5px;             /* Slight letter spacing */
-  transition: color 0.3s ease;       /* Smooth color transition */
+  font-size: 1.1rem;
+  /* Text size */
+  font-weight: 600;
+  /* Semi-bold weight */
+  color: var(--text-primary);
+  /* Light text color */
+  text-decoration: none;
+  /* Remove underline */
+  letter-spacing: 0.5px;
+  /* Slight letter spacing */
+  transition: color 0.3s ease;
+  /* Smooth color transition */
 }
 
 /**
  * Navigation brand hover state
  */
 .nav-brand:hover {
-  color: var(--blue-layer-5);  /* Light blue on hover */
+  color: var(--blue-layer-5);
+  /* Light blue on hover */
 }
 
 /**
  * Navigation links list container
  */
 .nav-links {
-  display: flex;     /* Horizontal layout */
-  list-style: none;  /* Remove bullet points */
-  gap: 2rem;         /* Space between items */
-  margin: 0;         /* No margin */
-  padding: 0;        /* No padding */
+  display: flex;
+  /* Horizontal layout */
+  list-style: none;
+  /* Remove bullet points */
+  gap: 2rem;
+  /* Space between items */
+  margin: 0;
+  /* No margin */
+  padding: 0;
+  /* No padding */
 }
 
 /**
  * Individual navigation link styling
  */
 .nav-links li a {
-  color: var(--text-muted);    /* Muted text color */
-  text-decoration: none;       /* No underline */
-  font-size: 0.9rem;           /* Text size */
-  font-weight: 500;            /* Medium weight */
-  transition: color 0.3s ease; /* Smooth color transition */
-  position: relative;          /* Position context for pseudo-element */
+  color: var(--text-muted);
+  /* Muted text color */
+  text-decoration: none;
+  /* No underline */
+  font-size: 0.9rem;
+  /* Text size */
+  font-weight: 500;
+  /* Medium weight */
+  transition: color 0.3s ease;
+  /* Smooth color transition */
+  position: relative;
+  /* Position context for pseudo-element */
 }
 
 /**
@@ -127,28 +177,38 @@ body {
  * Creates animated underline on hover
  */
 .nav-links li a::after {
-  content: '';                                /* Empty content */
-  position: absolute;                         /* Absolute positioning */
-  bottom: -4px;                               /* Below the text */
-  left: 0;                                    /* Aligned to left */
-  width: 0;                                   /* Initially no width */
-  height: 2px;                                /* Underline thickness */
-  background-color: var(--blue-layer-5);      /* Blue underline color */
-  transition: width 0.3s ease;                /* Animate width change */
+  content: '';
+  /* Empty content */
+  position: absolute;
+  /* Absolute positioning */
+  bottom: -4px;
+  /* Below the text */
+  left: 0;
+  /* Aligned to left */
+  width: 0;
+  /* Initially no width */
+  height: 2px;
+  /* Underline thickness */
+  background-color: var(--blue-layer-5);
+  /* Blue underline color */
+  transition: width 0.3s ease;
+  /* Animate width change */
 }
 
 /**
  * Navigation link hover state - text color
  */
 .nav-links li a:hover {
-  color: var(--text-primary);  /* Brighten text on hover */
+  color: var(--text-primary);
+  /* Brighten text on hover */
 }
 
 /**
  * Navigation link hover state - underline animation
  */
 .nav-links li a:hover::after {
-  width: 100%;  /* Expand underline to full width */
+  width: 100%;
+  /* Expand underline to full width */
 }
 
 /**
@@ -156,7 +216,8 @@ body {
  * Accounts for fixed navbar height
  */
 .container {
-  margin-top: 60px;  /* Offset for fixed navbar */
+  margin-top: 60px;
+  /* Offset for fixed navbar */
 }
 
 /**
@@ -164,13 +225,20 @@ body {
  * Full-screen overlay containing animated dot elements
  */
 .background-dots {
-  position: fixed;        /* Fixed positioning covers entire viewport */
-  top: 0;                 /* Aligned to top */
-  left: 0;                /* Aligned to left */
-  width: 100%;            /* Full width */
-  height: 100%;           /* Full height */
-  pointer-events: none;   /* Don't interfere with mouse events */
-  z-index: 0;             /* Render behind all content */
+  position: fixed;
+  /* Fixed positioning covers entire viewport */
+  top: 0;
+  /* Aligned to top */
+  left: 0;
+  /* Aligned to left */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  pointer-events: none;
+  /* Don't interfere with mouse events */
+  z-index: 0;
+  /* Render behind all content */
 }
 
 /**
@@ -178,145 +246,569 @@ body {
  * Creates glowing animated dots that float across screen
  */
 .dot {
-  position: absolute;                                            /* Absolute positioning for placement */
-  border-radius: 50%;                                            /* Make it circular */
-  background-color: var(--blue-layer-4);                         /* Blue color */
-  opacity: 0.6;                                                  /* Semi-transparent */
-  filter: blur(2px);                                             /* Slight blur for glow effect */
-  box-shadow: 0 0 10px var(--blue-glow), 0 0 20px var(--blue-glow); /* Glowing shadow effect */
+  position: absolute;
+  /* Absolute positioning for placement */
+  border-radius: 50%;
+  /* Make it circular */
+  background-color: var(--blue-layer-4);
+  /* Blue color */
+  opacity: 0.6;
+  /* Semi-transparent */
+  filter: blur(2px);
+  /* Slight blur for glow effect */
+  box-shadow: 0 0 10px var(--blue-glow), 0 0 20px var(--blue-glow);
+  /* Glowing shadow effect */
 }
 
-.dot-1 { width: 3px; height: 3px; top: 10%; left: 15%; animation: firefly1 8s ease-in-out infinite; }
-.dot-2 { width: 2px; height: 2px; top: 25%; left: 35%; animation: firefly2 7s ease-in-out infinite 1s; }
-.dot-3 { width: 4px; height: 4px; top: 40%; left: 20%; animation: firefly3 9s ease-in-out infinite 2s; }
-.dot-4 { width: 2px; height: 2px; top: 55%; left: 45%; animation: firefly4 6.5s ease-in-out infinite 0.5s; }
-.dot-5 { width: 3px; height: 3px; top: 70%; left: 25%; animation: firefly1 7.5s ease-in-out infinite 1.5s; }
-.dot-6 { width: 2px; height: 2px; top: 15%; left: 60%; animation: firefly2 8s ease-in-out infinite 2.5s; }
-.dot-7 { width: 4px; height: 4px; top: 30%; left: 75%; animation: firefly3 8.5s ease-in-out infinite 0.8s; }
-.dot-8 { width: 3px; height: 3px; top: 50%; left: 85%; animation: firefly4 7s ease-in-out infinite 1.8s; }
-.dot-9 { width: 2px; height: 2px; top: 65%; left: 70%; animation: firefly1 6.5s ease-in-out infinite 2.2s; }
-.dot-10 { width: 3px; height: 3px; top: 80%; left: 55%; animation: firefly2 7.5s ease-in-out infinite 0.3s; }
-.dot-11 { width: 2px; height: 2px; top: 5%; left: 40%; animation: firefly3 8s ease-in-out infinite 1.2s; }
-.dot-12 { width: 4px; height: 4px; top: 45%; left: 10%; animation: firefly4 9s ease-in-out infinite 2.8s; }
-.dot-13 { width: 3px; height: 3px; top: 60%; left: 90%; animation: firefly1 7s ease-in-out infinite 0.6s; }
-.dot-14 { width: 2px; height: 2px; top: 75%; left: 80%; animation: firefly2 6.5s ease-in-out infinite 1.4s; }
-.dot-15 { width: 3px; height: 3px; top: 90%; left: 30%; animation: firefly3 7.5s ease-in-out infinite 2.6s; }
-.dot-16 { width: 3px; height: 3px; top: 12%; left: 50%; animation: firefly4 8s ease-in-out infinite 0.2s; }
-.dot-17 { width: 2px; height: 2px; top: 28%; left: 65%; animation: firefly1 7s ease-in-out infinite 1.7s; }
-.dot-18 { width: 4px; height: 4px; top: 35%; left: 8%; animation: firefly2 9s ease-in-out infinite 3s; }
-.dot-19 { width: 2px; height: 2px; top: 48%; left: 92%; animation: firefly3 6.5s ease-in-out infinite 0.9s; }
-.dot-20 { width: 3px; height: 3px; top: 62%; left: 18%; animation: firefly4 7.5s ease-in-out infinite 2.1s; }
-.dot-21 { width: 2px; height: 2px; top: 8%; left: 78%; animation: firefly1 8s ease-in-out infinite 1.3s; }
-.dot-22 { width: 4px; height: 4px; top: 22%; left: 28%; animation: firefly2 8.5s ease-in-out infinite 2.4s; }
-.dot-23 { width: 3px; height: 3px; top: 38%; left: 58%; animation: firefly3 7s ease-in-out infinite 0.7s; }
-.dot-24 { width: 2px; height: 2px; top: 52%; left: 12%; animation: firefly4 6.5s ease-in-out infinite 1.9s; }
-.dot-25 { width: 3px; height: 3px; top: 68%; left: 88%; animation: firefly1 7.5s ease-in-out infinite 3.2s; }
-.dot-26 { width: 2px; height: 2px; top: 18%; left: 22%; animation: firefly2 8s ease-in-out infinite 0.4s; }
-.dot-27 { width: 4px; height: 4px; top: 32%; left: 48%; animation: firefly3 9s ease-in-out infinite 1.6s; }
-.dot-28 { width: 3px; height: 3px; top: 42%; left: 82%; animation: firefly4 7s ease-in-out infinite 2.9s; }
-.dot-29 { width: 2px; height: 2px; top: 58%; left: 38%; animation: firefly1 6.5s ease-in-out infinite 0.1s; }
-.dot-30 { width: 3px; height: 3px; top: 72%; left: 62%; animation: firefly2 7.5s ease-in-out infinite 1.1s; }
-.dot-31 { width: 2px; height: 2px; top: 3%; left: 68%; animation: firefly3 8s ease-in-out infinite 2.3s; }
-.dot-32 { width: 4px; height: 4px; top: 20%; left: 5%; animation: firefly4 8.5s ease-in-out infinite 3.1s; }
-.dot-33 { width: 3px; height: 3px; top: 35%; left: 95%; animation: firefly1 7s ease-in-out infinite 0.8s; }
-.dot-34 { width: 2px; height: 2px; top: 47%; left: 52%; animation: firefly2 6.5s ease-in-out infinite 1.5s; }
-.dot-35 { width: 3px; height: 3px; top: 63%; left: 32%; animation: firefly3 7.5s ease-in-out infinite 2.7s; }
-.dot-36 { width: 2px; height: 2px; top: 85%; left: 72%; animation: firefly4 8s ease-in-out infinite 0.6s; }
-.dot-37 { width: 4px; height: 4px; top: 14%; left: 42%; animation: firefly1 9s ease-in-out infinite 1.8s; }
-.dot-38 { width: 3px; height: 3px; top: 26%; left: 16%; animation: firefly2 7s ease-in-out infinite 3.3s; }
-.dot-39 { width: 2px; height: 2px; top: 44%; left: 76%; animation: firefly3 6.5s ease-in-out infinite 0.3s; }
-.dot-40 { width: 3px; height: 3px; top: 56%; left: 6%; animation: firefly4 7.5s ease-in-out infinite 1.4s; }
-.dot-41 { width: 2px; height: 2px; top: 74%; left: 46%; animation: firefly1 8s ease-in-out infinite 2.5s; }
-.dot-42 { width: 4px; height: 4px; top: 88%; left: 86%; animation: firefly2 8.5s ease-in-out infinite 0.9s; }
-.dot-43 { width: 3px; height: 3px; top: 7%; left: 24%; animation: firefly3 7s ease-in-out infinite 2.2s; }
-.dot-44 { width: 2px; height: 2px; top: 33%; left: 54%; animation: firefly4 6.5s ease-in-out infinite 3.4s; }
-.dot-45 { width: 3px; height: 3px; top: 51%; left: 66%; animation: firefly1 7.5s ease-in-out infinite 0.5s; }
-.dot-46 { width: 2px; height: 2px; top: 66%; left: 14%; animation: firefly2 8s ease-in-out infinite 1.6s; }
-.dot-47 { width: 4px; height: 4px; top: 78%; left: 94%; animation: firefly3 9s ease-in-out infinite 2.8s; }
-.dot-48 { width: 3px; height: 3px; top: 92%; left: 44%; animation: firefly4 7s ease-in-out infinite 0.2s; }
-.dot-49 { width: 2px; height: 2px; top: 17%; left: 84%; animation: firefly1 6.5s ease-in-out infinite 1.3s; }
-.dot-50 { width: 3px; height: 3px; top: 41%; left: 36%; animation: firefly2 7.5s ease-in-out infinite 2.9s; }
-.dot-51 { width: 2px; height: 2px; top: 74%; left: 46%; animation: firefly1 8s ease-in-out infinite 2.5s; }
-.dot-52 { width: 2px; height: 2px; top: 74%; left: 46%; animation: firefly1 8s ease-in-out infinite 2.5s; }
-.dot-53 { width: 2px; height: 2px; top: 74%; left: 46%; animation: firefly1 8s ease-in-out infinite 2.5s; }
-.dot-54 { width: 2px; height: 2px; top: 74%; left: 46%; animation: firefly1 8s ease-in-out infinite 2.5s; }
-.dot-55 { width: 2px; height: 2px; top: 74%; left: 46%; animation: firefly1 8s ease-in-out infinite 2.5s; }
-.dot-56 { width: 2px; height: 2px; top: 74%; left: 46%; animation: firefly1 8s ease-in-out infinite 2.5s; }
-.dot-57 { width: 2px; height: 2px; top: 74%; left: 46%; animation: firefly1 8s ease-in-out infinite 2.5s; }
+.dot-1 {
+  width: 3px;
+  height: 3px;
+  top: 10%;
+  left: 15%;
+  animation: firefly1 8s ease-in-out infinite;
+}
+
+.dot-2 {
+  width: 2px;
+  height: 2px;
+  top: 25%;
+  left: 35%;
+  animation: firefly2 7s ease-in-out infinite 1s;
+}
+
+.dot-3 {
+  width: 4px;
+  height: 4px;
+  top: 40%;
+  left: 20%;
+  animation: firefly3 9s ease-in-out infinite 2s;
+}
+
+.dot-4 {
+  width: 2px;
+  height: 2px;
+  top: 55%;
+  left: 45%;
+  animation: firefly4 6.5s ease-in-out infinite 0.5s;
+}
+
+.dot-5 {
+  width: 3px;
+  height: 3px;
+  top: 70%;
+  left: 25%;
+  animation: firefly1 7.5s ease-in-out infinite 1.5s;
+}
+
+.dot-6 {
+  width: 2px;
+  height: 2px;
+  top: 15%;
+  left: 60%;
+  animation: firefly2 8s ease-in-out infinite 2.5s;
+}
+
+.dot-7 {
+  width: 4px;
+  height: 4px;
+  top: 30%;
+  left: 75%;
+  animation: firefly3 8.5s ease-in-out infinite 0.8s;
+}
+
+.dot-8 {
+  width: 3px;
+  height: 3px;
+  top: 50%;
+  left: 85%;
+  animation: firefly4 7s ease-in-out infinite 1.8s;
+}
+
+.dot-9 {
+  width: 2px;
+  height: 2px;
+  top: 65%;
+  left: 70%;
+  animation: firefly1 6.5s ease-in-out infinite 2.2s;
+}
+
+.dot-10 {
+  width: 3px;
+  height: 3px;
+  top: 80%;
+  left: 55%;
+  animation: firefly2 7.5s ease-in-out infinite 0.3s;
+}
+
+.dot-11 {
+  width: 2px;
+  height: 2px;
+  top: 5%;
+  left: 40%;
+  animation: firefly3 8s ease-in-out infinite 1.2s;
+}
+
+.dot-12 {
+  width: 4px;
+  height: 4px;
+  top: 45%;
+  left: 10%;
+  animation: firefly4 9s ease-in-out infinite 2.8s;
+}
+
+.dot-13 {
+  width: 3px;
+  height: 3px;
+  top: 60%;
+  left: 90%;
+  animation: firefly1 7s ease-in-out infinite 0.6s;
+}
+
+.dot-14 {
+  width: 2px;
+  height: 2px;
+  top: 75%;
+  left: 80%;
+  animation: firefly2 6.5s ease-in-out infinite 1.4s;
+}
+
+.dot-15 {
+  width: 3px;
+  height: 3px;
+  top: 90%;
+  left: 30%;
+  animation: firefly3 7.5s ease-in-out infinite 2.6s;
+}
+
+.dot-16 {
+  width: 3px;
+  height: 3px;
+  top: 12%;
+  left: 50%;
+  animation: firefly4 8s ease-in-out infinite 0.2s;
+}
+
+.dot-17 {
+  width: 2px;
+  height: 2px;
+  top: 28%;
+  left: 65%;
+  animation: firefly1 7s ease-in-out infinite 1.7s;
+}
+
+.dot-18 {
+  width: 4px;
+  height: 4px;
+  top: 35%;
+  left: 8%;
+  animation: firefly2 9s ease-in-out infinite 3s;
+}
+
+.dot-19 {
+  width: 2px;
+  height: 2px;
+  top: 48%;
+  left: 92%;
+  animation: firefly3 6.5s ease-in-out infinite 0.9s;
+}
+
+.dot-20 {
+  width: 3px;
+  height: 3px;
+  top: 62%;
+  left: 18%;
+  animation: firefly4 7.5s ease-in-out infinite 2.1s;
+}
+
+.dot-21 {
+  width: 2px;
+  height: 2px;
+  top: 8%;
+  left: 78%;
+  animation: firefly1 8s ease-in-out infinite 1.3s;
+}
+
+.dot-22 {
+  width: 4px;
+  height: 4px;
+  top: 22%;
+  left: 28%;
+  animation: firefly2 8.5s ease-in-out infinite 2.4s;
+}
+
+.dot-23 {
+  width: 3px;
+  height: 3px;
+  top: 38%;
+  left: 58%;
+  animation: firefly3 7s ease-in-out infinite 0.7s;
+}
+
+.dot-24 {
+  width: 2px;
+  height: 2px;
+  top: 52%;
+  left: 12%;
+  animation: firefly4 6.5s ease-in-out infinite 1.9s;
+}
+
+.dot-25 {
+  width: 3px;
+  height: 3px;
+  top: 68%;
+  left: 88%;
+  animation: firefly1 7.5s ease-in-out infinite 3.2s;
+}
+
+.dot-26 {
+  width: 2px;
+  height: 2px;
+  top: 18%;
+  left: 22%;
+  animation: firefly2 8s ease-in-out infinite 0.4s;
+}
+
+.dot-27 {
+  width: 4px;
+  height: 4px;
+  top: 32%;
+  left: 48%;
+  animation: firefly3 9s ease-in-out infinite 1.6s;
+}
+
+.dot-28 {
+  width: 3px;
+  height: 3px;
+  top: 42%;
+  left: 82%;
+  animation: firefly4 7s ease-in-out infinite 2.9s;
+}
+
+.dot-29 {
+  width: 2px;
+  height: 2px;
+  top: 58%;
+  left: 38%;
+  animation: firefly1 6.5s ease-in-out infinite 0.1s;
+}
+
+.dot-30 {
+  width: 3px;
+  height: 3px;
+  top: 72%;
+  left: 62%;
+  animation: firefly2 7.5s ease-in-out infinite 1.1s;
+}
+
+.dot-31 {
+  width: 2px;
+  height: 2px;
+  top: 3%;
+  left: 68%;
+  animation: firefly3 8s ease-in-out infinite 2.3s;
+}
+
+.dot-32 {
+  width: 4px;
+  height: 4px;
+  top: 20%;
+  left: 5%;
+  animation: firefly4 8.5s ease-in-out infinite 3.1s;
+}
+
+.dot-33 {
+  width: 3px;
+  height: 3px;
+  top: 35%;
+  left: 95%;
+  animation: firefly1 7s ease-in-out infinite 0.8s;
+}
+
+.dot-34 {
+  width: 2px;
+  height: 2px;
+  top: 47%;
+  left: 52%;
+  animation: firefly2 6.5s ease-in-out infinite 1.5s;
+}
+
+.dot-35 {
+  width: 3px;
+  height: 3px;
+  top: 63%;
+  left: 32%;
+  animation: firefly3 7.5s ease-in-out infinite 2.7s;
+}
+
+.dot-36 {
+  width: 2px;
+  height: 2px;
+  top: 85%;
+  left: 72%;
+  animation: firefly4 8s ease-in-out infinite 0.6s;
+}
+
+.dot-37 {
+  width: 4px;
+  height: 4px;
+  top: 14%;
+  left: 42%;
+  animation: firefly1 9s ease-in-out infinite 1.8s;
+}
+
+.dot-38 {
+  width: 3px;
+  height: 3px;
+  top: 26%;
+  left: 16%;
+  animation: firefly2 7s ease-in-out infinite 3.3s;
+}
+
+.dot-39 {
+  width: 2px;
+  height: 2px;
+  top: 44%;
+  left: 76%;
+  animation: firefly3 6.5s ease-in-out infinite 0.3s;
+}
+
+.dot-40 {
+  width: 3px;
+  height: 3px;
+  top: 56%;
+  left: 6%;
+  animation: firefly4 7.5s ease-in-out infinite 1.4s;
+}
+
+.dot-41 {
+  width: 2px;
+  height: 2px;
+  top: 74%;
+  left: 46%;
+  animation: firefly1 8s ease-in-out infinite 2.5s;
+}
+
+.dot-42 {
+  width: 4px;
+  height: 4px;
+  top: 88%;
+  left: 86%;
+  animation: firefly2 8.5s ease-in-out infinite 0.9s;
+}
+
+.dot-43 {
+  width: 3px;
+  height: 3px;
+  top: 7%;
+  left: 24%;
+  animation: firefly3 7s ease-in-out infinite 2.2s;
+}
+
+.dot-44 {
+  width: 2px;
+  height: 2px;
+  top: 33%;
+  left: 54%;
+  animation: firefly4 6.5s ease-in-out infinite 3.4s;
+}
+
+.dot-45 {
+  width: 3px;
+  height: 3px;
+  top: 51%;
+  left: 66%;
+  animation: firefly1 7.5s ease-in-out infinite 0.5s;
+}
+
+.dot-46 {
+  width: 2px;
+  height: 2px;
+  top: 66%;
+  left: 14%;
+  animation: firefly2 8s ease-in-out infinite 1.6s;
+}
+
+.dot-47 {
+  width: 4px;
+  height: 4px;
+  top: 78%;
+  left: 94%;
+  animation: firefly3 9s ease-in-out infinite 2.8s;
+}
+
+.dot-48 {
+  width: 3px;
+  height: 3px;
+  top: 92%;
+  left: 44%;
+  animation: firefly4 7s ease-in-out infinite 0.2s;
+}
+
+.dot-49 {
+  width: 2px;
+  height: 2px;
+  top: 17%;
+  left: 84%;
+  animation: firefly1 6.5s ease-in-out infinite 1.3s;
+}
+
+.dot-50 {
+  width: 3px;
+  height: 3px;
+  top: 41%;
+  left: 36%;
+  animation: firefly2 7.5s ease-in-out infinite 2.9s;
+}
+
+.dot-51 {
+  width: 2px;
+  height: 2px;
+  top: 74%;
+  left: 46%;
+  animation: firefly1 8s ease-in-out infinite 2.5s;
+}
+
+.dot-52 {
+  width: 2px;
+  height: 2px;
+  top: 74%;
+  left: 46%;
+  animation: firefly1 8s ease-in-out infinite 2.5s;
+}
+
+.dot-53 {
+  width: 2px;
+  height: 2px;
+  top: 74%;
+  left: 46%;
+  animation: firefly1 8s ease-in-out infinite 2.5s;
+}
+
+.dot-54 {
+  width: 2px;
+  height: 2px;
+  top: 74%;
+  left: 46%;
+  animation: firefly1 8s ease-in-out infinite 2.5s;
+}
+
+.dot-55 {
+  width: 2px;
+  height: 2px;
+  top: 74%;
+  left: 46%;
+  animation: firefly1 8s ease-in-out infinite 2.5s;
+}
+
+.dot-56 {
+  width: 2px;
+  height: 2px;
+  top: 74%;
+  left: 46%;
+  animation: firefly1 8s ease-in-out infinite 2.5s;
+}
+
+.dot-57 {
+  width: 2px;
+  height: 2px;
+  top: 74%;
+  left: 46%;
+  animation: firefly1 8s ease-in-out infinite 2.5s;
+}
 
 /* Firefly movement animations */
 @keyframes firefly1 {
-  0%, 100% { 
-    opacity: 0.3; 
+
+  0%,
+  100% {
+    opacity: 0.3;
     transform: translate(0, 0);
   }
-  25% { 
-    opacity: 0.9; 
+
+  25% {
+    opacity: 0.9;
     transform: translate(15px, -20px);
   }
-  50% { 
-    opacity: 0.4; 
+
+  50% {
+    opacity: 0.4;
     transform: translate(30px, -10px);
   }
-  75% { 
-    opacity: 0.8; 
+
+  75% {
+    opacity: 0.8;
     transform: translate(10px, -25px);
   }
 }
 
 @keyframes firefly2 {
-  0%, 100% { 
-    opacity: 0.2; 
+
+  0%,
+  100% {
+    opacity: 0.2;
     transform: translate(0, 0);
   }
-  25% { 
-    opacity: 0.8; 
+
+  25% {
+    opacity: 0.8;
     transform: translate(-20px, 15px);
   }
-  50% { 
-    opacity: 0.5; 
+
+  50% {
+    opacity: 0.5;
     transform: translate(-10px, 25px);
   }
-  75% { 
-    opacity: 0.9; 
+
+  75% {
+    opacity: 0.9;
     transform: translate(-25px, 5px);
   }
 }
 
 @keyframes firefly3 {
-  0%, 100% { 
-    opacity: 0.4; 
+
+  0%,
+  100% {
+    opacity: 0.4;
     transform: translate(0, 0);
   }
-  25% { 
-    opacity: 0.7; 
+
+  25% {
+    opacity: 0.7;
     transform: translate(20px, 20px);
   }
-  50% { 
-    opacity: 0.9; 
+
+  50% {
+    opacity: 0.9;
     transform: translate(-15px, 30px);
   }
-  75% { 
-    opacity: 0.5; 
+
+  75% {
+    opacity: 0.5;
     transform: translate(25px, 10px);
   }
 }
 
 @keyframes firefly4 {
-  0%, 100% { 
-    opacity: 0.3; 
+
+  0%,
+  100% {
+    opacity: 0.3;
     transform: translate(0, 0);
   }
-  25% { 
-    opacity: 0.9; 
+
+  25% {
+    opacity: 0.9;
     transform: translate(-15px, -25px);
   }
-  50% { 
-    opacity: 0.6; 
+
+  50% {
+    opacity: 0.6;
     transform: translate(20px, -15px);
   }
-  75% { 
-    opacity: 0.8; 
+
+  75% {
+    opacity: 0.8;
     transform: translate(-10px, -30px);
   }
 }
@@ -326,12 +818,18 @@ body {
  * Positioned behind the main content as decorative element
  */
 .center-header {
-  position: absolute;                      /* Absolute positioning within container */
-  top: 50%;                                /* Vertical center */
-  left: 40%;                               /* Horizontal position */
-  transform: translate(-50%, -50%);        /* Center transform offset */
-  z-index: 0;                              /* Behind main content */
-  pointer-events: none;                    /* Don't block interactions */
+  position: absolute;
+  /* Absolute positioning within container */
+  top: 50%;
+  /* Vertical center */
+  left: 40%;
+  /* Horizontal position */
+  transform: translate(-50%, -50%);
+  /* Center transform offset */
+  z-index: 0;
+  /* Behind main content */
+  pointer-events: none;
+  /* Don't block interactions */
 }
 
 /**
@@ -339,16 +837,26 @@ body {
  * Large, semi-transparent text for visual interest
  */
 .background-text {
-  font-size: 3.5rem;                  /* Large text size */
-  font-weight: 900;                   /* Extra bold weight */
-  color: var(--blue-layer-4);         /* Blue color */
-  opacity: 0.05;                      /* Very transparent */
-  white-space: normal;                /* Allow text wrapping */
-  letter-spacing: 0.05em;             /* Slight letter spacing */
-  user-select: none;                  /* Prevent text selection */
-  text-align: right;                  /* Right-aligned text */
-  max-width: 400px;                   /* Maximum width constraint */
-  line-height: 1.2;                   /* Tight line height */
+  font-size: 3.5rem;
+  /* Large text size */
+  font-weight: 900;
+  /* Extra bold weight */
+  color: var(--blue-layer-4);
+  /* Blue color */
+  opacity: 0.05;
+  /* Very transparent */
+  white-space: normal;
+  /* Allow text wrapping */
+  letter-spacing: 0.05em;
+  /* Slight letter spacing */
+  user-select: none;
+  /* Prevent text selection */
+  text-align: right;
+  /* Right-aligned text */
+  max-width: 400px;
+  /* Maximum width constraint */
+  line-height: 1.2;
+  /* Tight line height */
 }
 
 /**
@@ -356,17 +864,28 @@ body {
  * Centers content and provides responsive spacing
  */
 main.container {
-  flex: 1;                    /* Grow to fill available space */
-  display: flex;              /* Flexbox layout */
-  align-items: center;        /* Vertically center items */
-  justify-content: center;    /* Horizontally center items */
-  padding: 2rem;              /* Internal spacing */
-  max-width: 1400px;          /* Maximum width */
-  margin: 0 auto;             /* Center horizontally */
-  width: 100%;                /* Full width up to max */
-  position: relative;         /* Position context for children */
-  z-index: 1;                 /* Above background elements */
-  gap: 4rem;                  /* Space between columns */
+  flex: 1;
+  /* Grow to fill available space */
+  display: flex;
+  /* Flexbox layout */
+  align-items: center;
+  /* Vertically center items */
+  justify-content: center;
+  /* Horizontally center items */
+  padding: 2rem;
+  /* Internal spacing */
+  max-width: 1400px;
+  /* Maximum width */
+  margin: 0 auto;
+  /* Center horizontally */
+  width: 100%;
+  /* Full width up to max */
+  position: relative;
+  /* Position context for children */
+  z-index: 1;
+  /* Above background elements */
+  gap: 4rem;
+  /* Space between columns */
 }
 
 /**
@@ -375,25 +894,32 @@ main.container {
  */
 .left-section,
 .right-section {
-  flex: 1;                    /* Equal flex grow */
-  display: flex;              /* Flexbox for centering */
-  align-items: center;        /* Vertical centering */
-  justify-content: center;    /* Horizontal centering */
+  flex: 1;
+  /* Equal flex grow */
+  display: flex;
+  /* Flexbox for centering */
+  align-items: center;
+  /* Vertical centering */
+  justify-content: center;
+  /* Horizontal centering */
 }
 
 /**
  * Left section specific styling
  */
 .left-section {
-  padding: 2rem;  /* Internal spacing */
+  padding: 2rem;
+  /* Internal spacing */
 }
 
 /**
  * Right section specific styling
  */
 .right-section {
-  padding: 2rem;          /* Internal spacing */
-  position: relative;     /* Position context for absolute children */
+  padding: 2rem;
+  /* Internal spacing */
+  position: relative;
+  /* Position context for absolute children */
 }
 
 /**
@@ -401,13 +927,20 @@ main.container {
  * Large, bold heading with glow effect
  */
 h1 {
-  font-size: 4rem;                                      /* Very large text */
-  font-weight: 700;                                      /* Bold weight */
-  color: var(--text-primary);                            /* Light text color */
-  margin-bottom: 1rem;                                   /* Space below */
-  letter-spacing: -0.03em;                               /* Tight letter spacing */
-  line-height: 1.1;                                      /* Tight line height */
-  text-shadow: 0 0 20px var(--blue-glow), 0 0 40px var(--blue-glow), 0 0 60px rgba(59, 130, 246, 0.3); /* Layered glow effect */
+  font-size: 4rem;
+  /* Very large text */
+  font-weight: 700;
+  /* Bold weight */
+  color: var(--text-primary);
+  /* Light text color */
+  margin-bottom: 1rem;
+  /* Space below */
+  letter-spacing: -0.03em;
+  /* Tight letter spacing */
+  line-height: 1.1;
+  /* Tight line height */
+  text-shadow: 0 0 20px var(--blue-glow), 0 0 40px var(--blue-glow), 0 0 60px rgba(59, 130, 246, 0.3);
+  /* Layered glow effect */
 }
 
 /**
@@ -415,11 +948,16 @@ h1 {
  * Lighter, larger text for secondary headings
  */
 .subheading {
-  font-size: 1.75rem;                                                /* Large text */
-  color: var(--text-muted);                                           /* Muted color */
-  font-weight: 300;                                                   /* Light weight */
-  letter-spacing: 0.01em;                                             /* Slight letter spacing */
-  text-shadow: 0 0 15px var(--blue-glow), 0 0 30px rgba(59, 130, 246, 0.2); /* Subtle glow */
+  font-size: 1.75rem;
+  /* Large text */
+  color: var(--text-muted);
+  /* Muted color */
+  font-weight: 300;
+  /* Light weight */
+  letter-spacing: 0.01em;
+  /* Slight letter spacing */
+  text-shadow: 0 0 15px var(--blue-glow), 0 0 30px rgba(59, 130, 246, 0.2);
+  /* Subtle glow */
 }
 
 /**
@@ -427,10 +965,14 @@ h1 {
  * Horizontal list of social/contact icon links
  */
 .contact-links {
-  display: flex;            /* Flexbox layout */
-  gap: 1rem;                /* Space between icons */
-  margin-top: 2rem;         /* Space above */
-  align-items: center;      /* Vertically center icons */
+  display: flex;
+  /* Flexbox layout */
+  gap: 1rem;
+  /* Space between icons */
+  margin-top: 2rem;
+  /* Space above */
+  align-items: center;
+  /* Vertically center icons */
 }
 
 /**
@@ -438,17 +980,28 @@ h1 {
  * Styled button container for social media icons
  */
 .contact-icon {
-  display: flex;                                  /* Flexbox for centering icon */
-  align-items: center;                            /* Vertical center */
-  justify-content: center;                        /* Horizontal center */
-  width: 40px;                                    /* Fixed width */
-  height: 40px;                                   /* Fixed height (square) */
-  border-radius: 8px;                             /* Rounded corners */
-  background-color: rgba(30, 58, 138, 0.3);       /* Semi-transparent blue background */
-  border: 1px solid rgba(147, 197, 253, 0.2);     /* Light blue border */
-  color: var(--text-muted);                       /* Muted icon color */
-  transition: all 0.3s ease;                      /* Smooth transition for all properties */
-  text-decoration: none;                          /* Remove link underline */
+  display: flex;
+  /* Flexbox for centering icon */
+  align-items: center;
+  /* Vertical center */
+  justify-content: center;
+  /* Horizontal center */
+  width: 40px;
+  /* Fixed width */
+  height: 40px;
+  /* Fixed height (square) */
+  border-radius: 8px;
+  /* Rounded corners */
+  background-color: rgba(30, 58, 138, 0.3);
+  /* Semi-transparent blue background */
+  border: 1px solid rgba(147, 197, 253, 0.2);
+  /* Light blue border */
+  color: var(--text-muted);
+  /* Muted icon color */
+  transition: all 0.3s ease;
+  /* Smooth transition for all properties */
+  text-decoration: none;
+  /* Remove link underline */
 }
 
 /**
@@ -456,19 +1009,26 @@ h1 {
  * Enhanced appearance on hover
  */
 .contact-icon:hover {
-  background-color: rgba(30, 58, 138, 0.6);       /* Darker background */
-  border-color: rgba(147, 197, 253, 0.5);          /* Brighter border */
-  color: var(--blue-layer-5);                      /* Brighter icon color */
-  transform: translateY(-2px);                     /* Slight lift effect */
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); /* Add glowing shadow */
+  background-color: rgba(30, 58, 138, 0.6);
+  /* Darker background */
+  border-color: rgba(147, 197, 253, 0.5);
+  /* Brighter border */
+  color: var(--blue-layer-5);
+  /* Brighter icon color */
+  transform: translateY(-2px);
+  /* Slight lift effect */
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  /* Add glowing shadow */
 }
 
 /**
  * SVG icon sizing within contact button
  */
 .contact-icon svg {
-  width: 20px;   /* Icon width */
-  height: 20px;  /* Icon height */
+  width: 20px;
+  /* Icon width */
+  height: 20px;
+  /* Icon height */
 }
 
 /**
@@ -476,12 +1036,18 @@ h1 {
  * Container for the circular layer system
  */
 .system-container {
-  position: relative;              /* Position context for absolute children */
-  width: 500px;                    /* Fixed width */
-  height: 500px;                   /* Fixed height (square) */
-  display: flex;                   /* Flexbox for centering */
-  align-items: center;             /* Vertical centering */
-  justify-content: center;         /* Horizontal centering */
+  position: relative;
+  /* Position context for absolute children */
+  width: 500px;
+  /* Fixed width */
+  height: 500px;
+  /* Fixed height (square) */
+  display: flex;
+  /* Flexbox for centering */
+  align-items: center;
+  /* Vertical centering */
+  justify-content: center;
+  /* Horizontal centering */
 }
 
 /**
@@ -489,13 +1055,20 @@ h1 {
  * Positioned absolutely to overlay the layer circles
  */
 .curved-text-svg {
-  position: absolute;       /* Absolute positioning */
-  top: 0;                   /* Aligned to top */
-  left: 0;                  /* Aligned to left */
-  width: 100%;              /* Full width */
-  height: 100%;             /* Full height */
-  pointer-events: none;     /* Don't block interactions with layers */
-  z-index: 10;              /* Above the layers */
+  position: absolute;
+  /* Absolute positioning */
+  top: 0;
+  /* Aligned to top */
+  left: 0;
+  /* Aligned to left */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  pointer-events: none;
+  /* Don't block interactions with layers */
+  z-index: 10;
+  /* Above the layers */
 }
 
 /**
@@ -503,12 +1076,18 @@ h1 {
  * Text that follows circular paths on SVG
  */
 .curved-label {
-  fill: #FFFFFF;                                     /* White text color */
-  font-size: 14px;                                   /* Text size */
-  font-weight: 700;                                  /* Bold weight */
-  letter-spacing: 0.15em;                            /* Wide letter spacing */
-  text-transform: uppercase;                         /* All caps */
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; /* Font stack */
+  fill: #FFFFFF;
+  /* White text color */
+  font-size: 14px;
+  /* Text size */
+  font-weight: 700;
+  /* Bold weight */
+  letter-spacing: 0.15em;
+  /* Wide letter spacing */
+  text-transform: uppercase;
+  /* All caps */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* Font stack */
 }
 
 /**
@@ -516,7 +1095,8 @@ h1 {
  * Hidden checkbox inputs for layer interaction (not used in JS version)
  */
 .layer-toggle {
-  display: none;  /* Hide checkbox from view */
+  display: none;
+  /* Hide checkbox from view */
 }
 
 /**
@@ -524,14 +1104,22 @@ h1 {
  * Common properties for all circular layers
  */
 .layer {
-  position: absolute;                  /* Absolute positioning for stacking */
-  border-radius: 50%;                  /* Make it circular */
-  border: 40px solid;                  /* Thick solid border (color set per layer) */
-  display: flex;                       /* Flexbox for centering label */
-  align-items: center;                 /* Vertical center */
-  justify-content: center;             /* Horizontal center */
-  cursor: pointer;                     /* Pointer cursor on hover */
-  transition: box-shadow 0.3s ease;    /* Smooth shadow transition */
+  position: absolute;
+  /* Absolute positioning for stacking */
+  border-radius: 50%;
+  /* Make it circular */
+  border: 40px solid;
+  /* Thick solid border (color set per layer) */
+  display: flex;
+  /* Flexbox for centering label */
+  align-items: center;
+  /* Vertical center */
+  justify-content: center;
+  /* Horizontal center */
+  cursor: pointer;
+  /* Pointer cursor on hover */
+  transition: box-shadow 0.3s ease;
+  /* Smooth shadow transition */
 }
 
 /**
@@ -539,30 +1127,42 @@ h1 {
  * Text displayed within each layer
  */
 .layer-label {
-  position: absolute;              /* Absolute positioning */
-  font-size: 0.9rem;               /* Text size */
-  font-weight: 600;                /* Semi-bold weight */
-  color: var(--text-primary);      /* Light text color */
-  opacity: 1;                      /* Fully visible */
-  transition: opacity 0.3s ease;   /* Smooth opacity transition */
-  pointer-events: none;            /* Don't block layer clicks */
-  text-align: center;              /* Center text alignment */
-  text-transform: uppercase;       /* All caps */
-  letter-spacing: 0.1em;           /* Wide letter spacing */
+  position: absolute;
+  /* Absolute positioning */
+  font-size: 0.9rem;
+  /* Text size */
+  font-weight: 600;
+  /* Semi-bold weight */
+  color: var(--text-primary);
+  /* Light text color */
+  opacity: 1;
+  /* Fully visible */
+  transition: opacity 0.3s ease;
+  /* Smooth opacity transition */
+  pointer-events: none;
+  /* Don't block layer clicks */
+  text-align: center;
+  /* Center text alignment */
+  text-transform: uppercase;
+  /* All caps */
+  letter-spacing: 0.1em;
+  /* Wide letter spacing */
 }
 
 /**
  * Layer Label Hover State
  */
 .layer:hover .layer-label {
-  opacity: 0.9;  /* Slightly reduce opacity on hover */
+  opacity: 0.9;
+  /* Slightly reduce opacity on hover */
 }
 
 /**
  * Layer Hover State - Add Glow
  */
 .layer:hover {
-  box-shadow: 0 0 20px var(--blue-glow);  /* Add glowing shadow */
+  box-shadow: 0 0 20px var(--blue-glow);
+  /* Add glowing shadow */
 }
 
 /**
@@ -570,18 +1170,24 @@ h1 {
  * Largest circle - represents foundation
  */
 .layer-6 {
-  width: 100%;                                                                 /* Full container width */
-  height: 100%;                                                                /* Full container height */
-  border-color: var(--blue-layer-6);                                          /* Lightest blue color */
-  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2); /* Outer and inner glow */
+  width: 100%;
+  /* Full container width */
+  height: 100%;
+  /* Full container height */
+  border-color: var(--blue-layer-6);
+  /* Lightest blue color */
+  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
+  /* Outer and inner glow */
 }
 
 /**
  * Layer 6 label positioning
  */
 .layer-6 .layer-label {
-  top: -30px;   /* Above the circle */
-  right: 20%;   /* Right side positioning */
+  top: -30px;
+  /* Above the circle */
+  right: 20%;
+  /* Right side positioning */
 }
 
 /**
@@ -589,18 +1195,24 @@ h1 {
  * Second largest circle
  */
 .layer-5 {
-  width: 85%;                                                                  /* 85% of container */
-  height: 85%;                                                                 /* 85% of container */
-  border-color: var(--blue-layer-5);                                           /* Light blue color */
-  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2); /* Outer and inner glow */
+  width: 85%;
+  /* 85% of container */
+  height: 85%;
+  /* 85% of container */
+  border-color: var(--blue-layer-5);
+  /* Light blue color */
+  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
+  /* Outer and inner glow */
 }
 
 /**
  * Layer 5 label positioning
  */
 .layer-5 .layer-label {
-  top: 10%;      /* Near top */
-  right: -60px;  /* Outside right edge */
+  top: 10%;
+  /* Near top */
+  right: -60px;
+  /* Outside right edge */
 }
 
 /**
@@ -608,18 +1220,24 @@ h1 {
  * Third largest circle
  */
 .layer-4 {
-  width: 70%;                                                                  /* 70% of container */
-  height: 70%;                                                                 /* 70% of container */
-  border-color: var(--blue-layer-4);                                           /* Medium blue color */
-  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2); /* Outer and inner glow */
+  width: 70%;
+  /* 70% of container */
+  height: 70%;
+  /* 70% of container */
+  border-color: var(--blue-layer-4);
+  /* Medium blue color */
+  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
+  /* Outer and inner glow */
 }
 
 /**
  * Layer 4 label positioning
  */
 .layer-4 .layer-label {
-  bottom: -30px;  /* Below the circle */
-  right: 25%;     /* Right side positioning */
+  bottom: -30px;
+  /* Below the circle */
+  right: 25%;
+  /* Right side positioning */
 }
 
 /**
@@ -627,18 +1245,24 @@ h1 {
  * Fourth largest circle
  */
 .layer-3 {
-  width: 55%;                                                                  /* 55% of container */
-  height: 55%;                                                                 /* 55% of container */
-  border-color: var(--blue-layer-3);                                           /* Medium-dark blue */
-  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2); /* Outer and inner glow */
+  width: 55%;
+  /* 55% of container */
+  height: 55%;
+  /* 55% of container */
+  border-color: var(--blue-layer-3);
+  /* Medium-dark blue */
+  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
+  /* Outer and inner glow */
 }
 
 /**
  * Layer 3 label positioning
  */
 .layer-3 .layer-label {
-  top: 15%;     /* Near top */
-  left: -60px;  /* Outside left edge */
+  top: 15%;
+  /* Near top */
+  left: -60px;
+  /* Outside left edge */
 }
 
 /**
@@ -646,18 +1270,24 @@ h1 {
  * Fifth largest circle
  */
 .layer-2 {
-  width: 40%;                                                                  /* 40% of container */
-  height: 40%;                                                                 /* 40% of container */
-  border-color: var(--blue-layer-2);                                           /* Dark blue */
-  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2); /* Outer and inner glow */
+  width: 40%;
+  /* 40% of container */
+  height: 40%;
+  /* 40% of container */
+  border-color: var(--blue-layer-2);
+  /* Dark blue */
+  box-shadow: 0 0 15px var(--blue-glow), inset 0 0 15px rgba(59, 130, 246, 0.2);
+  /* Outer and inner glow */
 }
 
 /**
  * Layer 2 label positioning
  */
 .layer-2 .layer-label {
-  bottom: 15%;   /* Near bottom */
-  left: -50px;   /* Outside left edge */
+  bottom: 15%;
+  /* Near bottom */
+  left: -50px;
+  /* Outside left edge */
 }
 
 /**
@@ -665,51 +1295,204 @@ h1 {
  * Smallest, innermost circle - the core
  */
 .layer-1 {
-  width: 25%;                                                                                         /* 25% of container */
-  height: 25%;                                                                                        /* 25% of container */
-  border-color: var(--blue-layer-1);                                                                  /* Darkest blue */
-  background-color: var(--blue-layer-1);                                                              /* Filled background */
-  box-shadow: 0 0 20px var(--blue-glow), inset 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.2); /* Multi-layer glow */
+  width: 25%;
+  /* 25% of container */
+  height: 25%;
+  /* 25% of container */
+  border-color: var(--blue-layer-1);
+  /* Darkest blue */
+  background-color: var(--blue-layer-1);
+  /* Filled background */
+  box-shadow: 0 0 20px var(--blue-glow), inset 0 0 20px rgba(59, 130, 246, 0.3), 0 0 40px rgba(59, 130, 246, 0.2);
+  /* Multi-layer glow */
 }
 
 /**
  * Layer 1 label positioning - centered
  */
 .layer-1 .layer-label {
-  top: 50%;                             /* Vertical center */
-  left: 50%;                            /* Horizontal center */
-  transform: translate(-50%, -50%);     /* Center transform */
+  top: 50%;
+  /* Vertical center */
+  left: 50%;
+  /* Horizontal center */
+  transform: translate(-50%, -50%);
+  /* Center transform */
+}
+
+/**
+ * Layer Group - wrapper that stacks every disc+label on top of each other
+ * All groups share the same absolute position so they form concentric circles.
+ */
+.layer-group {
+  position: absolute;
+  /* Stack all groups at the same spot */
+  top: 0;
+  left: 0;
+  width: 100%;
+  /* Fill the system-container */
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Rotation Animations */
 @keyframes rotate-cw-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes rotate-ccw-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
 }
 
 @keyframes rotate-cw-medium {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes rotate-ccw-medium {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
 }
 
 @keyframes rotate-cw-fast {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes rotate-ccw-fast {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(-360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+/* Counter-rotate animations (used to keep labels upright) */
+@keyframes counter-rotate-cw-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes counter-rotate-ccw-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes counter-rotate-cw-medium {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes counter-rotate-ccw-medium {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes counter-rotate-cw-fast {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@keyframes counter-rotate-ccw-fast {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/**
+ * Rotation utility classes — applied to .layer-group elements.
+ * The .layer and .curved-text-svg inside counter-rotate so the text
+ * stays readable while the disc ring itself spins.
+ */
+
+/* --- Slow CW (Layer 6 & Layer 2) --- */
+.rotate-cw-slow {
+  animation: rotate-cw-slow 30s linear infinite;
+}
+
+/* The disc border itself should spin but the label text path doesn't need to counter-rotate
+   because the curved SVG text path is embedded in the rotating group which is exactly what we want */
+
+/* --- Counter-clockwise medium (Layer 5 & Layer 3) --- */
+.rotate-ccw-medium {
+  animation: rotate-ccw-medium 20s linear infinite;
+}
+
+/* --- Clockwise medium (Layer 4) --- */
+.rotate-cw-medium {
+  animation: rotate-cw-medium 25s linear infinite;
+}
+
+/* --- Counter-clockwise fast (Layer 1 / core) --- */
+.rotate-ccw-fast {
+  animation: rotate-ccw-fast 15s linear infinite;
+}
+
+/**
+ * Keep the PROJECTS text label (inside layer-1) upright while the group spins.
+ * layer-1 is in the rotate-ccw-fast group so we counter-rotate cw-fast.
+ */
+.rotate-ccw-fast .layer-label {
+  animation: counter-rotate-ccw-fast 15s linear infinite;
 }
 
 /**
@@ -717,40 +1500,62 @@ h1 {
  * Modal-style panels that appear when layers are activated
  */
 .info-panel {
-  position: fixed;                      /* Fixed positioning on screen */
-  top: 50%;                             /* Vertical center */
-  left: 50%;                            /* Horizontal center */
-  transform: translate(-50%, -50%);     /* Center transform offset */
-  background-color: var(--panel-bg);    /* Semi-transparent blue background */
-  backdrop-filter: blur(10px);          /* Blur background behind panel */
-  border: 2px solid var(--panel-border); /* Light blue border */
-  border-radius: 12px;                  /* Rounded corners */
-  padding: 2.5rem;                      /* Internal spacing */
-  max-width: 500px;                     /* Maximum width constraint */
-  width: 90%;                           /* 90% width on smaller screens */
-  z-index: 10000;                       /* Above all other content */
-  opacity: 0;                           /* Initially hidden */
-  pointer-events: none;                 /* Don't block interactions when hidden */
-  transition: opacity 0.4s ease;        /* Smooth fade transition */
+  position: fixed;
+  /* Fixed positioning on screen */
+  top: 50%;
+  /* Vertical center */
+  left: 50%;
+  /* Horizontal center */
+  transform: translate(-50%, -50%);
+  /* Center transform offset */
+  background-color: var(--panel-bg);
+  /* Semi-transparent blue background */
+  backdrop-filter: blur(10px);
+  /* Blur background behind panel */
+  border: 2px solid var(--panel-border);
+  /* Light blue border */
+  border-radius: 12px;
+  /* Rounded corners */
+  padding: 2.5rem;
+  /* Internal spacing */
+  max-width: 500px;
+  /* Maximum width constraint */
+  width: 90%;
+  /* 90% width on smaller screens */
+  z-index: 10000;
+  /* Above all other content */
+  opacity: 0;
+  /* Initially hidden */
+  pointer-events: none;
+  /* Don't block interactions when hidden */
+  transition: opacity 0.4s ease;
+  /* Smooth fade transition */
 }
 
 /**
  * Info Panel Heading
  */
 .info-panel h2 {
-  font-size: 2rem;                /* Large heading size */
-  color: var(--blue-layer-6);     /* Light blue color */
-  margin-bottom: 1rem;            /* Space below heading */
-  font-weight: 600;               /* Semi-bold weight */
+  font-size: 2rem;
+  /* Large heading size */
+  color: var(--blue-layer-6);
+  /* Light blue color */
+  margin-bottom: 1rem;
+  /* Space below heading */
+  font-weight: 600;
+  /* Semi-bold weight */
 }
 
 /**
  * Info Panel Paragraph Text
  */
 .info-panel p {
-  font-size: 1.1rem;          /* Slightly large text */
-  color: var(--text-muted);   /* Muted gray color */
-  line-height: 1.8;           /* Generous line height for readability */
+  font-size: 1.1rem;
+  /* Slightly large text */
+  color: var(--text-muted);
+  /* Muted gray color */
+  line-height: 1.8;
+  /* Generous line height for readability */
 }
 
 /**
@@ -758,45 +1563,60 @@ h1 {
  * X button in top-right corner of panels
  */
 .close-panel {
-  position: absolute;                  /* Absolute positioning */
-  top: 1rem;                           /* Distance from top */
-  right: 1rem;                         /* Distance from right */
-  font-size: 1.5rem;                   /* Large text size */
-  color: var(--text-muted);            /* Muted gray color */
-  cursor: pointer;                     /* Pointer cursor */
-  width: 30px;                         /* Fixed width */
-  height: 30px;                        /* Fixed height */
-  display: flex;                       /* Flexbox for centering */
-  align-items: center;                 /* Vertical center */
-  justify-content: center;             /* Horizontal center */
-  transition: color 0.3s ease;         /* Smooth color transition */
+  position: absolute;
+  /* Absolute positioning */
+  top: 1rem;
+  /* Distance from top */
+  right: 1rem;
+  /* Distance from right */
+  font-size: 1.5rem;
+  /* Large text size */
+  color: var(--text-muted);
+  /* Muted gray color */
+  cursor: pointer;
+  /* Pointer cursor */
+  width: 30px;
+  /* Fixed width */
+  height: 30px;
+  /* Fixed height */
+  display: flex;
+  /* Flexbox for centering */
+  align-items: center;
+  /* Vertical center */
+  justify-content: center;
+  /* Horizontal center */
+  transition: color 0.3s ease;
+  /* Smooth color transition */
 }
 
 /**
  * Close Panel Button Hover State
  */
 .close-panel:hover {
-  color: var(--text-primary);  /* Brighten on hover */
+  color: var(--text-primary);
+  /* Brighten on hover */
 }
 
 /**
  * Show Panel When Checkbox is Checked OR When Layer is Hovered
  * CSS-only interaction (overridden by JavaScript in actual implementation)
  */
-#layer-1:checked ~ .panel-1,
-#layer-2:checked ~ .panel-2,
-#layer-3:checked ~ .panel-3,
-#layer-4:checked ~ .panel-4,
-#layer-5:checked ~ .panel-5,
-#layer-6:checked ~ .panel-6,
-.layer-1:hover ~ .panel-1,
-.layer-2:hover ~ .panel-2,
-.layer-3:hover ~ .panel-3,
-.layer-4:hover ~ .panel-4,
-.layer-5:hover ~ .panel-5,
-.layer-6:hover ~ .panel-6 {
-  opacity: 1;             /* Make visible */
-  pointer-events: auto;   /* Enable interactions */
+#layer-1:checked~.panel-1,
+#layer-2:checked~.panel-2,
+#layer-3:checked~.panel-3,
+#layer-4:checked~.panel-4,
+#layer-5:checked~.panel-5,
+#layer-6:checked~.panel-6,
+.layer-1:hover~.panel-1,
+.layer-2:hover~.panel-2,
+.layer-3:hover~.panel-3,
+.layer-4:hover~.panel-4,
+.layer-5:hover~.panel-5,
+.layer-6:hover~.panel-6 {
+  opacity: 1;
+  /* Make visible */
+  pointer-events: auto;
+  /* Enable interactions */
 }
 
 /**
@@ -804,12 +1624,18 @@ h1 {
  * Copyright and credits section at bottom of page
  */
 footer {
-  text-align: center;           /* Center text */
-  padding: 2rem;                /* Vertical and horizontal padding */
-  color: var(--text-muted);     /* Muted gray text */
-  font-size: 0.875rem;          /* Small text size */
-  position: relative;           /* Position context */
-  z-index: 1;                   /* Above background elements */
+  text-align: center;
+  /* Center text */
+  padding: 2rem;
+  /* Vertical and horizontal padding */
+  color: var(--text-muted);
+  /* Muted gray text */
+  font-size: 0.875rem;
+  /* Small text size */
+  position: relative;
+  /* Position context */
+  z-index: 1;
+  /* Above background elements */
 }
 
 /**
@@ -817,26 +1643,31 @@ footer {
  * Adjustments for screens 1024px and smaller
  */
 @media (max-width: 1024px) {
+
   /**
    * Reduce h1 size on tablets
    */
   h1 {
-    font-size: 3rem;  /* Smaller heading */
+    font-size: 3rem;
+    /* Smaller heading */
   }
 
   /**
    * Reduce subheading size on tablets
    */
   .subheading {
-    font-size: 1.5rem;  /* Smaller subheading */
+    font-size: 1.5rem;
+    /* Smaller subheading */
   }
 
   /**
    * Reduce system container size on tablets
    */
   .system-container {
-    width: 400px;   /* Smaller width */
-    height: 400px;  /* Smaller height */
+    width: 400px;
+    /* Smaller width */
+    height: 400px;
+    /* Smaller height */
   }
 }
 
@@ -845,55 +1676,65 @@ footer {
  * Adjustments for screens 768px and smaller
  */
 @media (max-width: 768px) {
+
   /**
    * Stack columns vertically on mobile
    */
   main.container {
-    flex-direction: column;  /* Vertical stacking */
-    gap: 2rem;               /* Reduced gap */
+    flex-direction: column;
+    /* Vertical stacking */
+    gap: 2rem;
+    /* Reduced gap */
   }
 
   /**
    * Further reduce h1 size on mobile
    */
   h1 {
-    font-size: 2.5rem;  /* Even smaller heading */
+    font-size: 2.5rem;
+    /* Even smaller heading */
   }
 
   /**
    * Further reduce subheading size on mobile
    */
   .subheading {
-    font-size: 1.25rem;  /* Smaller subheading */
+    font-size: 1.25rem;
+    /* Smaller subheading */
   }
 
   /**
    * Further reduce system container size on mobile
    */
   .system-container {
-    width: 350px;   /* Smaller width */
-    height: 350px;  /* Smaller height */
+    width: 350px;
+    /* Smaller width */
+    height: 350px;
+    /* Smaller height */
   }
 
   /**
    * Reduce info panel padding on mobile
    */
   .info-panel {
-    padding: 2rem;  /* Less padding */
+    padding: 2rem;
+    /* Less padding */
   }
 
   /**
    * Reduce info panel heading size on mobile
    */
   .info-panel h2 {
-    font-size: 1.5rem;  /* Smaller heading */
+    font-size: 1.5rem;
+    /* Smaller heading */
   }
 
   /**
    * Reduce info panel text size on mobile
    */
   .info-panel p {
-    font-size: 1rem;  /* Smaller text */
+    font-size: 1rem;
+    /* Smaller text */
   }
 }
 
@@ -906,11 +1747,16 @@ footer {
  * Page Container - Main wrapper for content pages
  */
 .page-container {
-  max-width: 1200px;        /* Maximum width constraint */
-  margin: 0 auto;           /* Center horizontally */
-  padding: 4rem 2rem;       /* Vertical and horizontal padding */
-  position: relative;       /* Position context */
-  z-index: 1;               /* Above background elements */
+  max-width: 1200px;
+  /* Maximum width constraint */
+  margin: 0 auto;
+  /* Center horizontally */
+  padding: 4rem 2rem;
+  /* Vertical and horizontal padding */
+  position: relative;
+  /* Position context */
+  z-index: 1;
+  /* Above background elements */
 }
 
 /**
@@ -918,33 +1764,48 @@ footer {
  * Title and subtitle area for content pages
  */
 .page-header {
-  text-align: center;                                 /* Center alignment */
-  margin-bottom: 3rem;                                /* Space below */
-  padding-bottom: 2rem;                               /* Internal bottom padding */
-  border-bottom: 1px solid rgba(147, 197, 253, 0.2); /* Bottom border separator */
+  text-align: center;
+  /* Center alignment */
+  margin-bottom: 3rem;
+  /* Space below */
+  padding-bottom: 2rem;
+  /* Internal bottom padding */
+  border-bottom: 1px solid rgba(147, 197, 253, 0.2);
+  /* Bottom border separator */
 }
 
 /**
  * Page Header H1 - Main title with gradient effect
  */
 .page-header h1 {
-  font-size: 3rem;                                                     /* Large text size */
-  margin-bottom: 1rem;                                                 /* Space below */
-  background: linear-gradient(135deg, var(--blue-layer-5), var(--blue-layer-3)); /* Blue gradient */
-  -webkit-background-clip: text;                                       /* Clip gradient to text (webkit) */
-  -webkit-text-fill-color: transparent;                                /* Make text transparent (webkit) */
-  background-clip: text;                                               /* Clip gradient to text (standard) */
+  font-size: 3rem;
+  /* Large text size */
+  margin-bottom: 1rem;
+  /* Space below */
+  background: linear-gradient(135deg, var(--blue-layer-5), var(--blue-layer-3));
+  /* Blue gradient */
+  -webkit-background-clip: text;
+  /* Clip gradient to text (webkit) */
+  -webkit-text-fill-color: transparent;
+  /* Make text transparent (webkit) */
+  background-clip: text;
+  /* Clip gradient to text (standard) */
 }
 
 /**
  * Page Subtitle - Descriptive text below title
  */
 .page-subtitle {
-  font-size: 1.2rem;          /* Medium text size */
-  color: var(--text-muted);   /* Muted gray color */
-  max-width: 700px;           /* Maximum width for readability */
-  margin: 0 auto;             /* Center horizontally */
-  line-height: 1.8;           /* Generous line height */
+  font-size: 1.2rem;
+  /* Medium text size */
+  color: var(--text-muted);
+  /* Muted gray color */
+  max-width: 700px;
+  /* Maximum width for readability */
+  margin: 0 auto;
+  /* Center horizontally */
+  line-height: 1.8;
+  /* Generous line height */
 }
 
 /**
@@ -952,21 +1813,30 @@ footer {
  * Main content area for page body
  */
 .page-content {
-  min-height: 400px;                                 /* Minimum height */
-  padding: 2rem;                                     /* Internal spacing */
-  background-color: rgba(30, 58, 138, 0.1);          /* Semi-transparent blue background */
-  border-radius: 12px;                               /* Rounded corners */
-  border: 1px solid rgba(147, 197, 253, 0.2);        /* Light blue border */
+  min-height: 400px;
+  /* Minimum height */
+  padding: 2rem;
+  /* Internal spacing */
+  background-color: rgba(30, 58, 138, 0.1);
+  /* Semi-transparent blue background */
+  border-radius: 12px;
+  /* Rounded corners */
+  border: 1px solid rgba(147, 197, 253, 0.2);
+  /* Light blue border */
 }
 
 /**
  * Page Content Paragraph Text
  */
 .page-content p {
-  font-size: 1.1rem;            /* Slightly large text */
-  color: var(--text-muted);     /* Muted gray color */
-  text-align: center;           /* Center alignment */
-  padding: 2rem;                /* Internal spacing */
+  font-size: 1.1rem;
+  /* Slightly large text */
+  color: var(--text-muted);
+  /* Muted gray color */
+  text-align: center;
+  /* Center alignment */
+  padding: 2rem;
+  /* Internal spacing */
 }
 
 /**
@@ -974,25 +1844,38 @@ footer {
  * Call-to-action links within info panels
  */
 .panel-link {
-  display: inline-block;                   /* Inline block for sizing */
-  margin-top: 1rem;                        /* Space above */
-  padding: 0.6rem 1.5rem;                  /* Horizontal and vertical padding */
-  background-color: var(--blue-layer-4);   /* Medium blue background */
-  color: var(--text-primary);              /* Light text color */
-  text-decoration: none;                   /* Remove underline */
-  border-radius: 6px;                      /* Rounded corners */
-  font-weight: 500;                        /* Medium weight */
-  transition: all 0.3s ease;               /* Smooth transitions */
-  border: 1px solid var(--blue-layer-5);   /* Light blue border */
+  display: inline-block;
+  /* Inline block for sizing */
+  margin-top: 1rem;
+  /* Space above */
+  padding: 0.6rem 1.5rem;
+  /* Horizontal and vertical padding */
+  background-color: var(--blue-layer-4);
+  /* Medium blue background */
+  color: var(--text-primary);
+  /* Light text color */
+  text-decoration: none;
+  /* Remove underline */
+  border-radius: 6px;
+  /* Rounded corners */
+  font-weight: 500;
+  /* Medium weight */
+  transition: all 0.3s ease;
+  /* Smooth transitions */
+  border: 1px solid var(--blue-layer-5);
+  /* Light blue border */
 }
 
 /**
  * Panel Link Hover State
  */
 .panel-link:hover {
-  background-color: var(--blue-layer-5);      /* Lighter blue background */
-  transform: translateY(-2px);                /* Slight lift effect */
-  box-shadow: 0 4px 12px var(--blue-glow);    /* Add glowing shadow */
+  background-color: var(--blue-layer-5);
+  /* Lighter blue background */
+  transform: translateY(-2px);
+  /* Slight lift effect */
+  box-shadow: 0 4px 12px var(--blue-glow);
+  /* Add glowing shadow */
 }
 
 /**
@@ -1000,49 +1883,59 @@ footer {
  * Navigation adjustments for screens 768px and smaller
  */
 @media (max-width: 768px) {
+
   /**
    * Stack navbar elements vertically on mobile
    */
   .nav-container {
-    flex-direction: column;  /* Vertical stacking */
-    gap: 1rem;               /* Space between elements */
+    flex-direction: column;
+    /* Vertical stacking */
+    gap: 1rem;
+    /* Space between elements */
   }
 
   /**
    * Make nav links wrap and center on mobile
    */
   .nav-links {
-    flex-wrap: wrap;          /* Allow wrapping */
-    justify-content: center;  /* Center items */
-    gap: 1rem;                /* Reduce gap */
+    flex-wrap: wrap;
+    /* Allow wrapping */
+    justify-content: center;
+    /* Center items */
+    gap: 1rem;
+    /* Reduce gap */
   }
 
   /**
    * Reduce nav link text size on mobile
    */
   .nav-links li a {
-    font-size: 0.85rem;  /* Smaller text */
+    font-size: 0.85rem;
+    /* Smaller text */
   }
 
   /**
    * Increase top margin to account for taller navbar
    */
   .container {
-    margin-top: 100px;  /* More space for wrapped navbar */
+    margin-top: 100px;
+    /* More space for wrapped navbar */
   }
 
   /**
    * Reduce page header h1 size on mobile
    */
   .page-header h1 {
-    font-size: 2rem;  /* Smaller heading */
+    font-size: 2rem;
+    /* Smaller heading */
   }
 
   /**
    * Reduce page subtitle size on mobile
    */
   .page-subtitle {
-    font-size: 1rem;  /* Smaller subtitle */
+    font-size: 1rem;
+    /* Smaller subtitle */
   }
 }
 
@@ -1058,10 +1951,14 @@ footer {
  * Enhanced transitions for layer interactions
  */
 .layer {
-  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),  /* Smooth scale animation */
-              opacity 0.4s ease,                             /* Smooth opacity change */
-              filter 0.4s ease;                              /* Smooth filter change */
-  cursor: pointer;                                           /* Pointer cursor for clickable layers */
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    /* Smooth scale animation */
+    opacity 0.4s ease,
+    /* Smooth opacity change */
+    filter 0.4s ease;
+  /* Smooth filter change */
+  cursor: pointer;
+  /* Pointer cursor for clickable layers */
 }
 
 /**
@@ -1069,9 +1966,12 @@ footer {
  * Applied when layer is clicked/activated
  */
 .layer.active {
-  transform: scale(1.08);                                         /* Slightly enlarge */
-  z-index: 100;                                                   /* Bring to front */
-  filter: brightness(1.3) drop-shadow(0 0 20px var(--blue-glow)); /* Brighten and add glow */
+  transform: scale(1.08);
+  /* Slightly enlarge */
+  z-index: 100;
+  /* Bring to front */
+  filter: brightness(1.3) drop-shadow(0 0 20px var(--blue-glow));
+  /* Brighten and add glow */
 }
 
 /**
@@ -1079,8 +1979,10 @@ footer {
  * Applied to non-active layers when one is activated
  */
 .layer.dimmed {
-  opacity: 0.3;                /* Significantly reduce opacity */
-  filter: brightness(0.6);     /* Darken the layer */
+  opacity: 0.3;
+  /* Significantly reduce opacity */
+  filter: brightness(0.6);
+  /* Darken the layer */
 }
 
 /**
@@ -1088,12 +1990,18 @@ footer {
  * Initially hidden with transform offset
  */
 .info-panel {
-  opacity: 0;                  /* Invisible */
-  visibility: hidden;          /* Hidden from screen readers */
-  transform: translateY(20px); /* Offset downward */
-  transition: opacity 0.4s ease,                              /* Smooth fade */
-              visibility 0.4s ease,                           /* Smooth visibility */
-              transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);    /* Smooth slide */
+  opacity: 0;
+  /* Invisible */
+  visibility: hidden;
+  /* Hidden from screen readers */
+  transform: translateY(20px);
+  /* Offset downward */
+  transition: opacity 0.4s ease,
+    /* Smooth fade */
+    visibility 0.4s ease,
+    /* Smooth visibility */
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Smooth slide */
 }
 
 /**
@@ -1101,9 +2009,12 @@ footer {
  * Applied by JavaScript when panel should show
  */
 .info-panel.visible {
-  opacity: 1;                /* Fully visible */
-  visibility: visible;       /* Visible to screen readers */
-  transform: translateY(0);  /* Reset to original position */
+  opacity: 1;
+  /* Fully visible */
+  visibility: visible;
+  /* Visible to screen readers */
+  transform: translateY(0);
+  /* Reset to original position */
 }
 
 /**
@@ -1111,9 +2022,12 @@ footer {
  * Visual indication of keyboard-focused layer
  */
 .layer.keyboard-focused {
-  outline: 2px solid var(--blue-layer-5);      /* Blue outline */
-  outline-offset: 4px;                          /* Space between outline and layer */
-  animation: focusPulse 2s ease-in-out infinite; /* Pulsing animation */
+  outline: 2px solid var(--blue-layer-5);
+  /* Blue outline */
+  outline-offset: 4px;
+  /* Space between outline and layer */
+  animation: focusPulse 2s ease-in-out infinite;
+  /* Pulsing animation */
 }
 
 /**
@@ -1121,11 +2035,16 @@ footer {
  * Pulsing outline color for keyboard focus
  */
 @keyframes focusPulse {
-  0%, 100% { 
-    outline-color: var(--blue-layer-5);  /* Light blue */
+
+  0%,
+  100% {
+    outline-color: var(--blue-layer-5);
+    /* Light blue */
   }
-  50% { 
-    outline-color: var(--blue-layer-4);  /* Medium blue */
+
+  50% {
+    outline-color: var(--blue-layer-4);
+    /* Medium blue */
   }
 }
 
@@ -1134,8 +2053,10 @@ footer {
  * Applied to layers when corresponding content is in viewport
  */
 .layer.scroll-highlighted {
-  filter: brightness(1.15);                  /* Slightly brighten */
-  box-shadow: 0 0 15px var(--blue-glow);     /* Add glow effect */
+  filter: brightness(1.15);
+  /* Slightly brighten */
+  box-shadow: 0 0 15px var(--blue-glow);
+  /* Add glow effect */
 }
 
 /**
@@ -1143,8 +2064,10 @@ footer {
  * Highlight for current page/section in navigation
  */
 .nav-links li a.active {
-  color: var(--blue-layer-5);  /* Blue color for active link */
-  font-weight: 600;            /* Semi-bold weight */
+  color: var(--blue-layer-5);
+  /* Blue color for active link */
+  font-weight: 600;
+  /* Semi-bold weight */
 }
 
 /**
@@ -1152,7 +2075,8 @@ footer {
  * Show underline for active navigation item
  */
 .nav-links li a.active::after {
-  width: 100%;  /* Full-width underline */
+  width: 100%;
+  /* Full-width underline */
 }
 
 /**
@@ -1239,11 +2163,23 @@ body.page-transition-out {
 }
 
 @keyframes pageFadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to   { opacity: 1; transform: translateY(0);   }
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes pageFadeOut {
-  from { opacity: 1; }
-  to   { opacity: 0; }
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
 }

@@ -178,49 +178,24 @@
     <section class="right-section"> <!-- Semantic section for visualization area -->
       <div class="system-container"> <!-- Container for the concentric layer system -->
         
-        <!-- SVG for curved text labels -->
-        <!-- Text that curves along each circular layer -->
-        <svg class="curved-text-svg" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-          <defs> <!-- SVG definitions for reusable elements -->
-            <!-- Invisible circular paths for text to follow -->
-            <!-- Each path corresponds to a specific layer's circumference -->
-            <path id="circle-6" d="M 250,20 A 230,230 0 1,1 249.9,20" fill="none"/> <!-- Path for layer 6 - outermost -->
-            <path id="circle-5" d="M 250,57.5 A 192.5,192.5 0 1,1 249.9,57.5" fill="none"/> <!-- Path for layer 5 -->
-            <path id="circle-4" d="M 250,95 A 155,155 0 1,1 249.9,95" fill="none"/> <!-- Path for layer 4 -->
-            <path id="circle-3" d="M 250,132.5 A 117.5,117.5 0 1,1 249.9,132.5" fill="none"/> <!-- Path for layer 3 -->
-            <path id="circle-2" d="M 250,170 A 80,80 0 1,1 249.9,170" fill="none"/> <!-- Path for layer 2 -->
-          </defs> <!-- End SVG definitions -->
-          
-          <!-- Text elements that follow circular paths -->
-          <!-- Each textPath references a path defined above -->
-          <text class="curved-label label-6"> <!-- Text for layer 6 -->
-            <!-- href links to path, startOffset positions text along path -->
-            <textPath href="#circle-6" startOffset="65%">BALANCE &amp; DISCIPLINE</textPath> <!-- Layer 6 label -->
-          </text>
-          <text class="curved-label label-5"> <!-- Text for layer 5 -->
-            <textPath href="#circle-5" startOffset="65%">ACHIEVEMENTS</textPath> <!-- Layer 5 label -->
-          </text>
-          <text class="curved-label label-4"> <!-- Text for layer 4 -->
-            <textPath href="#circle-4" startOffset="65%">ACADEMICS</textPath> <!-- Layer 4 label -->
-          </text>
-          <text class="curved-label label-3"> <!-- Text for layer 3 -->
-            <textPath href="#circle-3" startOffset="65%">LEADERSHIP</textPath> <!-- Layer 3 label -->
-          </text>
-          <text class="curved-label label-2"> <!-- Text for layer 2 -->
-            <textPath href="#circle-2" startOffset="65%">RESEARCH</textPath> <!-- Layer 2 label -->
-          </text>
-        </svg> <!-- End curved text SVG -->
+        <!-- Per-layer grouped components (layer + curved text) -->
+        <!-- Each .layer-group contains the circular layer and its curved label so they rotate together -->
         
         <!-- Layer 6: Balance & Discipline (Outermost) -->
         <!-- Largest circle representing the foundation of everything -->
         
         <!-- Hidden checkbox for CSS-only interaction (not used with JavaScript) -->
         <input type="checkbox" id="layer-6" class="layer-toggle"> <!-- Checkbox ID corresponds to layer -->
-        
-        <!-- Clickable layer link - navigates to balance.html -->
-        <!-- aria-label provides accessibility description -->
-        <a href="../pages/balance.html" class="layer layer-6" aria-label="Balance & Discipline">
-        </a> <!-- Empty anchor, styled as concentric circle via CSS -->
+
+        <div class="layer-group layer-group-6 rotate-cw-slow" data-layer="6">
+          <a href="../pages/balance.html" class="layer layer-6" aria-label="Balance & Discipline"></a>
+          <svg class="curved-text-svg local" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <path id="g6" d="M 250,20 A 230,230 0 1,1 249.9,20" fill="none"/>
+            </defs>
+            <text class="curved-label"><textPath href="#g6" startOffset="65%">BALANCE &amp; DISCIPLINE</textPath></text>
+          </svg>
+        </div>
         
         <!-- Information panel for Balance & Discipline -->
         <!-- Shown when layer is activated by JavaScript -->
@@ -234,8 +209,15 @@
         <!-- Layer 5: Achievements -->
         <!-- Second largest circle -->
         <input type="checkbox" id="layer-5" class="layer-toggle"> <!-- Hidden checkbox for layer 5 -->
-        <a href="../pages/achievements.html" class="layer layer-5" aria-label="Achievements">
-        </a> <!-- Layer 5 circle link -->
+        <div class="layer-group layer-group-5 rotate-ccw-medium" data-layer="5">
+          <a href="../pages/achievements.html" class="layer layer-5" aria-label="Achievements"></a>
+          <svg class="curved-text-svg local" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <path id="g5" d="M 250,57.5 A 192.5,192.5 0 1,1 249.9,57.5" fill="none"/>
+            </defs>
+            <text class="curved-label"><textPath href="#g5" startOffset="65%">ACHIEVEMENTS</textPath></text>
+          </svg>
+        </div>
         <div class="info-panel panel-5"> <!-- Achievement info panel -->
           <h2>Achievements</h2> <!-- Panel heading -->
           <p>Recognition and milestones that mark the journey. Hackathons, competitions, certifications, and honors earned through dedication.</p> <!-- Panel description -->
@@ -246,8 +228,15 @@
         <!-- Layer 4: Academics -->
         <!-- Third largest circle -->
         <input type="checkbox" id="layer-4" class="layer-toggle"> <!-- Hidden checkbox for layer 4 -->
-        <a href="../pages/academics.html" class="layer layer-4" aria-label="Academics">
-        </a> <!-- Layer 4 circle link -->
+        <div class="layer-group layer-group-4 rotate-cw-medium" data-layer="4">
+          <a href="../pages/academics.html" class="layer layer-4" aria-label="Academics"></a>
+          <svg class="curved-text-svg local" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <path id="g4" d="M 250,95 A 155,155 0 1,1 249.9,95" fill="none"/>
+            </defs>
+            <text class="curved-label"><textPath href="#g4" startOffset="65%">ACADEMICS</textPath></text>
+          </svg>
+        </div>
         <div class="info-panel panel-4"> <!-- Academics info panel -->
           <h2>Academics</h2> <!-- Panel heading -->
           <p>The theoretical foundation. Core computer science principles, algorithms, data structures, and mathematical rigor.</p> <!-- Panel description -->
@@ -258,8 +247,15 @@
         <!-- Layer 3: Leadership & Project Management -->
         <!-- Fourth largest circle -->
         <input type="checkbox" id="layer-3" class="layer-toggle"> <!-- Hidden checkbox for layer 3 -->
-        <a href="../pages/leadership.html" class="layer layer-3" aria-label="Leadership & Project Management">
-        </a> <!-- Layer 3 circle link -->
+        <div class="layer-group layer-group-3 rotate-ccw-medium" data-layer="3">
+          <a href="../pages/leadership.html" class="layer layer-3" aria-label="Leadership & Project Management"></a>
+          <svg class="curved-text-svg local" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <path id="g3" d="M 250,132.5 A 117.5,117.5 0 1,1 249.9,132.5" fill="none"/>
+            </defs>
+            <text class="curved-label"><textPath href="#g3" startOffset="65%">LEADERSHIP</textPath></text>
+          </svg>
+        </div>
         <div class="info-panel panel-3"> <!-- Leadership info panel -->
           <h2>Leadership & Project Management</h2> <!-- Panel heading -->
           <p>Orchestrating teams and driving projects to completion. Leading initiatives, mentoring peers, and managing complex deliverables.</p> <!-- Panel description -->
@@ -270,8 +266,15 @@
         <!-- Layer 2: Research & Publications -->
         <!-- Fifth largest circle -->
         <input type="checkbox" id="layer-2" class="layer-toggle"> <!-- Hidden checkbox for layer 2 -->
-        <a href="../pages/research.html" class="layer layer-2" aria-label="Research & Publications">
-        </a> <!-- Layer 2 circle link -->
+        <div class="layer-group layer-group-2 rotate-cw-slow" data-layer="2">
+          <a href="../pages/research.html" class="layer layer-2" aria-label="Research & Publications"></a>
+          <svg class="curved-text-svg local" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <path id="g2" d="M 250,170 A 80,80 0 1,1 249.9,170" fill="none"/>
+            </defs>
+            <text class="curved-label"><textPath href="#g2" startOffset="65%">RESEARCH</textPath></text>
+          </svg>
+        </div>
         <div class="info-panel panel-2"> <!-- Research info panel -->
           <h2>Research & Publications</h2> <!-- Panel heading -->
           <p>Pushing boundaries through systematic investigation. Academic papers, technical articles, and contributions to the body of knowledge.</p> <!-- Panel description -->
@@ -282,9 +285,17 @@
         <!-- Layer 1: Engineering Projects (Core) -->
         <!-- Smallest, innermost circle - the heart of the system -->
         <input type="checkbox" id="layer-1" class="layer-toggle"> <!-- Hidden checkbox for layer 1 -->
-        <a href="../pages/projects.html" class="layer layer-1" aria-label="Engineering Projects">
-          <span class="layer-label">PROJECTS</span> <!-- Text label displayed on core layer -->
-        </a> <!-- Layer 1 circle link with label -->
+        <div class="layer-group layer-group-1 rotate-ccw-fast" data-layer="1">
+          <a href="../pages/projects.html" class="layer layer-1" aria-label="Engineering Projects">
+            <span class="layer-label">PROJECTS</span> <!-- Text label displayed on core layer -->
+          </a>
+          <svg class="curved-text-svg local" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <path id="g1" d="M 250,210 A 60,60 0 1,1 249.9,210" fill="none"/>
+            </defs>
+            <text class="curved-label"><textPath href="#g1" startOffset="50%">PROJECTS</textPath></text>
+          </svg>
+        </div>
         <div class="info-panel panel-1"> <!-- Projects info panel -->
           <h2>Engineering Projects</h2> <!-- Panel heading -->
           <p>The core of practical engineering. Hands-on applications, systems built, problems solved, and code deployed.</p> <!-- Panel description -->

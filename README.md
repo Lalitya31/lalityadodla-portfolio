@@ -29,7 +29,7 @@ This metaphor is reflected both visually and functionally across the website.
 |-----|------------------|
 | 1 | HTML5, CSS3 |
 | 2 | HTML5, CSS3, Vanilla JavaScript |
-| 3 | React.js (planned) |
+| 3 | React.js |
 
 No external UI frameworks are used.
 
