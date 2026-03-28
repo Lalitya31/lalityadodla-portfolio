@@ -49,15 +49,31 @@
     .project-list-keys li::before { content: ''; width: 6px; height: 6px; background: #60A5FA; border-radius: 50%; display:inline-block; }
 
     /* Terminal (visible panel) */
-    .terminal-panel { width:100%; height:520px; max-width:100%; background:var(--panel-bg); border-left:1px solid rgba(96,165,250,0.06); padding:14px 16px; border-radius:8px; box-shadow:0 12px 40px rgba(2,6,23,0.6); color:#cfe8ff; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace; overflow:auto; font-size:0.88rem; line-height:1.45; }
+    .terminal-panel { position:relative; width:100%; height:520px; max-width:100%; background:var(--panel-bg); border-left:1px solid rgba(96,165,250,0.06); padding:44px 16px 16px; border-radius:8px; box-shadow:0 12px 40px rgba(2,6,23,0.6); color:#cfe8ff; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace; overflow:auto; font-size:0.88rem; line-height:1.45; }
     .terminal-panel::-webkit-scrollbar{ width:0; height:0; }
     .terminal-panel{ scrollbar-width:none; -ms-overflow-style:none; }
 
-    .terminal-navbar{ display:flex; gap:8px; margin-bottom:8px; }
-    .terminal-navbar .dot{ width:12px; height:12px; border-radius:50%; box-shadow:0 0 8px rgba(59,130,246,0.2); }
-    .terminal-navbar .red{ background:#ff6b6b; }
-    .terminal-navbar .yellow{ background:#ffd56b; }
-    .terminal-navbar .green{ background:#7ef59e; }
+    /* Mac-like terminal header (red/yellow/green window controls) */
+    .terminal-navbar{
+      position:absolute;
+      top:12px;
+      left:12px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      padding:6px 12px;
+      min-width:72px;
+      background: rgba(16,28,44,0.56);
+      border-radius:999px;
+      box-shadow: 0 8px 22px rgba(2,6,23,0.55), inset 0 1px 0 rgba(255,255,255,0.02);
+      backdrop-filter: blur(3px);
+      z-index: 30;
+      border: 1px solid rgba(255,255,255,0.02);
+    }
+    .terminal-navbar .dot{ width:11px; height:11px; border-radius:50%; display:inline-block; box-shadow: inset 0 -2px 0 rgba(0,0,0,0.35); }
+    .terminal-navbar .red{ background:#ff5f56; }
+    .terminal-navbar .yellow{ background:#ffbd2e; }
+    .terminal-navbar .green{ background:#27c93f; }
 
     .panel-title{ color:#9ed0ff; font-weight:700; margin-bottom:10px; }
     .cmd-entry{ display:flex; flex-direction:column; gap:6px; padding:8px; border-radius:6px; }
