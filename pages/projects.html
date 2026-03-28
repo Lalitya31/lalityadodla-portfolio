@@ -44,14 +44,14 @@
       justify-content: space-between; /* Space between columns */
       min-height: 100vh;            /* Minimum full viewport height */
       padding: 100px 4rem 2rem 4rem; /* Top accounts for navbar, horizontal padding */
-      gap: 4rem;                    /* Space between columns */
+      gap: 10%;                     /* 10% whitespace between columns */
     }
 
     /* Left Description Section */
     /* Contains text explaining projects */
     .left-description {
-      flex: 1;              /* Take up 1 part of flex space */
-      max-width: 500px;     /* Maximum width constraint */
+      flex: 0 0 45%;        /* Fixed 45% width for left column */
+      max-width: none;
       padding: 2rem;        /* Internal spacing */
     }
 
@@ -83,7 +83,7 @@
     /* Vault Container */
     /* Centers the vault visualization */
     .vault-container {
-      flex: 1;              /* Take up 1 part of flex space */
+      flex: 0 0 45%;        /* Fixed 45% width for right terminal panel */
       display: flex;        /* Flexbox for centering */
       justify-content: center; /* Horizontally center */
       align-items: center;  /* Vertically center */
@@ -390,6 +390,75 @@
     .vault-outer.opened .click-hint {
       display: none;  /* Completely hide element */
     }
+
+    /* Terminal modal (CLI theme) */
+    .terminal-modal {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(2,6,23,0.6);
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 240ms ease;
+    }
+    .terminal-modal.open { opacity: 1; pointer-events: all; }
+    .terminal-window {
+      width: min(920px, 92%);
+      height: min(520px, 78%);
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 24px 90px rgba(2,10,30,0.85), 0 8px 28px rgba(59,130,246,0.08);
+      border: 1px solid rgba(96,165,250,0.08);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
+      color: #dbefff;
+    }
+    .terminal-header { display:flex; align-items:center; gap:10px; padding:10px 14px; background:linear-gradient(180deg, rgba(14,42,80,0.35), transparent); }
+    .terminal-header .dot { width:12px; height:12px; border-radius:50%; display:inline-block; box-shadow: 0 0 8px rgba(59,130,246,0.6); }
+    .terminal-header .red { background:#60a5fa; }
+    .terminal-header .yellow { background:#93c5fd; }
+    .terminal-navbar { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+    .terminal-navbar .dot { width:12px; height:12px; border-radius:50%; display:inline-block; }
+    .terminal-navbar .red { background:#ff6b6b; box-shadow: 0 0 8px rgba(255,107,107,0.15);} 
+    .terminal-navbar .yellow { background:#ffd56b; box-shadow: 0 0 8px rgba(255,213,107,0.12);} 
+    .terminal-navbar .green { background:#7ef59e; box-shadow: 0 0 8px rgba(126,245,158,0.12);} 
+    .terminal-header .green { background:#93e9ff; }
+    .terminal-header .close-term { margin-left:auto; background:transparent; border:none; color:#9ecbff; font-size:18px; cursor:pointer; }
+    .terminal-body { padding:14px 18px; overflow:auto; flex:1; font-size:0.95rem; line-height:1.5; color:#cfe8ff; }
+    .terminal-line { white-space:pre-wrap; margin-bottom:8px; }
+    .terminal-input-line { display:flex; align-items:center; gap:8px; padding:12px 14px; border-top:1px solid rgba(96,165,250,0.04); }
+    .prompt { color:#7dd3fc; font-weight:700; }
+    .terminal-input { background:transparent; border:none; outline:none; color:inherit; flex:1; font-family:inherit; font-size:1rem; }
+    .hl { color:#7cc0ff; font-weight:700; }
+
+    /* Right-side visible terminal panel (blue theme) */
+    .terminal-panel {
+      width: 100%;
+      height: 520px;
+      max-width: 520px;
+      background: linear-gradient(180deg, rgba(6,18,36,0.85), rgba(3,12,24,0.7));
+      border-left: 1px solid rgba(96,165,250,0.06);
+      padding: 18px;
+      border-radius: 8px;
+      box-shadow: 0 12px 40px rgba(2,6,23,0.6);
+      color: #cfe8ff;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
+      overflow: auto;
+    }
+    .terminal-panel .panel-title { color:#9ed0ff; font-weight:700; margin-bottom:8px; }
+    .cmd-entry { display:flex; flex-direction:column; gap:6px; padding:8px 6px; border-radius:6px; }
+    .cmd-link { color:#7cc0ff; text-decoration:none; font-weight:700; background:transparent; border:none; cursor:pointer; }
+    .cmd-link:hover { text-decoration:underline; }
+    .cmd-meta { color:#9fbfe6; font-size:0.88rem; }
+    .cmd-links { margin-top:6px; display:flex; gap:8px; align-items:center; }
+    .meta-badge { background: rgba(96,165,250,0.06); color:#9ed0ff; padding:4px 8px; border-radius:999px; font-size:0.8rem; border:1px solid rgba(96,165,250,0.06); }
+    .repo-link { color:#cfe8ff; opacity:0.9; font-size:0.88rem; }
+    .terminal-panel a.repo-link:hover { text-decoration:underline; }
   </style>
 </head>
 <body> <!-- Main body element -->
@@ -431,67 +500,13 @@
       </ul>
     </section> <!-- End left-description -->
 
-    <!-- Right Section: Vault -->
-    <!-- Interactive vault visualization -->
-    <section class="vault-container"> <!-- Semantic section for vault -->
-      <!-- Vault Outer Container - clickable element with ID for JavaScript -->
-      <div class="vault-outer" id="vaultOuter"> <!-- ID used by JavaScript for interaction -->
-        
-        <!-- Main Vault Door -->
-        <!-- Circular door that rotates away when clicked -->
-        <div class="vault-door"> <!-- Vault door element -->
-          
-          <!-- Decorative Bolts -->
-          <!-- 8 bolts positioned around the door edge -->
-          <span class="bolt"></span> <!-- Bolt 1 - top center -->
-          <span class="bolt"></span> <!-- Bolt 2 - top right -->
-          <span class="bolt"></span> <!-- Bolt 3 - middle right -->
-          <span class="bolt"></span> <!-- Bolt 4 - bottom right -->
-          <span class="bolt"></span> <!-- Bolt 5 - bottom center -->
-          <span class="bolt"></span> <!-- Bolt 6 - bottom left -->
-          <span class="bolt"></span> <!-- Bolt 7 - middle left -->
-          <span class="bolt"></span> <!-- Bolt 8 - top left -->
-
-          <!-- Vault Wheel/Handle -->
-          <!-- Rotating wheel in center of door -->
-          <div class="vault-wheel"> <!-- Wheel container -->
-            <!-- 8 spokes radiating from center -->
-            <span class="spoke"></span> <!-- Spoke 1 - 0 degrees -->
-            <span class="spoke"></span> <!-- Spoke 2 - 45 degrees -->
-            <span class="spoke"></span> <!-- Spoke 3 - 90 degrees -->
-            <span class="spoke"></span> <!-- Spoke 4 - 135 degrees -->
-            <span class="spoke"></span> <!-- Spoke 5 - 180 degrees -->
-            <span class="spoke"></span> <!-- Spoke 6 - 225 degrees -->
-            <span class="spoke"></span> <!-- Spoke 7 - 270 degrees -->
-            <span class="spoke"></span> <!-- Spoke 8 - 315 degrees -->
-            
-            <!-- Center hub with text -->
-            <div class="vault-center">OPEN</div> <!-- Text label at center -->  
-          </div> <!-- End vault-wheel -->
-        </div> <!-- End vault-door -->
-
-        <!-- Click Hint -->
-        <!-- Animated text prompting user to click - improved copy -->
-        <div class="click-hint">
-          <div class="click-main">Open Project Vault</div>
-          <div class="click-sub">Explore all builds</div>
-        </div>
-
-        <!-- Projects Revealed When Vault Opens -->
-        <!-- Hidden content that becomes visible after clicking vault -->
-        <div class="projects-revealed"> <!-- Container for project details -->
-          
-          <!-- Close Button -->
-          <!-- onclick attribute calls closeVault() JavaScript function -->
-          <button class="close-vault" onclick="closeVault()">×</button> <!-- × is multiplication sign used as X -->  
-          
-          <h2>My Engineering Projects</h2> <!-- Projects heading -->
-          
-          <!-- Projects list – rendered dynamically by JS below -->
-          <div class="projects-list" id="projectsListContainer"></div>
-        </div> <!-- End projects-revealed -->
-      </div> <!-- End vault-outer -->
-    </section> <!-- End vault-container -->
+    <!-- Right Section: Project command panel (terminal-style) -->
+    <section class="vault-container"> <!-- Semantic section for terminal panel -->
+      <div class="terminal-panel" id="terminalPanel" aria-label="Project command panel">
+        <div class="panel-title">Project Vault — command list</div>
+        <!-- Entries will be rendered here by JS -->
+      </div>
+    </section>
   </main> <!-- End projects-container -->
 
   <!-- Dynamic Project Data & Renderer -->
@@ -526,55 +541,61 @@
         tech: ['React', 'Node.js', 'Chart.js'],
         description: 'SPA dashboard with live charts and exportable metrics.'
       }
+      ,
+      {
+        title: 'RushGrid',
+        tech: [],
+        description: 'Description coming soon.'
+      },
+      {
+        title: 'NeoPulse',
+        tech: [],
+        description: 'Description coming soon.'
+      },
+      {
+        title: 'E.D.G.E',
+        tech: [],
+        description: 'Description coming soon.'
+      },
+      {
+        title: 'GestALT',
+        tech: [],
+        description: 'Description coming soon.'
+      }
     ];
 
     /**
-     * Renders PROJECTS array into the vault's project list container.
-     * Demonstrates: DOM creation, dynamic rendering, data-driven UI.
+     * Render projects into the visible terminal-style panel on the right.
+     * Each entry shows a command-like link, tech stack, project page link, and repo link (if available).
      */
-    function renderProjects() {
-      const container = document.getElementById('projectsListContainer');
-      if (!container) return;
+    function renderTerminalPanel() {
+      const panel = document.getElementById('terminalPanel');
+      if (!panel) return;
 
-      container.innerHTML = PROJECTS.map(p => `
-        <div class="project-item">
-          <h3>${p.title}</h3>
-          <div class="project-tech">
-            ${p.tech.map(t => `<span class="tech-tag">${t}</span>`).join('')}
-          </div>
-          <p>${p.description}</p>
-        </div>
-      `).join('');
+      let html = '<div class="panel-title">Project Vault — command list</div>';
+      PROJECTS.forEach((p, i) => {
+        const idx = i + 1;
+        const cmdHref = `#proj-${idx}`;
+        const repoHref = p.repo || '#';
+        const pageHref = p.page || cmdHref;
+        const techLine = (p.tech && p.tech.length) ? p.tech.join(' • ') : 'Tech stack: TBD';
+
+        html += `
+          <div class="cmd-entry">
+            <a class="cmd-link" href="${pageHref}"><span class="prompt">&gt;</span> (${p.title})</a>
+            <div class="cmd-meta">${techLine}</div>
+            <div class="cmd-links">
+              <a class="repo-link" href="${repoHref}" ${p.repo? 'target="_blank" rel="noopener noreferrer"' : ''}>${p.repo? 'GitHub Repo' : 'GitHub (coming soon)'}</a>
+              <span class="meta-badge">view</span>
+            </div>
+          </div>`;
+      });
+
+      panel.innerHTML = html;
     }
 
-    renderProjects();
-  </script>
-
-  <!-- Inline JavaScript for Vault Interaction -->
-  <!-- Handles opening and closing the vault -->
-  <script>
-    // Get reference to vault element by ID
-    const vaultOuter = document.getElementById('vaultOuter');
-    
-    // Add click event listener to vault
-    // Event parameter 'e' contains information about the click
-    vaultOuter.addEventListener('click', function(e) {
-      // Don't open if clicking the close button
-      // Check if clicked element has 'close-vault' class
-      if (!e.target.classList.contains('close-vault')) {
-        // Add 'opened' class to trigger CSS animations
-        this.classList.add('opened');
-      }
-    });
-
-    /**
-     * Closes the vault by removing the 'opened' class
-     * Called by close button onclick attribute
-     */
-    function closeVault() {
-      // Remove 'opened' class to reverse animations
-      vaultOuter.classList.remove('opened');
-    }
+    // Populate terminal panel now
+    renderTerminalPanel();
   </script>
 
   <!-- Interactive Features Script -->
