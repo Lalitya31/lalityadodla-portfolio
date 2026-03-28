@@ -1,15 +1,10 @@
-<!--
-  Engineering Projects Page
-  
-  Dedicated page for showcasing engineering projects with an interactive vault metaphor.
-  Features a clickable vault door animation that reveals project details when opened.
-  
-  This page includes:
-  - Custom inline styles for vault visualization
-  - Two-column layout: description (left) and interactive vault (right)
-  - JavaScript for vault open/close interaction
-  
-  Uses semantic HTML5 structure and extends main.css with page-specific styles.
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Engineering Projects - Balanced Engineering</title>
+  <link rel="stylesheet" href="../css/main.css">
   <!-- Page-specific inline styles for projects/terminal. Cleaned to remove invalid fragments. -->
   <style>
     :root { --bg:#0B0D10; --muted:#9fbfe6; --accent:#60A5FA; --panel-bg:linear-gradient(180deg, rgba(6,18,36,0.85), rgba(3,12,24,0.7)); }
@@ -38,6 +33,20 @@
 
     .project-tech { display:flex; flex-wrap:wrap; gap:0.4rem; margin-top:0.5rem; }
     .tech-tag{ font-size:0.7rem; padding:0.12rem 0.5rem; border-radius:4px; background:rgba(30,58,138,0.35); color:#93C5FD; border:1px solid rgba(147,197,253,0.08); }
+
+    /* Inline project category list (one line) */
+    .project-list-keys {
+      display: flex;
+      gap: 1.25rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      align-items: center;
+      color: #D1D5DB;
+      font-size: 0.85rem;
+    }
+    .project-list-keys li { display: inline-flex; align-items: center; gap: 0.5rem; }
+    .project-list-keys li::before { content: ''; width: 6px; height: 6px; background: #60A5FA; border-radius: 50%; display:inline-block; }
 
     /* Terminal (visible panel) */
     .terminal-panel { width:100%; height:520px; max-width:100%; background:var(--panel-bg); border-left:1px solid rgba(96,165,250,0.06); padding:14px 16px; border-radius:8px; box-shadow:0 12px 40px rgba(2,6,23,0.6); color:#cfe8ff; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace; overflow:auto; font-size:0.88rem; line-height:1.45; }
