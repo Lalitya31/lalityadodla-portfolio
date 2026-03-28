@@ -955,6 +955,28 @@
   }
 
   // ============================================================================
+  // FEATURE 11: REVEAL PROJECT CARDS ON SCROLL
+  // ============================================================================
+  /**
+   * Observes elements with the .revealable class and toggles .in-view when visible
+   */
+  function setupCardReveal() {
+    const elems = Array.from(document.querySelectorAll('.revealable'));
+    if (!elems.length) return;
+
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    elems.forEach(el => obs.observe(el));
+    state.observers.push(obs);
+  }
+
+  // ============================================================================
   // INITIALIZATION
   // ============================================================================
   
@@ -981,6 +1003,7 @@
       setupLayerStats();            // Inject stat markup into info panels
       setupMouseLayerInteraction(); // 3-D tilt effect on layer stack
       setupPageTransitions();       // Fade transitions between pages
+      setupCardReveal();            // Reveal project cards on scroll
       
       console.log('✅ All interactive features initialized');
     } catch (error) {

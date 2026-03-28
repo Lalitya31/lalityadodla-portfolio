@@ -909,7 +909,9 @@ main.container {
  */
 .left-section {
   padding: 2rem;
-  /* Internal spacing */
+  padding: 2rem;
+  flex: 0 0 44%; /* reduce left column width for balance */
+  max-width: 560px;
 }
 
 /**
@@ -921,6 +923,62 @@ main.container {
   position: relative;
   /* Position context for absolute children */
 }
+
+/* Right previews to balance the layout */
+.right-previews {
+  position: absolute;
+  right: 2.5rem;
+  bottom: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 5;
+}
+
+.preview-card {
+  background: rgba(30,58,138,0.45);
+  border: 1px solid rgba(147,197,253,0.2);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  width: 220px;
+  color: var(--text-primary);
+  transform: translateY(8px);
+  opacity: 0;
+  transition: opacity 420ms ease, transform 420ms ease;
+}
+.preview-card.in-view { opacity: 1; transform: translateY(0); }
+
+/* Homepage project cards (left column) */
+.project-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.project-card {
+  background: rgba(30,58,138,0.55);
+  border: 1px solid rgba(147,197,253,0.18);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(11,13,16,0.6);
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 480ms ease, transform 480ms ease, box-shadow 200ms ease;
+}
+.project-card.in-view { opacity: 1; transform: translateY(0); }
+.project-card:hover { box-shadow: 0 12px 36px rgba(59,130,246,0.12); transform: translateY(-4px); }
+.project-card h3 { color: var(--blue-layer-5); margin-bottom: 0.35rem; font-size: 1.05rem; }
+.project-card p { color: var(--text-muted); font-size: 0.95rem; margin: 0.45rem 0; }
+.card-link { color: var(--blue-layer-4); text-decoration: none; font-weight: 700; }
+
+/* small tech tags reused from projects page */
+.project-tech { display:flex; gap:0.4rem; flex-wrap:wrap; margin-top:6px; }
+.tech-tag { font-size:0.65rem; color:var(--blue-layer-6); background:transparent; border-radius:4px; padding:0.12rem 0.45rem; border:1px solid rgba(147,197,253,0.12); }
+
+/* Reveal animation helper class (fade-in on scroll) */
+.revealable { opacity: 0; transform: translateY(12px); transition: opacity 420ms ease, transform 420ms ease; }
+.revealable.in-view { opacity: 1; transform: translateY(0); }
 
 /**
  * Typography - Main Heading (h1)
@@ -2183,3 +2241,13 @@ body.page-transition-out {
     opacity: 0;
   }
 }
+
+.project-list-keys {
+  margin-top: 1rem;
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+.project-list-keys li::before { content: '•'; color: var(--blue-layer-5); margin-right: 0.5rem; }

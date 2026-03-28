@@ -106,6 +106,15 @@
       transform: scale(1.02);  /* Slightly enlarge on hover */
     }
 
+    /* Small pulse on the door for hover liveliness */
+    .vault-outer:hover .vault-door { animation: pulseVault 1.6s ease-in-out infinite; }
+
+    @keyframes pulseVault {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.015); }
+      100% { transform: scale(1); }
+    }
+
     /* Vault Door - Main Circle */
     /* The circular vault door that rotates away when clicked */
     .vault-door {
@@ -360,10 +369,15 @@
       left: 50%;                                /* Horizontally centered */
       transform: translateX(-50%);              /* Center transform */
       color: #93C5FD;                           /* Light blue color */
-      font-size: 0.9rem;                        /* Small text */
-      font-weight: 500;                         /* Medium weight */
-      opacity: 0.8;                             /* Semi-transparent */
+      font-size: 0.95rem;                       /* Small text */
+      font-weight: 600;                         /* Medium weight */
+      opacity: 0.95;                            /* Slightly more visible */
+      text-align: center;
       animation: pulse 2s ease-in-out infinite; /* Pulsing animation */
+    }
+
+    .click-hint .click-main { font-size: 1rem; font-weight:700; }
+    .click-hint .click-sub { font-size: 0.8rem; color: #C7E0FF; margin-top:4px; font-weight:500; }
     }
 
     /* Pulse Animation for Click Hint */
@@ -408,20 +422,13 @@
     <section class="left-description"> <!-- Semantic section element -->
       <h1>Projects</h1> <!-- Main page heading -->
       
-      <h2>The Core of Engineering</h2> <!-- First subheading -->
-      <p>Where theory becomes practical—designs and code that solve real problems.</p>
-      
-      <h2>Building Real Solutions</h2> <!-- Second subheading -->
-      <p>Hands-on projects from prototype to deployment with clean, maintainable implementations.</p>
-      
-      <h2>Innovation Through Practice</h2> <!-- Third subheading -->
-      <p>Work across web, systems, and data that focuses on practical results and key learnings.</p>
-      
-      <h2>Continuous Learning</h2> <!-- Fourth subheading -->
-      <p>A curated vault showing growth, experimentation, and adaptability.</p>
-      
-      <h2>Click the Vault</h2> <!-- Fifth subheading - call to action -->
-      <p>Open the vault to quickly browse concise project summaries.</p>
+      <h2>Projects — Concise, Practical, Ready</h2>
+      <p class="subheading">Browse real builds grouped by focus:</p>
+      <ul class="project-list-keys">
+        <li>Web Systems</li>
+        <li>Data Projects</li>
+        <li>Automation</li>
+      </ul>
     </section> <!-- End left-description -->
 
     <!-- Right Section: Vault -->
@@ -464,8 +471,11 @@
         </div> <!-- End vault-door -->
 
         <!-- Click Hint -->
-        <!-- Animated text prompting user to click -->
-        <div class="click-hint">Click to Open</div> <!-- Hint text with pulse animation -->
+        <!-- Animated text prompting user to click - improved copy -->
+        <div class="click-hint">
+          <div class="click-main">Open Project Vault</div>
+          <div class="click-sub">Explore all builds</div>
+        </div>
 
         <!-- Projects Revealed When Vault Opens -->
         <!-- Hidden content that becomes visible after clicking vault -->
