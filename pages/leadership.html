@@ -1,72 +1,447 @@
-<!--
-  Leadership & Project Management Page
-  
-  Dedicated page for showcasing leadership experience, team management,
-  project coordination, and mentoring activities.
-  
-  Uses semantic HTML5 structure with nav, main, section, header, and footer.
-  Styled with main.css for consistent design across portfolio.
--->
-<!DOCTYPE html> <!-- HTML5 document type -->
-<html lang="en"> <!-- Root element with English language -->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <!-- Character encoding for UTF-8 support -->
   <meta charset="UTF-8">
-  
-  <!-- Viewport meta tag for responsive design -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Page title shown in browser tab -->
   <title>Leadership & Project Management - Balanced Engineering</title>
-  
-  <!-- Main stylesheet link (relative path from pages folder) -->
   <link rel="stylesheet" href="../css/main.css">
-</head>
-<body> <!-- Main body element -->
+  <style>
+    :root {
+      --bg-a: #050911;
+      --bg-b: #03060d;
+      --ink: #e8f1ff;
+      --muted: #9cb5da;
+      --glow: #6aa6ff;
+      --grid: rgba(102, 156, 255, 0.12);
+      --px: 50;
+      --py: 50;
+    }
 
-  <!-- Navigation Bar -->
-  <!-- Fixed top navigation consistent across all pages -->
-  <nav class="navbar"> <!-- Semantic nav element -->
-    <div class="nav-container"> <!-- Container for navbar content -->
-      <!-- Brand link returns to home page -->
+    body.leadership-body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 10%, #0b1d45 0%, transparent 45%),
+        radial-gradient(circle at 85% 75%, #071531 0%, transparent 42%),
+        linear-gradient(160deg, var(--bg-a) 0%, var(--bg-b) 70%);
+      overflow-x: hidden;
+    }
+
+    .lead-shell {
+      min-height: 100vh;
+      padding: 82px 1.5rem 2.4rem;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .lead-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image:
+        linear-gradient(to right, var(--grid) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: radial-gradient(circle at 50% 42%, black 15%, transparent 72%);
+      opacity: 0.45;
+    }
+
+    .lead-header {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 980px;
+      margin: 0 auto 1.1rem;
+    }
+
+    .lead-header h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 2.7vw, 2.7rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .lead-header p {
+      margin: 0.65rem auto 0;
+      color: var(--muted);
+      font-size: clamp(0.95rem, 1.55vw, 1.08rem);
+      letter-spacing: 0.03em;
+    }
+
+    .command-center {
+      position: relative;
+      z-index: 2;
+      width: min(92vw, 880px);
+      aspect-ratio: 1 / 1;
+      margin: 0.7rem auto 0;
+      transform: translate(
+        calc((var(--px) - 50) * 0.09px),
+        calc((var(--py) - 50) * 0.09px)
+      );
+      transition: transform 0.12s ease-out;
+    }
+
+    .connectors {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .connector {
+      stroke: rgba(118, 172, 255, 0.52);
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      fill: none;
+      stroke-dasharray: 5 10;
+      animation: flow 5s linear infinite;
+      filter: drop-shadow(0 0 6px rgba(109, 170, 255, 0.4));
+    }
+
+    .connector.alt {
+      stroke-dashoffset: 40;
+      animation-duration: 6.6s;
+    }
+
+    .node {
+      position: absolute;
+      border: 0;
+      background: transparent;
+      color: var(--ink);
+      cursor: pointer;
+      font: inherit;
+      padding: 0;
+      z-index: 3;
+      text-align: center;
+    }
+
+    .node-core {
+      width: clamp(118px, 17vw, 150px);
+      height: clamp(118px, 17vw, 150px);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(204, 225, 255, 0.9), rgba(124, 173, 255, 0.26) 28%, rgba(36, 72, 138, 0.88) 68%, rgba(16, 35, 76, 0.96) 100%);
+      display: grid;
+      place-items: center;
+      box-shadow:
+        0 0 0 2px rgba(133, 182, 255, 0.5),
+        0 0 22px rgba(98, 161, 255, 0.66),
+        0 0 55px rgba(76, 137, 245, 0.4);
+      animation: pulseCore 3.8s ease-in-out infinite;
+      position: relative;
+    }
+
+    .node-core::after {
+      content: "";
+      position: absolute;
+      width: 124%;
+      height: 124%;
+      border-radius: 50%;
+      border: 1px solid rgba(136, 183, 255, 0.34);
+      animation: orbitHalo 4.6s ease-in-out infinite;
+    }
+
+    .node-core strong {
+      font-size: clamp(0.7rem, 1vw, 0.85rem);
+      line-height: 1.3;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0 0.45rem;
+      text-shadow: 0 0 12px rgba(80, 138, 242, 0.85);
+    }
+
+    .pod-node {
+      width: clamp(74px, 10vw, 94px);
+      height: clamp(74px, 10vw, 94px);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 32% 30%, rgba(215, 232, 255, 0.72), rgba(121, 172, 255, 0.2) 24%, rgba(24, 59, 123, 0.9) 72%, rgba(11, 28, 63, 0.98) 100%);
+      box-shadow:
+        0 0 0 1px rgba(136, 183, 255, 0.56),
+        0 0 16px rgba(96, 160, 255, 0.56),
+        inset 0 0 24px rgba(8, 22, 58, 0.9);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      animation: pulsePod 4.2s ease-in-out infinite;
+    }
+
+    .pod-node span {
+      font-size: clamp(0.66rem, 0.9vw, 0.78rem);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.94;
+    }
+
+    .node:hover .pod-node,
+    .node:focus-visible .pod-node,
+    .node:hover .node-core,
+    .node:focus-visible .node-core {
+      transform: scale(1.06);
+      box-shadow:
+        0 0 0 1px rgba(169, 206, 255, 0.8),
+        0 0 26px rgba(110, 176, 255, 0.8),
+        inset 0 0 26px rgba(7, 25, 66, 0.95);
+    }
+
+    .node:focus-visible {
+      outline: none;
+    }
+
+    .center-node { left: 50%; top: 50%; transform: translate(-50%, -50%); }
+    .pod-a { left: 50%; top: 11%; transform: translate(-50%, -50%); }
+    .pod-b { left: 82%; top: 33%; transform: translate(-50%, -50%); }
+    .pod-c { left: 82%; top: 68%; transform: translate(-50%, -50%); }
+    .pod-d { left: 50%; top: 89%; transform: translate(-50%, -50%); }
+    .pod-e { left: 18%; top: 33%; transform: translate(-50%, -50%); }
+    .pod-f { left: 18%; top: 68%; transform: translate(-50%, -50%); }
+
+    .details {
+      position: relative;
+      z-index: 2;
+      width: min(92vw, 980px);
+      margin: 1.1rem auto 0;
+      text-align: center;
+      min-height: 150px;
+      padding: 0.2rem 0 0;
+    }
+
+    .details h2 {
+      margin: 0;
+      font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+      letter-spacing: 0.04em;
+      color: #d8e9ff;
+    }
+
+    .details p {
+      margin: 0.55rem auto 0;
+      max-width: 74ch;
+      line-height: 1.75;
+      color: #c2d7fa;
+      font-size: clamp(0.9rem, 1.35vw, 1.03rem);
+    }
+
+    .details ul {
+      list-style: none;
+      margin: 0.9rem auto 0;
+      padding: 0;
+      max-width: 72ch;
+      color: #aac6ef;
+      line-height: 1.65;
+      font-size: clamp(0.88rem, 1.2vw, 0.98rem);
+    }
+
+    .details li::before {
+      content: "• ";
+      color: #81b2ff;
+    }
+
+    @keyframes flow {
+      from { stroke-dashoffset: 0; }
+      to { stroke-dashoffset: -120; }
+    }
+
+    @keyframes pulseCore {
+      0%, 100% { box-shadow: 0 0 0 2px rgba(133, 182, 255, 0.5), 0 0 22px rgba(98, 161, 255, 0.66), 0 0 55px rgba(76, 137, 245, 0.4); }
+      50% { box-shadow: 0 0 0 2px rgba(161, 203, 255, 0.72), 0 0 30px rgba(126, 188, 255, 0.86), 0 0 72px rgba(85, 145, 250, 0.58); }
+    }
+
+    @keyframes pulsePod {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+    }
+
+    @keyframes orbitHalo {
+      0%, 100% { transform: scale(0.95); opacity: 0.38; }
+      50% { transform: scale(1.08); opacity: 0.78; }
+    }
+
+    @media (max-width: 760px) {
+      .lead-shell { padding-top: 74px; }
+      .command-center { width: min(96vw, 630px); }
+      .details { min-height: 205px; }
+      .pod-a { top: 14%; }
+      .pod-d { top: 86%; }
+      .pod-b, .pod-c { left: 79%; }
+      .pod-e, .pod-f { left: 21%; }
+    }
+  </style>
+</head>
+<body class="leadership-body">
+  <nav class="navbar">
+    <div class="nav-container">
       <a href="../index.html/index.html" class="nav-brand">Balanced Engineering</a>
-      
-      <!-- Navigation links list -->
-      <ul class="nav-links"> <!-- Unordered list of page links -->
-        <li><a href="projects.html">Projects</a></li> <!-- Link to Projects page -->
-        <li><a href="research.html">Research</a></li> <!-- Link to Research page -->
-        <li><a href="leadership.html">Leadership</a></li> <!-- Current page - Leadership -->
-        <li><a href="academics.html">Academics</a></li> <!-- Link to Academics page -->
-        <li><a href="achievements.html">Achievements</a></li> <!-- Link to Achievements page -->
-        <li><a href="balance.html">Balance</a></li> <!-- Link to Balance page -->
+      <ul class="nav-links">
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+        <li><a href="academics.html">Academics</a></li>
+        <li><a href="achievements.html">Achievements</a></li>
+        <li><a href="balance.html">Balance</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Main Content Container -->
-  <main class="page-container"> <!-- Semantic main element with page container class -->
-    
-    <!-- Page Header Section -->
-    <section class="page-header"> <!-- Header section for page title -->
-      <h1>Leadership & Project Management</h1> <!-- Main page heading -->
-      <p class="page-subtitle">Orchestrating teams and driving projects to completion. Leading initiatives, mentoring peers, and managing complex deliverables.</p> <!-- Page description -->
+  <main class="lead-shell" id="leadShell">
+    <header class="lead-header">
+      <h1>Leadership & Project Management</h1>
+      <p>Coordinating systems. Empowering people. Delivering outcomes.</p>
+    </header>
+
+    <section class="command-center" id="commandCenter" aria-label="System command center visualization">
+      <svg class="connectors" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+        <path class="connector" d="M50,50 L50,12"></path>
+        <path class="connector alt" d="M50,50 L82,33"></path>
+        <path class="connector" d="M50,50 L82,68"></path>
+        <path class="connector alt" d="M50,50 L50,88"></path>
+        <path class="connector" d="M50,50 L18,33"></path>
+        <path class="connector alt" d="M50,50 L18,68"></path>
+      </svg>
+
+      <button class="node center-node" data-role="center" aria-label="Project Management Lead Genesis">
+        <span class="node-core"><strong>Project Management Lead<br>Genesis</strong></span>
+      </button>
+
+      <button class="node pod-a" data-role="pod-a" aria-label="Pod A">
+        <span class="pod-node"><span>Pod A</span></span>
+      </button>
+      <button class="node pod-b" data-role="pod-b" aria-label="Pod B">
+        <span class="pod-node"><span>Pod B</span></span>
+      </button>
+      <button class="node pod-c" data-role="pod-c" aria-label="Pod C">
+        <span class="pod-node"><span>Pod C</span></span>
+      </button>
+      <button class="node pod-d" data-role="pod-d" aria-label="Pod D">
+        <span class="pod-node"><span>Pod D</span></span>
+      </button>
+      <button class="node pod-e" data-role="pod-e" aria-label="Pod E">
+        <span class="pod-node"><span>Pod E</span></span>
+      </button>
+      <button class="node pod-f" data-role="pod-f" aria-label="Pod F">
+        <span class="pod-node"><span>Pod F</span></span>
+      </button>
     </section>
 
-    <!-- Page Content Section -->
-    <section class="page-content"> <!-- Content area for leadership experience -->
-      <!-- Add your leadership content here -->
-      <p>Content coming soon...</p> <!-- Placeholder text for future content -->
+    <section class="details" aria-live="polite">
+      <h2 id="detailTitle">Project Management Lead - Genesis</h2>
+      <p id="detailText">Leading multiple pods, coordinating execution, and ensuring alignment across teams.</p>
+      <ul id="detailList">
+        <li>Oversaw multiple project pods simultaneously.</li>
+        <li>Acted as the central coordination layer between teams.</li>
+        <li>Ensured smooth execution from planning to delivery.</li>
+        <li>Maintained clarity, accountability, and system flow.</li>
+      </ul>
     </section>
   </main>
 
-  <!-- Footer Section -->
-  <footer> <!-- Semantic footer element -->
-    <p>&copy; 2026 Balanced Engineering</p> <!-- Copyright notice -->
-  </footer>
+  <script src="../js/interactions.js"></script>
+  <script>
+    (function () {
+      const shell = document.getElementById('leadShell');
+      const center = document.getElementById('commandCenter');
+      const title = document.getElementById('detailTitle');
+      const text = document.getElementById('detailText');
+      const list = document.getElementById('detailList');
 
-  <!-- Interactive Features Script -->
-  <!-- JavaScript file that adds interactivity to navbar and other features -->
-  <script src="../js/interactions.js"></script> <!-- External JavaScript file -->
+      if (!shell || !center || !title || !text || !list) return;
 
+      const details = {
+        center: {
+          title: 'Leadership Philosophy',
+          text: 'I do not lead by instruction. I lead by alignment, trust, and shared ownership.',
+          items: [
+            'Leadership is not about directing people - it is about enabling them.',
+            'I work alongside teams to build confidence and clarity.',
+            'Shared responsibility creates stronger outcomes than command-driven delivery.'
+          ]
+        },
+        'pod-a': {
+          title: 'Pod A - Planning and Scope',
+          text: 'Structured planning, milestone definition, and scope integrity across phases.',
+          items: [
+            'Converted broad goals into actionable sprint plans.',
+            'Prioritized tasks based on system impact and dependencies.',
+            'Prevented scope drift while protecting delivery quality.'
+          ]
+        },
+        'pod-b': {
+          title: 'Pod B - Execution Cadence',
+          text: 'Ensured execution rhythm and cross-team momentum through active coordination.',
+          items: [
+            'Maintained delivery cadence across parallel work streams.',
+            'Removed blockers through rapid communication loops.',
+            'Aligned progress updates to shared outcomes.'
+          ]
+        },
+        'pod-c': {
+          title: 'Pod C - Quality and Validation',
+          text: 'Connected validation checkpoints to delivery timelines without slowing momentum.',
+          items: [
+            'Integrated quality reviews into each milestone cycle.',
+            'Aligned acceptance criteria with technical constraints.',
+            'Reduced rework by enforcing clear verification gates.'
+          ]
+        },
+        'pod-d': {
+          title: 'Pod D - Delivery and Hand-off',
+          text: 'Drove final execution and accountable hand-offs from planning to deployment.',
+          items: [
+            'Tracked completion against defined release outcomes.',
+            'Coordinated final alignment between teams and stakeholders.',
+            'Ensured hand-off readiness with clear ownership.'
+          ]
+        },
+        'pod-e': {
+          title: 'Pod E - Communication Layer',
+          text: 'Served as the system bridge between teams, reducing friction and ambiguity.',
+          items: [
+            'Mapped dependencies across pods in real time.',
+            'Created visibility loops to prevent misalignment.',
+            'Kept accountability explicit at every stage.'
+          ]
+        },
+        'pod-f': {
+          title: 'Pod F - Team Enablement',
+          text: 'Built confidence and ownership so teams could perform at their best.',
+          items: [
+            'Supported teams with context, not just directives.',
+            'Encouraged autonomy while preserving shared standards.',
+            'Reinforced trust to improve delivery resilience.'
+          ]
+        }
+      };
+
+      function render(role) {
+        const data = details[role] || details.center;
+        title.textContent = data.title;
+        text.textContent = data.text;
+        list.innerHTML = data.items.map((item) => `<li>${item}</li>`).join('');
+      }
+
+      center.querySelectorAll('.node').forEach((node) => {
+        const role = node.getAttribute('data-role');
+        node.addEventListener('mouseenter', () => render(role));
+        node.addEventListener('focus', () => render(role));
+      });
+
+      center.addEventListener('mouseleave', () => render('center'));
+
+      center.addEventListener('mousemove', (event) => {
+        const rect = center.getBoundingClientRect();
+        const x = ((event.clientX - rect.left) / rect.width) * 100;
+        const y = ((event.clientY - rect.top) / rect.height) * 100;
+        shell.style.setProperty('--px', x.toFixed(2));
+        shell.style.setProperty('--py', y.toFixed(2));
+      });
+
+      render('center');
+    })();
+  </script>
 </body>
 </html>
