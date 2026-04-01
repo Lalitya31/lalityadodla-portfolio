@@ -1223,6 +1223,35 @@ h1 {
   /* Add glowing shadow */
 }
 
+/* Hover tooltip for one-line disc descriptions */
+.layer::after {
+  content: attr(data-tip);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0.96);
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: var(--text-primary);
+  background: rgba(7, 19, 44, 0.92);
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  padding: 0.4rem 0.65rem;
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 20;
+}
+
+.layer:hover::after {
+  opacity: 1;
+  transform: translate(-50%, calc(-50% - 34px)) scale(1);
+}
+
 /**
  * Layer 6: Balance & Discipline (Outermost Layer)
  * Largest circle - represents foundation
