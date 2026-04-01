@@ -1,72 +1,421 @@
-<!--
-  Research & Publications Page
-  
-  Dedicated page for showcasing research work, academic papers,
-  and technical publications.
-  
-  Uses semantic HTML5 structure with nav, main, section, header, and footer.
-  Styled with main.css for consistent design across portfolio.
--->
-<!DOCTYPE html> <!-- HTML5 document type -->
-<html lang="en"> <!-- Root element with English language -->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <!-- Character encoding for UTF-8 support -->
   <meta charset="UTF-8">
-  
-  <!-- Viewport meta tag for responsive design -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- Page title shown in browser tab -->
   <title>Research & Publications - Balanced Engineering</title>
-  
-  <!-- Main stylesheet link (relative path from pages folder) -->
   <link rel="stylesheet" href="../css/main.css">
-</head>
-<body> <!-- Main body element -->
+  <style>
+    :root {
+      --base-bg: #040812;
+      --left-accent: #7fb4ff;
+      --right-accent: #4e87ff;
+      --text-main: #e9f1ff;
+      --text-muted: #9eb2d8;
+      --left-x: 50%;
+      --left-y: 50%;
+      --right-x: 50%;
+      --right-y: 50%;
+      --right-snap-x: 0px;
+      --right-snap-y: 0px;
+    }
 
-  <!-- Navigation Bar -->
-  <!-- Fixed top navigation consistent across all pages -->
-  <nav class="navbar"> <!-- Semantic nav element -->
-    <div class="nav-container"> <!-- Container for navbar content -->
-      <!-- Brand link returns to home page -->
+    body.research-body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at 50% -10%, #0a1a3a 0%, #050a16 42%, #02040b 100%);
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    .research-shell {
+      position: relative;
+      min-height: 100vh;
+      padding-top: 64px;
+      isolation: isolate;
+    }
+
+    .research-title {
+      position: absolute;
+      top: 92px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .research-title h1 {
+      margin: 0;
+      font-size: clamp(1.5rem, 2.7vw, 2.6rem);
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .split-interface {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 64px);
+      border-top: 1px solid rgba(134, 178, 255, 0.16);
+    }
+
+    .force-field {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1.5rem, 4vw, 4rem);
+    }
+
+    .field-content {
+      position: relative;
+      z-index: 3;
+      max-width: 38ch;
+    }
+
+    .field-kicker {
+      margin: 0 0 0.8rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      opacity: 0.9;
+    }
+
+    .field-content h2 {
+      margin: 0;
+      font-size: clamp(1.55rem, 2.6vw, 2.35rem);
+      line-height: 1.2;
+      letter-spacing: 0.03em;
+    }
+
+    .field-subline {
+      margin: 0.7rem 0 1.2rem;
+      color: #bfd1f4;
+      font-size: clamp(0.93rem, 1.7vw, 1.08rem);
+      letter-spacing: 0.03em;
+    }
+
+    .field-content p {
+      margin: 0;
+      color: #d6e2fb;
+      line-height: 1.78;
+      font-size: clamp(0.9rem, 1.4vw, 1.02rem);
+    }
+
+    .field-divider {
+      position: absolute;
+      top: 0;
+      left: calc(50% - 1px);
+      width: 2px;
+      height: 100%;
+      background: linear-gradient(180deg, transparent, rgba(114, 169, 255, 0.5), transparent);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .perception-field {
+      background:
+        radial-gradient(800px circle at var(--left-x) var(--left-y), rgba(103, 157, 255, 0.22), transparent 58%),
+        radial-gradient(560px circle at 22% 70%, rgba(107, 84, 190, 0.26), transparent 62%),
+        radial-gradient(640px circle at 70% 30%, rgba(102, 148, 255, 0.18), transparent 60%),
+        linear-gradient(140deg, #08152e 0%, #061125 45%, #030915 100%);
+    }
+
+    .perception-field::before,
+    .perception-field::after {
+      content: "";
+      position: absolute;
+      border-radius: 48% 52% 44% 56% / 56% 46% 54% 44%;
+      filter: blur(34px);
+      opacity: 0.58;
+      z-index: 1;
+      transition: transform 0.24s ease-out;
+      animation: floatCloud 12s ease-in-out infinite;
+    }
+
+    .perception-field::before {
+      width: min(44vw, 430px);
+      aspect-ratio: 1 / 1;
+      top: -8%;
+      left: -10%;
+      background: radial-gradient(circle at 35% 38%, rgba(164, 198, 255, 0.36), rgba(73, 116, 214, 0.18));
+      transform: translate(calc((var(--left-x) - 50%) * 0.08), calc((var(--left-y) - 50%) * 0.08));
+    }
+
+    .perception-field::after {
+      width: min(46vw, 460px);
+      aspect-ratio: 1 / 1;
+      bottom: -16%;
+      right: -12%;
+      background: radial-gradient(circle at 58% 52%, rgba(166, 157, 255, 0.28), rgba(87, 128, 226, 0.14));
+      animation-delay: -4s;
+      transform: translate(calc((50% - var(--left-x)) * 0.1), calc((50% - var(--left-y)) * 0.1));
+    }
+
+    .perception-particles {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle at 14% 20%, rgba(194, 220, 255, 0.66) 0 1.5px, transparent 2px),
+        radial-gradient(circle at 68% 24%, rgba(148, 191, 255, 0.55) 0 1.3px, transparent 2px),
+        radial-gradient(circle at 32% 62%, rgba(182, 209, 255, 0.58) 0 1.6px, transparent 2.2px),
+        radial-gradient(circle at 80% 66%, rgba(163, 202, 255, 0.45) 0 1.2px, transparent 2px),
+        radial-gradient(circle at 46% 84%, rgba(195, 218, 255, 0.62) 0 1.4px, transparent 2.2px);
+      filter: blur(0.2px);
+      animation: driftParticles 16s linear infinite;
+      transform: translate(
+        calc((var(--left-x) - 50%) * 0.03),
+        calc((var(--left-y) - 50%) * 0.04)
+      );
+    }
+
+    .perception-distort {
+      position: absolute;
+      inset: -8%;
+      z-index: 2;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      background:
+        radial-gradient(220px circle at var(--left-x) var(--left-y), rgba(197, 222, 255, 0.16), transparent 68%),
+        radial-gradient(310px circle at calc(var(--left-x) + 9%) calc(var(--left-y) - 7%), rgba(133, 183, 255, 0.12), transparent 70%);
+      animation: waveField 9s ease-in-out infinite;
+      filter: blur(1.3px);
+    }
+
+    .crypto-field {
+      background:
+        linear-gradient(140deg, #050d1f 0%, #041128 50%, #030914 100%);
+    }
+
+    .crypto-grid {
+      position: absolute;
+      inset: -20% -10% -20% -10%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.62;
+      transform:
+        translate(var(--right-snap-x), var(--right-snap-y))
+        perspective(900px)
+        rotateX(56deg)
+        scale(1.05);
+      transform-origin: center;
+      transition: transform 0.12s ease-out;
+      background-image:
+        linear-gradient(to right, rgba(90, 144, 255, 0.24) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(90, 144, 255, 0.24) 1px, transparent 1px);
+      background-size: 36px 36px;
+      animation: sweepGrid 10s linear infinite;
+    }
+
+    .crypto-nodes {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.7;
+      background-image:
+        radial-gradient(circle at 18% 24%, rgba(144, 183, 255, 0.82) 0 1.8px, transparent 2.4px),
+        radial-gradient(circle at 41% 30%, rgba(144, 183, 255, 0.7) 0 1.7px, transparent 2.4px),
+        radial-gradient(circle at 64% 44%, rgba(144, 183, 255, 0.75) 0 1.8px, transparent 2.4px),
+        radial-gradient(circle at 79% 62%, rgba(144, 183, 255, 0.67) 0 1.6px, transparent 2.2px),
+        radial-gradient(circle at 54% 79%, rgba(144, 183, 255, 0.78) 0 1.8px, transparent 2.4px),
+        radial-gradient(circle at 27% 70%, rgba(144, 183, 255, 0.74) 0 1.6px, transparent 2.2px);
+      transform: translate(
+        calc((var(--right-x) - 50%) * 0.02),
+        calc((var(--right-y) - 50%) * 0.02)
+      );
+      transition: transform 0.14s ease-out;
+    }
+
+    .crypto-stream {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.26;
+      font-family: "Consolas", "Courier New", monospace;
+      letter-spacing: 0.08em;
+      color: #99c2ff;
+      white-space: pre;
+      background: repeating-linear-gradient(
+        180deg,
+        transparent 0,
+        transparent 17px,
+        rgba(115, 171, 255, 0.06) 18px,
+        rgba(115, 171, 255, 0.06) 19px
+      );
+      mask-image: radial-gradient(circle at var(--right-x) var(--right-y), black 14%, transparent 72%);
+      animation: matrixShift 8s linear infinite;
+    }
+
+    .crypto-field .field-content {
+      text-align: left;
+      margin-left: clamp(1rem, 2vw, 2.8rem);
+    }
+
+    .perception-field .field-content {
+      text-align: right;
+      margin-right: clamp(1rem, 2vw, 2.8rem);
+    }
+
+    @keyframes driftParticles {
+      0% { transform: translate(0, 0); }
+      50% { transform: translate(-8px, 6px); }
+      100% { transform: translate(0, 0); }
+    }
+
+    @keyframes waveField {
+      0%, 100% { transform: scale(1); opacity: 0.72; }
+      50% { transform: scale(1.06); opacity: 0.9; }
+    }
+
+    @keyframes floatCloud {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      50% { transform: translate(8px, -10px) rotate(5deg); }
+    }
+
+    @keyframes sweepGrid {
+      0% { background-position: 0 0, 0 0; }
+      100% { background-position: 36px 0, 0 36px; }
+    }
+
+    @keyframes matrixShift {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 24px; }
+    }
+
+    @media (max-width: 980px) {
+      .split-interface {
+        grid-template-columns: 1fr;
+      }
+
+      .field-divider {
+        width: 100%;
+        height: 2px;
+        top: 50%;
+        left: 0;
+      }
+
+      .perception-field .field-content,
+      .crypto-field .field-content {
+        text-align: left;
+        margin: 0;
+        max-width: 90%;
+      }
+
+      .research-title {
+        position: static;
+        transform: none;
+        padding: 1.25rem 1rem 0;
+      }
+
+      .research-shell {
+        padding-top: 56px;
+      }
+
+      .force-field {
+        min-height: 48vh;
+      }
+    }
+  </style>
+</head>
+<body class="research-body">
+  <nav class="navbar">
+    <div class="nav-container">
       <a href="../index.html/index.html" class="nav-brand">Balanced Engineering</a>
-      
-      <!-- Navigation links list -->
-      <ul class="nav-links"> <!-- Unordered list of page links -->
-        <li><a href="projects.html">Projects</a></li> <!-- Link to Projects page -->
-        <li><a href="research.html">Research</a></li> <!-- Current page - Research -->
-        <li><a href="leadership.html">Leadership</a></li> <!-- Link to Leadership page -->
-        <li><a href="academics.html">Academics</a></li> <!-- Link to Academics page -->
-        <li><a href="achievements.html">Achievements</a></li> <!-- Link to Achievements page -->
-        <li><a href="balance.html">Balance</a></li> <!-- Link to Balance page -->
+      <ul class="nav-links">
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="research.html">Research</a></li>
+        <li><a href="leadership.html">Leadership</a></li>
+        <li><a href="academics.html">Academics</a></li>
+        <li><a href="achievements.html">Achievements</a></li>
+        <li><a href="balance.html">Balance</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Main Content Container -->
-  <main class="page-container"> <!-- Semantic main element with page container class -->
-    
-    <!-- Page Header Section -->
-    <section class="page-header"> <!-- Header section for page title -->
-      <h1>Research & Publications</h1> <!-- Main page heading -->
-      <p class="page-subtitle">Pushing boundaries through systematic investigation. Academic papers, technical articles, and contributions to the body of knowledge.</p> <!-- Page description -->
-    </section>
+  <main class="research-shell" id="researchShell">
+    <div class="research-title">
+      <h1>Research & Publications</h1>
+    </div>
 
-    <!-- Page Content Section -->
-    <section class="page-content"> <!-- Content area for research items -->
-      <!-- Add your research content here -->
-      <p>Content coming soon...</p> <!-- Placeholder text for future content -->
-    </section>
+    <div class="split-interface" id="splitInterface" aria-label="Split consciousness research interface">
+      <div class="field-divider" aria-hidden="true"></div>
+
+      <article class="force-field perception-field" id="perceptionField" aria-label="Cognition and perception field">
+        <div class="perception-particles" aria-hidden="true"></div>
+        <div class="perception-distort" aria-hidden="true"></div>
+        <div class="field-content">
+          <p class="field-kicker">Cognition / Perception</p>
+          <h2>Transcending Visual Boundaries</h2>
+          <p class="field-subline">Exploring perception beyond sight</p>
+          <p>
+            A neuroscientific investigation into how dreams and sensory experiences are formed in both visually challenged and sighted individuals.
+            The study examines how the brain constructs perception without visual input, redefining the boundaries of human experience.
+          </p>
+        </div>
+      </article>
+
+      <article class="force-field crypto-field" id="cryptoField" aria-label="Computation and security field">
+        <div class="crypto-grid" aria-hidden="true"></div>
+        <div class="crypto-nodes" aria-hidden="true"></div>
+        <div class="crypto-stream" aria-hidden="true"></div>
+        <div class="field-content">
+          <p class="field-kicker">Computation / Security</p>
+          <h2>Post-Quantum Cryptography</h2>
+          <p class="field-subline">Securing systems beyond classical limits</p>
+          <p>
+            A study of lattice-based and hash-based cryptographic algorithms, analyzing the impact of quantum computing on classical security models.
+            The research focuses on building resilient systems capable of withstanding future computational paradigms.
+          </p>
+        </div>
+      </article>
+    </div>
   </main>
 
-  <!-- Footer Section -->
-  <footer> <!-- Semantic footer element -->
-    <p>&copy; 2026 Balanced Engineering</p> <!-- Copyright notice -->
-  </footer>
+  <script src="../js/interactions.js"></script>
+  <script>
+    (function () {
+      const shell = document.getElementById('researchShell');
+      const split = document.getElementById('splitInterface');
+      if (!shell || !split) return;
 
-  <!-- Interactive Features Script -->
-  <!-- JavaScript file that adds interactivity to navbar and other features -->
-  <script src="../js/interactions.js"></script> <!-- External JavaScript file -->
+      function setVars(x, y) {
+        const rect = split.getBoundingClientRect();
+        const relX = ((x - rect.left) / rect.width) * 100;
+        const relY = ((y - rect.top) / rect.height) * 100;
 
+        const clampedX = Math.max(0, Math.min(100, relX));
+        const clampedY = Math.max(0, Math.min(100, relY));
+
+        shell.style.setProperty('--left-x', clampedX + '%');
+        shell.style.setProperty('--left-y', clampedY + '%');
+        shell.style.setProperty('--right-x', clampedX + '%');
+        shell.style.setProperty('--right-y', clampedY + '%');
+
+        const snapUnit = 14;
+        const snapX = Math.round((clampedX - 50) / snapUnit) * 6;
+        const snapY = Math.round((clampedY - 50) / snapUnit) * 6;
+        shell.style.setProperty('--right-snap-x', snapX + 'px');
+        shell.style.setProperty('--right-snap-y', snapY + 'px');
+      }
+
+      split.addEventListener('mousemove', (event) => {
+        setVars(event.clientX, event.clientY);
+      });
+
+      split.addEventListener('touchmove', (event) => {
+        const touch = event.touches[0];
+        if (!touch) return;
+        setVars(touch.clientX, touch.clientY);
+      }, { passive: true });
+    })();
+  </script>
 </body>
 </html>
