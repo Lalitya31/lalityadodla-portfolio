@@ -145,10 +145,10 @@
      * Each object is rendered into a .project-item card inside the vault.
      */
     const PROJECTS = [
-      { title: 'RushGrid', tech: [], description: 'Description coming soon.', repo: 'https://github.com/Lalitya31/RushGrid' },
-      { title: 'NeoPulse', tech: [], description: 'Description coming soon.' },
+      { title: 'RushGrid', tech: [], description: 'Description coming soon.', repo: 'https://github.com/Lalitya31/RushGrid', deploy: 'https://rushgridfinal.vercel.app/' },
+      { title: 'NeoPulse', tech: [], description: 'Description coming soon.', deploy: 'https://www.youtube.com/watch?v=qWQqcY_4Wjc' },
       { title: 'E.D.G.E', tech: [], description: 'Description coming soon.', repo: 'https://github.com/Lalitya31/E.D.G.E' },
-      { title: 'GestALT', tech: [], description: 'Description coming soon.', repo: 'https://github.com/Lalitya31/GestALT' },
+      { title: 'GestALT', tech: [], description: 'Description coming soon.', repo: 'https://github.com/Lalitya31/GestALT', deploy: 'https://gest-alt.vercel.app/' },
       { title: 'Balanced Engineering Portfolio', tech: [], description: 'Description coming soon.', repo: 'https://github.com/Lalitya31/lalityadodla-portfolio' }
     ];
 
@@ -166,18 +166,23 @@
         const idx = i + 1;
         const cmdHref = `#proj-${idx}`;
         const repoHref = p.repo || '#';
+        const deployHref = p.deploy || '';
         const pageHref = p.page || cmdHref;
-        const techLine = (p.tech && p.tech.length) ? p.tech.join(' • ') : 'Tech stack: TBD';
+        const techLine = (p.tech && p.tech.length) ? p.tech.join(' • ') : '';
+        const techHtml = techLine ? `<div class="cmd-meta">${techLine}</div>` : '';
+        const deployHtml = deployHref
+          ? `<a class="meta-badge" href="${deployHref}" target="_blank" rel="noopener noreferrer" aria-label="Open deployment">↗</a>`
+          : '';
 
         html += `
           <div class="cmd-entry">
             <a class="cmd-link" href="${pageHref}"><span class="prompt">&gt;</span><span class="project-name">${p.title}</span></a>
-            <div class="cmd-meta">${techLine}</div>
+            ${techHtml}
             <div class="cmd-links">
               <a class="repo-link" href="${repoHref}" ${p.repo? 'target="_blank" rel="noopener noreferrer"' : ''} aria-label="GitHub">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.286-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.757-1.333-1.757-1.09-.744.083-.729.083-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.835 2.807 1.305 3.492.998.108-.776.418-1.305.762-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.467-2.382 1.235-3.222-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.912 1.23 3.222 0 4.61-2.805 5.625-5.475 5.92.435.375.81 1.096.81 2.215 0 1.6-.015 2.887-.015 3.28 0 .315.21.69.825.573C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
               </a>
-              <span class="meta-badge">view</span>
+              ${deployHtml}
             </div>
           </div>`;
       });
