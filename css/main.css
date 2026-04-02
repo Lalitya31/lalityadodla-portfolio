@@ -1176,6 +1176,8 @@ h1 {
   /* Horizontal center */
   cursor: pointer;
   /* Pointer cursor on hover */
+  pointer-events: auto;
+  /* Make actual disc anchor clickable */
   transition: box-shadow 0.3s ease;
   /* Smooth shadow transition */
 }
@@ -1421,6 +1423,8 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
+  pointer-events: none;
+  /* Prevent full-size wrapper from blocking clicks to lower discs */
 }
 
 /* Rotation Animations */

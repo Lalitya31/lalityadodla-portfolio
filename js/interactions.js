@@ -208,7 +208,12 @@
     // Add click handlers to each layer
     layers.forEach(layer => {
       layer.addEventListener('click', (e) => {
-        e.preventDefault();      // Prevent default link behavior
+        // If a layer is a real link (homepage rotating discs), let navigation happen.
+        if (layer.matches('a[href]')) {
+          return;
+        }
+
+        e.preventDefault();      // Prevent default behavior for non-link layers
         activateLayer(layer);    // Activate clicked layer
       });
     });
@@ -598,6 +603,13 @@
         if (state.focusedLayerIndex >= 0 && state.focusedLayerIndex < layers.length) {
           e.preventDefault();  // Prevent default behavior
           const layer = layers[state.focusedLayerIndex];  // Get focused layer
+
+          // On homepage, layers are anchors; Enter should navigate like clicking navbar links.
+          if (layer.matches('a[href]')) {
+            window.location.href = layer.getAttribute('href');
+            return;
+          }
+
           activateLayer(layer);  // Activate it
         }
       }
