@@ -21,6 +21,130 @@
   
   <!-- Main stylesheet link (relative path from pages folder) -->
   <link rel="stylesheet" href="../css/main.css">
+
+  <style>
+    .achievements-signal {
+      --sig-blue: #7fbfff;
+      --sig-glow: rgba(0, 150, 255, 0.5);
+      --sig-soft: #bcd3ef;
+      position: relative;
+      min-height: 72vh;
+      overflow: hidden;
+    }
+
+    .achievements-signal::before {
+      content: "";
+      position: absolute;
+      inset: 22% -12% auto -12%;
+      height: 190px;
+      background: linear-gradient(90deg, transparent, rgba(0, 150, 255, 0.07), transparent);
+      filter: blur(6px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .achievements-signal .page-header {
+      background: none;
+      border: none;
+      margin-bottom: 1.6rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .achievements-signal .page-header h1 {
+      color: var(--sig-blue);
+      text-shadow: 0 0 10px rgba(0, 150, 255, 0.5);
+    }
+
+    .signal-zone {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 1rem 1rem 0.7rem;
+    }
+
+    .signal-timeline {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 1.5rem 0;
+      display: grid;
+      justify-items: center;
+      gap: 0.85rem;
+    }
+
+    .timeline-line-top,
+    .timeline-line-bottom {
+      width: 2px;
+      background: rgba(0, 150, 255, 0.2);
+      box-shadow: 0 0 14px rgba(0, 150, 255, 0.2);
+    }
+
+    .timeline-line-top {
+      height: 70px;
+    }
+
+    .timeline-line-bottom {
+      height: 88px;
+    }
+
+    .timeline-node {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: var(--sig-blue);
+      box-shadow: 0 0 0 0 rgba(0, 150, 255, 0.6);
+      animation: pulse 2.2s ease-out infinite;
+      transition: transform 240ms ease, box-shadow 240ms ease;
+    }
+
+    .timeline-node:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 0 0 rgba(0, 150, 255, 0.6), 0 0 22px rgba(0, 150, 255, 0.45);
+    }
+
+    .signal-title {
+      color: var(--sig-blue);
+      text-shadow: 0 0 10px rgba(0, 150, 255, 0.5);
+      font-size: 1.1rem;
+      letter-spacing: 0.02em;
+    }
+
+    .signal-rank {
+      color: var(--sig-soft);
+      text-shadow: 0 0 10px rgba(0, 150, 255, 0.38);
+      font-size: 0.98rem;
+      font-family: "Consolas", "Lucida Console", monospace;
+      letter-spacing: 0.03em;
+    }
+
+    .author-note-signal {
+      margin: 1.2rem auto 0;
+      max-width: 860px;
+      text-align: center;
+      color: #c4d7ef;
+      font-style: italic;
+      line-height: 1.75;
+      text-shadow: 0 0 10px rgba(0, 150, 255, 0.28);
+      opacity: 0.92;
+      animation: signalFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(0,150,255,0.6); }
+      70% { box-shadow: 0 0 0 20px rgba(0,150,255,0); }
+      100% { box-shadow: 0 0 0 0 rgba(0,150,255,0); }
+    }
+
+    @keyframes signalFloat {
+      0%,
+      100% { transform: translateY(0px); }
+      50% { transform: translateY(-3px); }
+    }
+  </style>
 </head>
 <body> <!-- Main body element -->
 
@@ -44,18 +168,24 @@
   </nav>
 
   <!-- Main Content Container -->
-  <main class="page-container"> <!-- Semantic main element with page container class -->
+  <main class="page-container achievements-signal"> <!-- Semantic main element with page container class -->
     
     <!-- Page Header Section -->
     <section class="page-header"> <!-- Header section for page title -->
       <h1>Achievements</h1> <!-- Main page heading -->
-      <p class="page-subtitle">Recognition and milestones that mark the journey. Hackathons, competitions, certifications, and honors earned through dedication.</p> <!-- Page description -->
+      <p class="page-subtitle">System signal detection. Minimal, focused markers of progress.</p> <!-- Page description -->
     </section>
 
-    <!-- Page Content Section -->
-    <section class="page-content"> <!-- Content area for achievements -->
-      <!-- Add your achievements content here -->
-      <p>Content coming soon...</p> <!-- Placeholder text for future content -->
+    <section class="signal-zone" aria-label="Achievement signal timeline">
+      <div class="signal-timeline">
+        <span class="timeline-line-top" aria-hidden="true"></span>
+        <span class="timeline-node" aria-hidden="true"></span>
+        <p class="signal-title">Apertre 3.0</p>
+        <p class="signal-rank">Rank 30 / 229</p>
+        <span class="timeline-line-bottom" aria-hidden="true"></span>
+      </div>
+
+      <p class="author-note-signal">Achievements are not endpoints — they are signals of progress within a larger system of growth.</p>
     </section>
   </main>
 
