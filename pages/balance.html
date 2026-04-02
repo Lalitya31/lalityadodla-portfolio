@@ -21,6 +21,233 @@
   
   <!-- Main stylesheet link (relative path from pages folder) -->
   <link rel="stylesheet" href="../css/main.css">
+
+  <style>
+    .balance-system {
+      --bal-line: rgba(96, 165, 250, 0.3);
+      --bal-soft: #bdd3f4;
+      --bal-panel: rgba(10, 20, 37, 0.76);
+      --bal-glow: rgba(96, 165, 250, 0.34);
+      --bal-title: "Bahnschrift", "Trebuchet MS", "Segoe UI", sans-serif;
+      --bal-data: "Consolas", "Lucida Console", monospace;
+    }
+
+    .balance-system .page-header {
+      background: linear-gradient(155deg, rgba(18, 35, 64, 0.72), rgba(7, 14, 26, 0.78));
+      border-radius: 14px;
+      border: 1px solid var(--bal-line);
+      border-bottom: 1px solid var(--bal-line);
+      padding: 2rem 1.2rem;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 1.25rem;
+    }
+
+    .balance-system .page-header::before {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.3), transparent 70%);
+      top: -180px;
+      right: -90px;
+      pointer-events: none;
+    }
+
+    .balance-system .page-header h1,
+    .balance-system h2,
+    .balance-system h3 {
+      font-family: var(--bal-title);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .stability-zone {
+      position: relative;
+      margin-top: 1.35rem;
+      margin-bottom: 1.25rem;
+      padding: 1.05rem;
+      border-radius: 14px;
+      border: 1px solid var(--bal-line);
+      background: linear-gradient(165deg, rgba(19, 35, 58, 0.68), var(--bal-panel));
+      box-shadow: 0 14px 30px rgba(3, 7, 14, 0.46);
+    }
+
+    .stability-core {
+      border-radius: 10px;
+      border: 1px solid rgba(147, 197, 253, 0.34);
+      padding: 0.9rem;
+      background: rgba(8, 16, 29, 0.78);
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .stability-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding-bottom: 0.65rem;
+      border-bottom: 1px dashed rgba(147, 197, 253, 0.25);
+    }
+
+    .stability-status {
+      font-family: var(--bal-data);
+      font-size: 0.94rem;
+      letter-spacing: 0.06em;
+      color: #90bcff;
+      text-transform: uppercase;
+    }
+
+    .stability-pulse {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: #67a8ff;
+      box-shadow: 0 0 0 0 rgba(103, 168, 255, 0.5);
+      animation: pulseStable 2.5s ease-in-out infinite;
+    }
+
+    .io-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    .io-node {
+      border-radius: 10px;
+      border: 1px solid rgba(147, 197, 253, 0.2);
+      background: linear-gradient(150deg, rgba(19, 37, 67, 0.6), rgba(7, 14, 26, 0.82));
+      padding: 0.75rem;
+      min-height: 92px;
+      transition: transform 240ms ease, box-shadow 240ms ease, border-color 240ms ease;
+      cursor: pointer;
+    }
+
+    .io-node:hover,
+    .io-node:focus-visible {
+      transform: translateY(-2px) scale(1.015);
+      border-color: rgba(191, 219, 254, 0.8);
+      box-shadow: 0 8px 24px var(--bal-glow);
+      outline: none;
+    }
+
+    .io-node.active {
+      border-color: rgba(191, 219, 254, 0.96);
+      box-shadow: 0 10px 28px rgba(96, 165, 250, 0.35);
+      background: linear-gradient(150deg, rgba(32, 64, 108, 0.66), rgba(9, 18, 33, 0.88));
+    }
+
+    .io-label {
+      color: #dbe9ff;
+      font-size: 0.9rem;
+      font-family: var(--bal-title);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .io-detail {
+      margin-top: 0.35rem;
+      color: var(--bal-soft);
+      line-height: 1.65;
+      font-size: 0.93rem;
+    }
+
+    .io-summary {
+      border: 1px solid rgba(147, 197, 253, 0.24);
+      border-radius: 10px;
+      background: rgba(7, 14, 26, 0.78);
+      padding: 0.75rem;
+      color: var(--bal-soft);
+      line-height: 1.65;
+      min-height: 74px;
+      font-size: 0.93rem;
+    }
+
+    .balance-blocks {
+      display: grid;
+      gap: 0.82rem;
+      margin-top: 1.25rem;
+    }
+
+    .balance-block {
+      border-radius: 12px;
+      border: 1px solid rgba(147, 197, 253, 0.2);
+      background: linear-gradient(162deg, rgba(20, 38, 68, 0.56), rgba(8, 16, 29, 0.8));
+      padding: 0.9rem 1rem;
+      transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+      cursor: default;
+    }
+
+    .balance-block:hover {
+      transform: translateX(4px) scale(1.01);
+      border-color: rgba(191, 219, 254, 0.8);
+      box-shadow: 0 10px 26px var(--bal-glow);
+    }
+
+    .balance-block h3 {
+      font-size: 0.95rem;
+      margin-bottom: 0.45rem;
+      color: #dbe9ff;
+    }
+
+    .balance-block p {
+      color: var(--bal-soft);
+      line-height: 1.72;
+      font-size: 0.95rem;
+    }
+
+    .author-note-balance {
+      margin-top: 1.2rem;
+      padding: 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(147, 197, 253, 0.36);
+      background:
+        linear-gradient(145deg, rgba(16, 32, 58, 0.8), rgba(7, 13, 24, 0.88)),
+        radial-gradient(circle at 12% 24%, rgba(59, 130, 246, 0.26), transparent 56%);
+    }
+
+    .author-note-balance h2 {
+      font-size: 1rem;
+      color: #e6efff;
+      margin-bottom: 0.45rem;
+    }
+
+    .author-note-balance p {
+      color: #d9e7fc;
+      line-height: 1.78;
+      margin: 0.42rem 0;
+    }
+
+    .reveal-balance {
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 520ms ease, transform 520ms ease;
+    }
+
+    .reveal-balance.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @keyframes pulseStable {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(103, 168, 255, 0.45);
+        transform: scale(1);
+      }
+      50% {
+        box-shadow: 0 0 0 8px rgba(103, 168, 255, 0);
+        transform: scale(1.08);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .io-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body> <!-- Main body element -->
 
@@ -44,18 +271,69 @@
   </nav>
 
   <!-- Main Content Container -->
-  <main class="page-container"> <!-- Semantic main element with page container class -->
+  <main class="page-container balance-system"> <!-- Semantic main element with page container class -->
     
     <!-- Page Header Section -->
     <section class="page-header"> <!-- Header section for page title -->
       <h1>Balance & Discipline</h1> <!-- Main page heading -->
-      <p class="page-subtitle">The foundation of sustainable engineering excellence. Maintaining equilibrium between work, learning, health, and personal growth.</p> <!-- Page description -->
+      <p class="page-subtitle">A controlled operating model for sustainability, clarity, and long-horizon execution.</p> <!-- Page description -->
     </section>
 
-    <!-- Page Content Section -->
-    <section class="page-content"> <!-- Content area for balance philosophy -->
-      <!-- Add your balance content here -->
-      <p>Content coming soon...</p> <!-- Placeholder text for future content -->
+    <section class="stability-zone reveal-balance" aria-label="System stability indicator">
+      <div class="stability-core">
+        <header class="stability-head">
+          <p class="stability-status">SYSTEM STATUS: STABLE</p>
+          <span class="stability-pulse" aria-hidden="true"></span>
+        </header>
+
+        <div class="io-grid">
+          <button class="io-node" type="button" data-summary="Inputs drive execution quality. Effort and Time are controlled resources that set system consistency.">
+            <span class="io-label">Inputs</span>
+            <p class="io-detail">Effort, Time</p>
+          </button>
+          <button class="io-node" type="button" data-summary="Outputs reveal system health. Performance and Growth are sustained only when inputs remain disciplined.">
+            <span class="io-label">Outputs</span>
+            <p class="io-detail">Performance, Growth</p>
+          </button>
+        </div>
+
+        <article class="io-summary" id="ioSummary" aria-live="polite">Inputs drive execution quality. Effort and Time are controlled resources that set system consistency.</article>
+      </div>
+    </section>
+
+    <section class="balance-blocks reveal-balance" aria-label="Balance framework">
+      <article class="balance-block">
+        <h3>🔷 Core Statement</h3>
+        <p>Balance is not a goal — it is a system constraint.</p>
+        <p>It ensures sustainability, clarity, and consistent performance.</p>
+      </article>
+
+      <article class="balance-block">
+        <h3>🔷 Work</h3>
+        <p>Building and executing ideas through structured problem-solving and disciplined effort.</p>
+      </article>
+
+      <article class="balance-block">
+        <h3>🔷 Learning</h3>
+        <p>Continuously expanding knowledge across domains, driven by curiosity and long-term growth.</p>
+      </article>
+
+      <article class="balance-block">
+        <h3>🔷 Health</h3>
+        <p>Maintaining physical and mental energy to sustain high performance over time.</p>
+      </article>
+
+      <article class="balance-block">
+        <h3>🔷 Mind</h3>
+        <p>Developing focus, clarity, and discipline to navigate complexity and make effective decisions.</p>
+      </article>
+    </section>
+
+    <section class="author-note-balance reveal-balance" aria-label="Author note">
+      <h2>Author’s Note</h2>
+      <p>Engineering is not just about building systems — it is about sustaining them.</p>
+      <p>Balance and discipline are what allow me to stay consistent, think clearly, and operate effectively across different domains.</p>
+      <p>Without this foundation, everything else becomes unstable.</p>
     </section>
   </main>
 
@@ -66,6 +344,44 @@
 
   <!-- Interactive Features Script -->
   <!-- JavaScript file that adds interactivity to navbar and other features -->
+  <script>
+    (function() {
+      const root = document.querySelector('.balance-system');
+      if (!root) return;
+
+      const ioNodes = Array.from(root.querySelectorAll('.io-node'));
+      const ioSummary = document.getElementById('ioSummary');
+
+      function activateNode(node) {
+        ioNodes.forEach((item) => item.classList.toggle('active', item === node));
+        ioSummary.textContent = node.dataset.summary || '';
+      }
+
+      ioNodes.forEach((node) => {
+        node.addEventListener('click', () => activateNode(node));
+      });
+      if (ioNodes[0]) activateNode(ioNodes[0]);
+
+      const reveal = Array.from(root.querySelectorAll('.reveal-balance'));
+      if ('IntersectionObserver' in window && reveal.length) {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.16 });
+
+        reveal.forEach((element, index) => {
+          element.style.transitionDelay = (index * 70) + 'ms';
+          observer.observe(element);
+        });
+      } else {
+        reveal.forEach((element) => element.classList.add('visible'));
+      }
+    })();
+  </script>
   <script src="../js/interactions.js"></script> <!-- External JavaScript file -->
 
 </body>
