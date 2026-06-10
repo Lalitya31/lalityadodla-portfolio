@@ -985,13 +985,20 @@ main.container {
  * Large, bold heading with glow effect
  */
 h1 {
-  font-size: 4.2rem;
-  font-weight: 800;
+  font-size: 4rem;
+  /* Very large text */
+  font-weight: 700;
+  /* Bold weight */
   color: var(--text-primary);
-  margin-bottom: 1.25rem;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
-  text-shadow: 0 0 20px var(--blue-glow), 0 0 40px var(--blue-glow), 0 0 60px rgba(59,130,246,0.3);
+  /* Light text color */
+  margin-bottom: 1rem;
+  /* Space below */
+  letter-spacing: -0.03em;
+  /* Tight letter spacing */
+  line-height: 1.1;
+  /* Tight line height */
+  text-shadow: 0 0 20px var(--blue-glow), 0 0 40px var(--blue-glow), 0 0 60px rgba(59, 130, 246, 0.3);
+  /* Layered glow effect */
 }
 
 /**
@@ -1017,10 +1024,13 @@ h1 {
  */
 .contact-links {
   display: flex;
-  gap: 0.6rem;
-  margin-bottom: 2rem;
+  /* Flexbox layout */
+  gap: 1rem;
+  /* Space between icons */
+  margin-top: 2rem;
+  /* Space above */
   align-items: center;
-  flex-wrap: wrap;
+  /* Vertically center icons */
 }
 
 /**
@@ -1028,19 +1038,28 @@ h1 {
  * Styled button container for social media icons
  */
 .contact-icon {
-  display: inline-flex;
+  display: flex;
+  /* Flexbox for centering icon */
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 7px;
-  background: rgba(30,58,138,0.25);
-  border: 1px solid rgba(147,197,253,0.15);
+  /* Vertical center */
+  justify-content: center;
+  /* Horizontal center */
+  width: 40px;
+  /* Fixed width */
+  height: 40px;
+  /* Fixed height (square) */
+  border-radius: 8px;
+  /* Rounded corners */
+  background-color: rgba(30, 58, 138, 0.3);
+  /* Semi-transparent blue background */
+  border: 1px solid rgba(147, 197, 253, 0.2);
+  /* Light blue border */
   color: var(--text-muted);
-  transition: all 0.25s ease;
+  /* Muted icon color */
+  transition: all 0.3s ease;
+  /* Smooth transition for all properties */
   text-decoration: none;
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
+  /* Remove link underline */
 }
 
 /**
@@ -1048,85 +1067,26 @@ h1 {
  * Enhanced appearance on hover
  */
 .contact-icon:hover {
-  background: rgba(30,58,138,0.55);
-  border-color: rgba(147,197,253,0.4);
+  background-color: rgba(30, 58, 138, 0.6);
+  /* Darker background */
+  border-color: rgba(147, 197, 253, 0.5);
+  /* Brighter border */
   color: var(--blue-layer-5);
+  /* Brighter icon color */
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(59,130,246,0.25);
+  /* Slight lift effect */
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  /* Add glowing shadow */
 }
 
 /**
  * SVG icon sizing within contact button
  */
 .contact-icon svg {
-  width: 15px;
-  height: 15px;
-  flex-shrink: 0;
-}
-
-.status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.45rem;
-  padding: 0.28rem 0.75rem;
-  border-radius: 999px;
-  border: 1px solid rgba(147,197,253,0.15);
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
-  color: rgba(147,197,253,0.55);
-  margin-bottom: 1.6rem;
-}
-.status-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #4ade80;
-  box-shadow: 0 0 6px rgba(74,222,128,0.7);
-  animation: statusPulse 2.4s ease-in-out infinite;
-  flex-shrink: 0;
-}
-@keyframes statusPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(0.8); }
-}
-.about-text {
-  font-size: 1rem;
-  color: #9aafc4;
-  line-height: 1.7;
-  margin-bottom: 1.6rem;
-  max-width: 380px;
-}
-.left-divider {
-  width: 40px;
-  height: 1px;
-  background: rgba(147,197,253,0.2);
-  margin-bottom: 1.4rem;
-}
-.contact-links {
-  display: flex;
-  gap: 0.6rem;
-  margin-bottom: 2rem;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.cgpa-line {
-  display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-}
-.cgpa-num {
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  letter-spacing: -0.03em;
-  line-height: 1;
-  text-shadow: 0 0 12px var(--blue-glow);
-}
-.cgpa-label {
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--text-muted);
+  width: 20px;
+  /* Icon width */
+  height: 20px;
+  /* Icon height */
 }
 
 /**

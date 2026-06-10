@@ -1,0 +1,6 @@
+- [ ] Plan approved
+- [x] Updated index.html left-section/article text-content
+- [x] Updated main.css h1 styling
+- [x] Updated main.css contact-icon styles
+- [ ] Fix main.css corruption (unmatched selectors/braces) and apply exactly required removals/additions
+- [ ] Verify no extra rules were modified outside specified sections
