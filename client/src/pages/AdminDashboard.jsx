@@ -1,0 +1,400 @@
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { useDocumentTitle } from './useDocumentTitle.js'
+
+const emptyForm = {
+  title: '',
+  description: '',
+  technologies: '',
+  image: '',
+  github: '',
+  live: '',
+  featured: false,
+}
+
+function AdminDashboard() {
+  useDocumentTitle('Admin Dashboard - Portfolio CMS')
+
+  const navigate = useNavigate()
+  const [projects, setProjects] = useState([])
+  const [formData, setFormData] = useState(emptyForm)
+  const [editingId, setEditingId] = useState(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [isSaving, setIsSaving] = useState(false)
+  const [error, setError] = useState('')
+
+  const token = localStorage.getItem('adminToken')
+
+  const fetchProjects = async () => {
+    setError('')
+    setIsLoading(true)
+
+    try {
+      const response = await fetch('http://localhost:5001/api/projects')
+
+      if (!response.ok) {
+        throw new Error('Unable to load projects')
+      }
+
+      const data = await response.json()
+      setProjects(Array.isArray(data) ? data : [])
+    } catch (err) {
+      setError(err.message || 'Unable to load projects')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (!token) {
+      navigate('/admin/login')
+      return
+    }
+
+    fetchProjects()
+  }, [navigate, token])
+
+  const handleChange = (event) => {
+    const { name, value, type, checked } = event.target
+    setFormData((current) => ({
+      ...current,
+      [name]: type === 'checkbox' ? checked : value,
+    }))
+  }
+
+  const resetForm = () => {
+    setFormData(emptyForm)
+    setEditingId(null)
+  }
+
+  const handleEdit = (project) => {
+    setEditingId(project._id)
+    setFormData({
+      title: project.title || '',
+      description: project.description || '',
+      technologies: Array.isArray(project.technologies) ? project.technologies.join(', ') : '',
+      image: project.image || '',
+      github: project.github || '',
+      live: project.live || '',
+      featured: Boolean(project.featured),
+    })
+  }
+
+  const buildProjectPayload = () => ({
+    ...formData,
+    technologies: formData.technologies
+      .split(',')
+      .map((technology) => technology.trim())
+      .filter(Boolean),
+  })
+
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    setError('')
+    setIsSaving(true)
+
+    try {
+      const url = editingId
+        ? `http://localhost:5001/api/projects/${editingId}`
+        : 'http://localhost:5001/api/projects'
+
+      const response = await fetch(url, {
+        method: editingId ? 'PUT' : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(buildProjectPayload()),
+      })
+
+      if (response.status === 401) {
+        localStorage.removeItem('adminToken')
+        navigate('/admin/login')
+        return
+      }
+
+      if (!response.ok) {
+        throw new Error(editingId ? 'Unable to update project' : 'Unable to create project')
+      }
+
+      resetForm()
+      await fetchProjects()
+    } catch (err) {
+      setError(err.message || 'Unable to save project')
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
+  const handleDelete = async (projectId) => {
+    setError('')
+
+    try {
+      const response = await fetch(`http://localhost:5001/api/projects/${projectId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      if (response.status === 401) {
+        localStorage.removeItem('adminToken')
+        navigate('/admin/login')
+        return
+      }
+
+      if (!response.ok) {
+        throw new Error('Unable to delete project')
+      }
+
+      await fetchProjects()
+    } catch (err) {
+      setError(err.message || 'Unable to delete project')
+    }
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('adminToken')
+    navigate('/admin/login')
+  }
+
+  return (
+    <main style={styles.page}>
+      <header style={styles.header}>
+        <div>
+          <h1 style={styles.title}>Portfolio CMS</h1>
+          <p style={styles.subtitle}>Manage engineering projects</p>
+        </div>
+        <button style={styles.secondaryButton} type="button" onClick={handleLogout}>
+          Logout
+        </button>
+      </header>
+
+      {error ? <p style={styles.error}>{error}</p> : null}
+
+      <section style={styles.grid}>
+        <form onSubmit={handleSubmit} style={styles.panel}>
+          <h2 style={styles.sectionTitle}>{editingId ? 'Edit Project' : 'Add Project'}</h2>
+
+          <label style={styles.label}>
+            Title
+            <input style={styles.input} name="title" value={formData.title} onChange={handleChange} required />
+          </label>
+
+          <label style={styles.label}>
+            Description
+            <textarea style={styles.textarea} name="description" value={formData.description} onChange={handleChange} required />
+          </label>
+
+          <label style={styles.label}>
+            Technologies
+            <input style={styles.input} name="technologies" value={formData.technologies} onChange={handleChange} placeholder="React, Node, MongoDB" />
+          </label>
+
+          <label style={styles.label}>
+            Image URL
+            <input style={styles.input} name="image" value={formData.image} onChange={handleChange} />
+          </label>
+
+          <label style={styles.label}>
+            GitHub URL
+            <input style={styles.input} name="github" value={formData.github} onChange={handleChange} />
+          </label>
+
+          <label style={styles.label}>
+            Live URL
+            <input style={styles.input} name="live" value={formData.live} onChange={handleChange} />
+          </label>
+
+          <label style={styles.checkboxLabel}>
+            <input name="featured" type="checkbox" checked={formData.featured} onChange={handleChange} />
+            Featured
+          </label>
+
+          <div style={styles.actions}>
+            <button style={styles.button} type="submit" disabled={isSaving}>
+              {isSaving ? 'Saving...' : editingId ? 'Update Project' : 'Create Project'}
+            </button>
+            {editingId ? (
+              <button style={styles.secondaryButton} type="button" onClick={resetForm}>
+                Cancel
+              </button>
+            ) : null}
+          </div>
+        </form>
+
+        <section style={styles.panel}>
+          <h2 style={styles.sectionTitle}>Projects</h2>
+          {isLoading ? <p style={styles.muted}>Loading projects...</p> : null}
+          {!isLoading && projects.length === 0 ? <p style={styles.muted}>No projects available</p> : null}
+          <div style={styles.projectList}>
+            {projects.map((project) => (
+              <article key={project._id} style={styles.projectItem}>
+                <div>
+                  <h3 style={styles.projectTitle}>{project.title}</h3>
+                  <p style={styles.projectDescription}>{project.description}</p>
+                  {project.technologies?.length ? (
+                    <p style={styles.muted}>{project.technologies.join(' • ')}</p>
+                  ) : null}
+                </div>
+                <div style={styles.actions}>
+                  <button style={styles.secondaryButton} type="button" onClick={() => handleEdit(project)}>
+                    Edit
+                  </button>
+                  <button style={styles.dangerButton} type="button" onClick={() => handleDelete(project._id)}>
+                    Delete
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      </section>
+    </main>
+  )
+}
+
+const styles = {
+  page: {
+    minHeight: '100vh',
+    padding: '2rem',
+    background: '#020617',
+    color: '#e5e7eb',
+  },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    gap: '1rem',
+    alignItems: 'center',
+    maxWidth: '1180px',
+    margin: '0 auto 1.5rem',
+  },
+  title: {
+    margin: 0,
+    fontSize: '2rem',
+  },
+  subtitle: {
+    margin: '0.25rem 0 0',
+    color: '#93c5fd',
+  },
+  grid: {
+    display: 'grid',
+    gridTemplateColumns: 'minmax(280px, 420px) minmax(0, 1fr)',
+    gap: '1.5rem',
+    maxWidth: '1180px',
+    margin: '0 auto',
+  },
+  panel: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+    padding: '1.5rem',
+    border: '1px solid rgba(96, 165, 250, 0.18)',
+    borderRadius: '8px',
+    background: 'rgba(6, 18, 36, 0.85)',
+    boxShadow: '0 12px 40px rgba(2, 6, 23, 0.45)',
+  },
+  sectionTitle: {
+    margin: 0,
+    fontSize: '1.25rem',
+  },
+  label: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.4rem',
+    color: '#d1d5db',
+  },
+  checkboxLabel: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    color: '#d1d5db',
+  },
+  input: {
+    padding: '0.7rem',
+    borderRadius: '6px',
+    border: '1px solid rgba(148, 163, 184, 0.35)',
+    background: '#0f172a',
+    color: '#f8fafc',
+    font: 'inherit',
+  },
+  textarea: {
+    minHeight: '96px',
+    padding: '0.7rem',
+    borderRadius: '6px',
+    border: '1px solid rgba(148, 163, 184, 0.35)',
+    background: '#0f172a',
+    color: '#f8fafc',
+    font: 'inherit',
+    resize: 'vertical',
+  },
+  button: {
+    padding: '0.7rem 1rem',
+    borderRadius: '6px',
+    border: '1px solid rgba(96, 165, 250, 0.3)',
+    background: '#2563eb',
+    color: '#fff',
+    font: 'inherit',
+    fontWeight: 700,
+    cursor: 'pointer',
+  },
+  secondaryButton: {
+    padding: '0.65rem 0.9rem',
+    borderRadius: '6px',
+    border: '1px solid rgba(148, 163, 184, 0.35)',
+    background: '#0f172a',
+    color: '#e5e7eb',
+    font: 'inherit',
+    cursor: 'pointer',
+  },
+  dangerButton: {
+    padding: '0.65rem 0.9rem',
+    borderRadius: '6px',
+    border: '1px solid rgba(248, 113, 113, 0.4)',
+    background: 'rgba(127, 29, 29, 0.45)',
+    color: '#fecaca',
+    font: 'inherit',
+    cursor: 'pointer',
+  },
+  actions: {
+    display: 'flex',
+    gap: '0.6rem',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+  },
+  error: {
+    maxWidth: '1180px',
+    margin: '0 auto 1rem',
+    padding: '0.75rem',
+    borderRadius: '6px',
+    color: '#fecaca',
+    background: 'rgba(127, 29, 29, 0.35)',
+  },
+  muted: {
+    margin: 0,
+    color: '#9fbfe6',
+  },
+  projectList: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.8rem',
+  },
+  projectItem: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    gap: '1rem',
+    padding: '1rem',
+    border: '1px solid rgba(96, 165, 250, 0.12)',
+    borderRadius: '8px',
+    background: 'rgba(15, 23, 42, 0.7)',
+  },
+  projectTitle: {
+    margin: '0 0 0.35rem',
+  },
+  projectDescription: {
+    margin: '0 0 0.5rem',
+    color: '#d1d5db',
+  },
+}
+
+export default AdminDashboard
