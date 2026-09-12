@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { API_BASE_URL } from '../api.js'
 import { useDocumentTitle } from './useDocumentTitle.js'
 
 const emptyForm = {
@@ -43,7 +44,7 @@ function AdminDashboard() {
     setIsLoading(true)
 
     try {
-      const response = await fetch('http://localhost:5001/api/projects')
+      const response = await fetch(`${API_BASE_URL}/api/projects`)
 
       if (!response.ok) {
         throw new Error('Unable to load projects')
@@ -63,7 +64,7 @@ function AdminDashboard() {
     setIsBlogLoading(true)
 
     try {
-      const response = await fetch('http://localhost:5001/api/blog')
+      const response = await fetch(`${API_BASE_URL}/api/blog`)
 
       if (!response.ok) {
         throw new Error('Unable to load blog posts')
@@ -160,8 +161,8 @@ function AdminDashboard() {
 
     try {
       const url = editingId
-        ? `http://localhost:5001/api/projects/${editingId}`
-        : 'http://localhost:5001/api/projects'
+        ? `${API_BASE_URL}/api/projects/${editingId}`
+        : `${API_BASE_URL}/api/projects`
 
       const response = await fetch(url, {
         method: editingId ? 'PUT' : 'POST',
@@ -195,7 +196,7 @@ function AdminDashboard() {
     setError('')
 
     try {
-      const response = await fetch(`http://localhost:5001/api/projects/${projectId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/projects/${projectId}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -225,8 +226,8 @@ function AdminDashboard() {
 
     try {
       const url = editingBlogId
-        ? `http://localhost:5001/api/blog/${editingBlogId}`
-        : 'http://localhost:5001/api/blog'
+        ? `${API_BASE_URL}/api/blog/${editingBlogId}`
+        : `${API_BASE_URL}/api/blog`
 
       const response = await fetch(url, {
         method: editingBlogId ? 'PUT' : 'POST',
@@ -260,7 +261,7 @@ function AdminDashboard() {
     setBlogError('')
 
     try {
-      const response = await fetch(`http://localhost:5001/api/blog/${postId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/blog/${postId}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

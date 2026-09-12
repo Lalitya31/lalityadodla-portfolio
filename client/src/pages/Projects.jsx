@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { API_BASE_URL } from '../api.js'
 import PageShell from './PageShell.jsx'
 import './pages.css'
 import { useDocumentTitle } from './useDocumentTitle.js'
@@ -13,7 +14,7 @@ function Projects() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch('http://localhost:5001/api/projects')
+        const response = await fetch(`${API_BASE_URL}/api/projects`)
 
         if (!response.ok) {
           throw new Error('Unable to load projects')

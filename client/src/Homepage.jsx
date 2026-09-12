@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { API_BASE_URL } from './api.js'
 import './homepage.css'
 
 const NAV_LINKS = [
@@ -513,7 +514,7 @@ function Homepage() {
     setIsSubmittingContact(true)
 
     try {
-      const response = await fetch('http://localhost:5001/api/contact', {
+      const response = await fetch(`${API_BASE_URL}/api/contact`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
