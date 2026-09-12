@@ -486,6 +486,9 @@ function Homepage() {
   const systemStatus = useSystemStatus()
   const systemContainerRef = useLayerTilt()
   const { tooltip, showTooltip, moveTooltip, hideTooltip } = useTooltip()
+  const [contactForm, setContactForm] = useState({ name: '', email: '', message: '' })
+  const [contactStatus, setContactStatus] = useState({ type: '', message: '' })
+  const [isSubmittingContact, setIsSubmittingContact] = useState(false)
 
   const handleNavigate = (event, href) => {
     if (href.startsWith('http') || href.startsWith('mailto:')) {
@@ -497,6 +500,40 @@ function Homepage() {
     window.setTimeout(() => {
       navigate(href)
     }, 320)
+  }
+
+  const handleContactChange = (event) => {
+    const { name, value } = event.target
+    setContactForm((current) => ({ ...current, [name]: value }))
+  }
+
+  const handleContactSubmit = async (event) => {
+    event.preventDefault()
+    setContactStatus({ type: '', message: '' })
+    setIsSubmittingContact(true)
+
+    try {
+      const response = await fetch('http://localhost:5001/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(contactForm),
+      })
+
+      const data = await response.json().catch(() => ({}))
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Message could not be sent')
+      }
+
+      setContactForm({ name: '', email: '', message: '' })
+      setContactStatus({ type: 'success', message: 'Message sent successfully.' })
+    } catch (error) {
+      setContactStatus({ type: 'error', message: error.message || 'Message could not be sent' })
+    } finally {
+      setIsSubmittingContact(false)
+    }
   }
 
   return (
@@ -548,6 +585,38 @@ function Homepage() {
                 <ContactLink key={link.label} {...link} />
               ))}
             </div>
+
+            <form className="contact-form" onSubmit={handleContactSubmit}>
+              <input
+                type="text"
+                name="name"
+                value={contactForm.name}
+                onChange={handleContactChange}
+                placeholder="Name"
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                value={contactForm.email}
+                onChange={handleContactChange}
+                placeholder="Email"
+                required
+              />
+              <textarea
+                name="message"
+                value={contactForm.message}
+                onChange={handleContactChange}
+                placeholder="Message"
+                required
+              />
+              <button type="submit" disabled={isSubmittingContact}>
+                {isSubmittingContact ? 'Sending...' : 'Send message'}
+              </button>
+              {contactStatus.message ? (
+                <p className={`contact-form-status ${contactStatus.type}`}>{contactStatus.message}</p>
+              ) : null}
+            </form>
           </article>
         </section>
 
