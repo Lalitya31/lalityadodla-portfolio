@@ -12,16 +12,29 @@ const emptyForm = {
   featured: false,
 }
 
+const emptyBlogForm = {
+  title: '',
+  excerpt: '',
+  content: '',
+  tags: '',
+}
+
 function AdminDashboard() {
   useDocumentTitle('Admin Dashboard - Portfolio CMS')
 
   const navigate = useNavigate()
   const [projects, setProjects] = useState([])
+  const [blogPosts, setBlogPosts] = useState([])
   const [formData, setFormData] = useState(emptyForm)
+  const [blogFormData, setBlogFormData] = useState(emptyBlogForm)
   const [editingId, setEditingId] = useState(null)
+  const [editingBlogId, setEditingBlogId] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [isBlogLoading, setIsBlogLoading] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
+  const [isBlogSaving, setIsBlogSaving] = useState(false)
   const [error, setError] = useState('')
+  const [blogError, setBlogError] = useState('')
 
   const token = localStorage.getItem('adminToken')
 
@@ -45,6 +58,26 @@ function AdminDashboard() {
     }
   }
 
+  const fetchBlogPosts = async () => {
+    setBlogError('')
+    setIsBlogLoading(true)
+
+    try {
+      const response = await fetch('http://localhost:5001/api/blog')
+
+      if (!response.ok) {
+        throw new Error('Unable to load blog posts')
+      }
+
+      const data = await response.json()
+      setBlogPosts(Array.isArray(data) ? data : [])
+    } catch (err) {
+      setBlogError(err.message || 'Unable to load blog posts')
+    } finally {
+      setIsBlogLoading(false)
+    }
+  }
+
   useEffect(() => {
     if (!token) {
       navigate('/admin/login')
@@ -52,6 +85,7 @@ function AdminDashboard() {
     }
 
     fetchProjects()
+    fetchBlogPosts()
   }, [navigate, token])
 
   const handleChange = (event) => {
@@ -65,6 +99,11 @@ function AdminDashboard() {
   const resetForm = () => {
     setFormData(emptyForm)
     setEditingId(null)
+  }
+
+  const resetBlogForm = () => {
+    setBlogFormData(emptyBlogForm)
+    setEditingBlogId(null)
   }
 
   const handleEdit = (project) => {
@@ -85,6 +124,32 @@ function AdminDashboard() {
     technologies: formData.technologies
       .split(',')
       .map((technology) => technology.trim())
+      .filter(Boolean),
+  })
+
+  const handleBlogChange = (event) => {
+    const { name, value } = event.target
+    setBlogFormData((current) => ({
+      ...current,
+      [name]: value,
+    }))
+  }
+
+  const handleBlogEdit = (post) => {
+    setEditingBlogId(post._id)
+    setBlogFormData({
+      title: post.title || '',
+      excerpt: post.excerpt || '',
+      content: post.content || '',
+      tags: Array.isArray(post.tags) ? post.tags.join(', ') : '',
+    })
+  }
+
+  const buildBlogPayload = () => ({
+    ...blogFormData,
+    tags: blogFormData.tags
+      .split(',')
+      .map((tag) => tag.trim())
       .filter(Boolean),
   })
 
@@ -153,6 +218,71 @@ function AdminDashboard() {
     }
   }
 
+  const handleBlogSubmit = async (event) => {
+    event.preventDefault()
+    setBlogError('')
+    setIsBlogSaving(true)
+
+    try {
+      const url = editingBlogId
+        ? `http://localhost:5001/api/blog/${editingBlogId}`
+        : 'http://localhost:5001/api/blog'
+
+      const response = await fetch(url, {
+        method: editingBlogId ? 'PUT' : 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(buildBlogPayload()),
+      })
+
+      if (response.status === 401) {
+        localStorage.removeItem('adminToken')
+        navigate('/admin/login')
+        return
+      }
+
+      if (!response.ok) {
+        throw new Error(editingBlogId ? 'Unable to update blog post' : 'Unable to create blog post')
+      }
+
+      resetBlogForm()
+      await fetchBlogPosts()
+    } catch (err) {
+      setBlogError(err.message || 'Unable to save blog post')
+    } finally {
+      setIsBlogSaving(false)
+    }
+  }
+
+  const handleBlogDelete = async (postId) => {
+    setBlogError('')
+
+    try {
+      const response = await fetch(`http://localhost:5001/api/blog/${postId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+
+      if (response.status === 401) {
+        localStorage.removeItem('adminToken')
+        navigate('/admin/login')
+        return
+      }
+
+      if (!response.ok) {
+        throw new Error('Unable to delete blog post')
+      }
+
+      await fetchBlogPosts()
+    } catch (err) {
+      setBlogError(err.message || 'Unable to delete blog post')
+    }
+  }
+
   const handleLogout = () => {
     localStorage.removeItem('adminToken')
     navigate('/admin/login')
@@ -163,7 +293,7 @@ function AdminDashboard() {
       <header style={styles.header}>
         <div>
           <h1 style={styles.title}>Portfolio CMS</h1>
-          <p style={styles.subtitle}>Manage engineering projects</p>
+          <p style={styles.subtitle}>Manage engineering projects and blog posts</p>
         </div>
         <button style={styles.secondaryButton} type="button" onClick={handleLogout}>
           Logout
@@ -242,6 +372,70 @@ function AdminDashboard() {
                     Edit
                   </button>
                   <button style={styles.dangerButton} type="button" onClick={() => handleDelete(project._id)}>
+                    Delete
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      </section>
+
+      {blogError ? <p style={styles.error}>{blogError}</p> : null}
+
+      <section style={{ ...styles.grid, marginTop: '1.5rem' }}>
+        <form onSubmit={handleBlogSubmit} style={styles.panel}>
+          <h2 style={styles.sectionTitle}>{editingBlogId ? 'Edit Blog Post' : 'Add Blog Post'}</h2>
+
+          <label style={styles.label}>
+            Title
+            <input style={styles.input} name="title" value={blogFormData.title} onChange={handleBlogChange} required />
+          </label>
+
+          <label style={styles.label}>
+            Excerpt
+            <textarea style={styles.textarea} name="excerpt" value={blogFormData.excerpt} onChange={handleBlogChange} required />
+          </label>
+
+          <label style={styles.label}>
+            Content
+            <textarea style={{ ...styles.textarea, minHeight: '150px' }} name="content" value={blogFormData.content} onChange={handleBlogChange} required />
+          </label>
+
+          <label style={styles.label}>
+            Tags
+            <input style={styles.input} name="tags" value={blogFormData.tags} onChange={handleBlogChange} placeholder="React, CMS, Internship" />
+          </label>
+
+          <div style={styles.actions}>
+            <button style={styles.button} type="submit" disabled={isBlogSaving}>
+              {isBlogSaving ? 'Saving...' : editingBlogId ? 'Update Blog Post' : 'Create Blog Post'}
+            </button>
+            {editingBlogId ? (
+              <button style={styles.secondaryButton} type="button" onClick={resetBlogForm}>
+                Cancel
+              </button>
+            ) : null}
+          </div>
+        </form>
+
+        <section style={styles.panel}>
+          <h2 style={styles.sectionTitle}>Blog Posts</h2>
+          {isBlogLoading ? <p style={styles.muted}>Loading blog posts...</p> : null}
+          {!isBlogLoading && blogPosts.length === 0 ? <p style={styles.muted}>No blog posts available</p> : null}
+          <div style={styles.projectList}>
+            {blogPosts.map((post) => (
+              <article key={post._id} style={styles.projectItem}>
+                <div>
+                  <h3 style={styles.projectTitle}>{post.title}</h3>
+                  <p style={styles.projectDescription}>{post.excerpt}</p>
+                  {post.tags?.length ? <p style={styles.muted}>{post.tags.join(' • ')}</p> : null}
+                </div>
+                <div style={styles.actions}>
+                  <button style={styles.secondaryButton} type="button" onClick={() => handleBlogEdit(post)}>
+                    Edit
+                  </button>
+                  <button style={styles.dangerButton} type="button" onClick={() => handleBlogDelete(post._id)}>
                     Delete
                   </button>
                 </div>
