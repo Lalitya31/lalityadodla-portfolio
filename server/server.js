@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const authRoutes = require('./routes/authRoutes');
 const projectRoutes = require('./routes/projectRoutes');
 require('dotenv').config();
 
@@ -13,9 +14,10 @@ app.get('/api/health', (req, res) => {
   res.json({ message: 'API is running' });
 });
 
+app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 mongoose
   .connect(process.env.MONGODB_URI)

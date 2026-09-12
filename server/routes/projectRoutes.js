@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Project = require('../models/Project');
+const authMiddleware = require('../middleware/authMiddleware');
 
 const router = express.Router();
 
@@ -33,7 +34,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-router.post('/', async (req, res) => {
+router.post('/', authMiddleware, async (req, res) => {
   try {
     const project = await Project.create(req.body);
     res.status(201).json(project);
@@ -46,7 +47,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/:id', authMiddleware, async (req, res) => {
   try {
     if (!isValidObjectId(req.params.id)) {
       return res.status(400).json({ message: 'Invalid project ID' });
@@ -71,7 +72,7 @@ router.put('/:id', async (req, res) => {
   }
 });
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', authMiddleware, async (req, res) => {
   try {
     if (!isValidObjectId(req.params.id)) {
       return res.status(400).json({ message: 'Invalid project ID' });
