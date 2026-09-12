@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './homepage.css'
 
 const NAV_LINKS = [
-  { label: 'Projects', href: 'pages/projects.html' },
-  { label: 'Research', href: 'pages/research.html' },
-  { label: 'Leadership', href: 'pages/leadership.html' },
-  { label: 'Academics', href: 'pages/academics.html' },
-  { label: 'Achievements', href: 'pages/achievements.html' },
-  { label: 'Balance', href: 'pages/balance.html' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'Research', href: '/research' },
+  { label: 'Leadership', href: '/leadership' },
+  { label: 'Academics', href: '/academics' },
+  { label: 'Achievements', href: '/achievements' },
+  { label: 'Balance', href: '/balance' },
 ]
 
 const CONTACT_LINKS = [
@@ -51,7 +52,7 @@ const LAYERS = [
     id: 'layer-6',
     groupClass: 'layer-group-6 rotate-cw-slow',
     className: 'layer-6',
-    href: 'pages/balance.html',
+    href: '/balance',
     ariaLabel: 'Balance & Discipline',
     tip: 'Balance keeps performance sustainable.',
     label: null,
@@ -64,7 +65,7 @@ const LAYERS = [
     id: 'layer-5',
     groupClass: 'layer-group-5 rotate-ccw-medium',
     className: 'layer-5',
-    href: 'pages/achievements.html',
+    href: '/achievements',
     ariaLabel: 'Achievements',
     tip: 'Achievements mark consistent execution and growth.',
     label: null,
@@ -77,7 +78,7 @@ const LAYERS = [
     id: 'layer-4',
     groupClass: 'layer-group-4 rotate-cw-medium',
     className: 'layer-4',
-    href: 'pages/academics.html',
+    href: '/academics',
     ariaLabel: 'Academics',
     tip: 'Academics provide rigorous technical foundations.',
     label: null,
@@ -90,7 +91,7 @@ const LAYERS = [
     id: 'layer-3',
     groupClass: 'layer-group-3 rotate-ccw-medium',
     className: 'layer-3',
-    href: 'pages/leadership.html',
+    href: '/leadership',
     ariaLabel: 'Leadership & Project Management',
     tip: 'Leadership turns direction into team momentum.',
     label: null,
@@ -103,7 +104,7 @@ const LAYERS = [
     id: 'layer-2',
     groupClass: 'layer-group-2 rotate-cw-slow',
     className: 'layer-2',
-    href: 'pages/research.html',
+    href: '/research',
     ariaLabel: 'Research & Publications',
     tip: 'Research converts curiosity into tested insight.',
     label: null,
@@ -116,7 +117,7 @@ const LAYERS = [
     id: 'layer-1',
     groupClass: 'layer-group-1 rotate-ccw-fast',
     className: 'layer-1',
-    href: 'pages/projects.html',
+    href: '/projects',
     ariaLabel: 'Engineering Projects',
     tip: 'Projects turn ideas into working systems.',
     label: 'PROJECTS',
@@ -480,6 +481,7 @@ function LayerRing({ layer, onNavigate, onHoverStart, onHoverMove, onHoverEnd })
 }
 
 function Homepage() {
+  const navigate = useNavigate()
   const clock = useSystemClock()
   const systemStatus = useSystemStatus()
   const systemContainerRef = useLayerTilt()
@@ -493,7 +495,7 @@ function Homepage() {
     event.preventDefault()
     document.body.classList.add('page-transition-out')
     window.setTimeout(() => {
-      window.location.href = href
+      navigate(href)
     }, 320)
   }
 
@@ -503,7 +505,7 @@ function Homepage() {
 
       <nav className="navbar">
         <div className="nav-container">
-          <a href="index.html" className="nav-brand" onClick={(event) => handleNavigate(event, 'index.html')}>
+          <a href="/" className="nav-brand" onClick={(event) => handleNavigate(event, '/')}>
             Balanced Engineering
           </a>
 
